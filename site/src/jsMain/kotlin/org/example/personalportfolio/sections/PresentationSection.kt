@@ -30,7 +30,7 @@ import org.jetbrains.compose.web.dom.Text
 fun PresentationSection() {
     Box(
         modifier = Modifier
-            .fillMaxHeight(35.percent)
+            .fillMaxHeight(40.percent)
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {

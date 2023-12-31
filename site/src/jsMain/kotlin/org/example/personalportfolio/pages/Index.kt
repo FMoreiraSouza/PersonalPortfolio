@@ -6,26 +6,24 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.core.Page
+import org.example.personalportfolio.sections.AcademicSection
 import org.example.personalportfolio.sections.PresentationSection
-import org.example.personalportfolio.sections.SkillsSection
+import org.example.personalportfolio.sections.SkillSection
 
 @Page
 @Composable
 fun HomePage() {
-    // TODO: Replace the following with your own content
     Box(
         Modifier
-//            .backgroundColor(Colors.Blue)
             .fillMaxSize(),
-//        contentAlignment = Alignment.Center
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-//                .backgroundColor(Colors.Red)
         ) {
             PresentationSection()
-            SkillsSection()
+            SkillSection()
+            AcademicSection()
         }
     }
 }

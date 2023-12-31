@@ -5,7 +5,7 @@ enum class Section(
     val title: String,
     val path: String
 ) {
-    Habilidades(
+    Skills(
         id = "skills",
         title = "Habilidades",
         path = "#skills",

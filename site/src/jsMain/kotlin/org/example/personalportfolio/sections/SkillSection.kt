@@ -20,27 +20,28 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun SkillsSection() {
+fun SkillSection() {
     Box(
         modifier = Modifier
-            .id(Section.Habilidades.id)
-            .margin(topBottom = 120.px)
+            .id(Section.Skills.id)
+            .fillMaxHeight(15.percent)
+            .margin(topBottom = 40.px)
             .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        SkillsContent()
+        SkillContent()
     }
 }
 
 @Composable
-fun SkillsContent(){
+fun SkillContent(){
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SectionTitle(
-            section = Section.Habilidades
+            section = Section.Skills
         )
         Skills()
     }

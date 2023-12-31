@@ -52,7 +52,6 @@ fun Topics() {
             Link(
                 modifier = NavigationStyle.toModifier()
                     .margin(all = 10.px)
-//                    .padding(all = 20.px)
                     .fontFamily("Montserrat", "sans-serif")
                     .fontSize(18.px)
                     .fontWeight(FontWeight.Normal)
