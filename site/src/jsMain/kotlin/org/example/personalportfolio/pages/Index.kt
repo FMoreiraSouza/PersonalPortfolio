@@ -7,6 +7,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.core.Page
 import org.example.personalportfolio.sections.AcademicSection
+import org.example.personalportfolio.sections.ExperienceSection
 import org.example.personalportfolio.sections.PresentationSection
 import org.example.personalportfolio.sections.SkillSection
 
@@ -24,6 +25,7 @@ fun HomePage() {
             PresentationSection()
             SkillSection()
             AcademicSection()
+            ExperienceSection()
         }
     }
 }

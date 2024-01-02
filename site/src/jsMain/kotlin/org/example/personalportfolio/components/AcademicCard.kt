@@ -10,7 +10,9 @@ import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.style.toModifier
 import org.example.personalportfolio.models.Academics
+import org.example.personalportfolio.styles.AcademicStyle
 import org.example.personalportfolio.util.Constants.FONT_FAMILY
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
@@ -22,7 +24,7 @@ fun AcademicCard(
     academics: Academics
 ) {
     Column(
-        modifier = Modifier
+        modifier = AcademicStyle.toModifier()
             .fillMaxWidth()
     ) {
         Image(
@@ -72,7 +74,6 @@ fun AcademicCard(
                 .height(2.px)
                 .width(1100.px)
                 .borderRadius(50.px)
-                .backgroundColor(Colors.Gray)
         )
     }
 }

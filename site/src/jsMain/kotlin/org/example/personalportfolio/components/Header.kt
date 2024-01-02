@@ -12,14 +12,17 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
+import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.SunIcon
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Section
+import org.example.personalportfolio.models.Theme
 import org.example.personalportfolio.styles.CircleButtonVariant
 import org.example.personalportfolio.styles.NavigationStyle
+import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.percent
@@ -29,14 +32,30 @@ import org.jetbrains.compose.web.css.px
 fun Header() {
     Row(
         modifier = Modifier
-            .fillMaxWidth(70.percent)
-            .padding(1.cssRem)
-            .margin(top = 50.px, left = 150.px),
-        horizontalArrangement = Arrangement.End,
+            .fillMaxWidth()
+            .padding(1.cssRem),
+        horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
+        ProfessionalLogo()
         Topics()
         ColorModeButton()
+    }
+}
+
+@Composable
+fun ProfessionalLogo() {
+    Row(
+        modifier = Modifier
+            .margin(bottom = 2.px, right = 120.px)
+            .fillMaxSize(30.percent),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Image(
+            modifier = Modifier
+                .fillMaxSize(),
+            src = Res.Image.professionalLogo
+        )
     }
 }
 
@@ -44,7 +63,7 @@ fun Header() {
 fun Topics() {
     Row(
         modifier = Modifier
-            .margin(bottom = 2.px, right = 20.px)
+            .margin(bottom = 2.px, left = 20.px)
             .fillMaxWidth(50.percent),
         horizontalArrangement = Arrangement.Center
     ) {
@@ -55,7 +74,8 @@ fun Topics() {
                     .fontFamily("Montserrat", "sans-serif")
                     .fontSize(18.px)
                     .fontWeight(FontWeight.Normal)
-                    .textDecorationLine(TextDecorationLine.None),
+                    .textDecorationLine(TextDecorationLine.None)
+                    .color(Theme.Primary.rgb),
                 path = section.path,
                 text = section.title,
             )

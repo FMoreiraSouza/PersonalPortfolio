@@ -24,8 +24,6 @@ fun SkillSection() {
     Box(
         modifier = Modifier
             .id(Section.Skills.id)
-            .fillMaxHeight(15.percent)
-            .margin(topBottom = 40.px)
             .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {

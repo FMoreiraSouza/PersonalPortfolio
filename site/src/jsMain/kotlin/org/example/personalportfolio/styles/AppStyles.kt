@@ -7,9 +7,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
 import com.varabyte.kobweb.silk.components.style.addVariantBase
-import com.varabyte.kobweb.silk.components.style.anyLink
 import com.varabyte.kobweb.silk.components.style.hover
-import org.example.personalportfolio.models.Theme
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.percent
@@ -22,12 +20,7 @@ val CircleButtonVariant by ButtonStyle.addVariantBase {
 val NavigationStyle by ComponentStyle{
     base {
         Modifier
-            .color(Theme.Primary.rgb)
             .transition(CSSTransition(property = "color", duration = 200.ms))
-    }
-    anyLink{
-        Modifier
-            .color(Theme.Primary.rgb)
     }
     hover{
         Modifier
@@ -37,14 +30,25 @@ val NavigationStyle by ComponentStyle{
 }
 
 val ButtonStyle by ComponentStyle{
-    base{
+    cssRule(" > :first-child"){
         Modifier
-            .backgroundColor(Colors.Blue)
+            .backgroundColor(Colors.RoyalBlue)
             .transition(CSSTransition(property = "background", duration = 200.ms))
     }
-    hover{
+    cssRule(":hover > :first-child"){
         Modifier
-            .backgroundColor(Colors.SkyBlue)
+            .backgroundColor(Colors.White)
+    }
+
+    cssRule(" > :last-child"){
+        Modifier
+            .color(Colors.White)
+            .transition(CSSTransition(property = "color", duration = 200.ms))
+    }
+
+    cssRule(":hover > :last-child"){
+        Modifier
+            .color(Colors.RoyalBlue)
     }
 }
 
@@ -69,5 +73,17 @@ val SkillStyle by ComponentStyle{
     hover{
         Modifier
             .color(Colors.SkyBlue)
+    }
+}
+
+val AcademicStyle by ComponentStyle {
+    cssRule(" > :last-child") {
+        Modifier
+            .backgroundColor(Colors.Gray)
+            .transition(CSSTransition(property = "background", duration = 200.ms))
+    }
+
+    cssRule(":hover > :last-child") {
+        Modifier.backgroundColor(Colors.SkyBlue)
     }
 }

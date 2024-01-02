@@ -13,6 +13,7 @@ object Constants {
 object Res {
     object Image {
         const val profilePhoto = "ProfilePhoto.png"
+        const val professionalLogo = "ProfessionalLogo.png"
     }
 
     object Icon {
@@ -26,5 +27,8 @@ object Res {
         const val ktorFramework = "KtorIcon.png"
         const val postgreSQL = "PostgreSQLIcon.svg"
         const val ufcCoatOfArms = "UFCCoatOfArms.png"
+        const val ufc = "UFC.png"
+        const val fitbank450 = "Fitbank450.png"
+        const val nemo = "Nemo.png"
     }
 }

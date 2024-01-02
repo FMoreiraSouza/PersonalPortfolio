@@ -2,7 +2,6 @@ package org.example.personalportfolio.components
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.Cursor
-import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -23,6 +22,8 @@ import org.example.personalportfolio.util.Constants.GITHUB
 import org.example.personalportfolio.util.Constants.LINKEDIN
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Button
+import org.jetbrains.compose.web.dom.Text
+
 
 @Composable
 fun SocialBar() {
@@ -61,22 +62,21 @@ fun SocialLinks() {
             size = IconSize.LG
         )
     }
-    Button(
-        attrs = ButtonStyle.toModifier()
-            .margin(bottom = 20.px, left = 20.px)
-            .height(40.px)
-            .border(width = 0.px)
-            .borderRadius(r = 5.px)
-            .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.DarkGray)
-            .cursor(Cursor.Pointer)
-            .toAttrs(),
+    Link(
+        modifier = ButtonStyle.toModifier(),
+        path = Section.Contact.path
     ) {
-        Link(
-            modifier = Modifier
-                .color(Colors.White)
-                .textDecorationLine(TextDecorationLine.None),
-            text = "Fale Comigo",
-            path = Section.Contact.path
-        )
+        Button(
+            attrs = Modifier
+                .margin(bottom = 20.px, left = 20.px)
+                .height(40.px)
+                .border(width = 0.px)
+                .borderRadius(r = 5.px)
+                .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.DarkGray)
+                .cursor(Cursor.Pointer)
+                .toAttrs()
+        ) {
+            Text("Fale Comigo")
+        }
     }
 }
