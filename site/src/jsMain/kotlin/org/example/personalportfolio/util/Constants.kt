@@ -30,5 +30,6 @@ object Res {
         const val ufc = "UFC.png"
         const val fitbank450 = "Fitbank450.png"
         const val nemo = "Nemo.png"
+        const val computer = "ComputerCodeIcon.png"
     }
 }

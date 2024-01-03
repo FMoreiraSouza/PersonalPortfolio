@@ -47,8 +47,8 @@ fun Header() {
 fun ProfessionalLogo() {
     Row(
         modifier = Modifier
-            .margin(bottom = 2.px, right = 120.px)
-            .fillMaxSize(30.percent),
+            .margin(bottom = 2.px, right = 290.px)
+            .fillMaxSize(20.percent),
         horizontalArrangement = Arrangement.Center
     ) {
         Image(

@@ -24,7 +24,6 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Text
 
-
 @Composable
 fun SocialBar() {
     Row(

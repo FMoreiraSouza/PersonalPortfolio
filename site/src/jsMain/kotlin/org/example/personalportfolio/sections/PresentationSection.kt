@@ -15,11 +15,10 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
-import org.example.personalportfolio.components.Header
-import org.example.personalportfolio.components.SocialBar
+import org.example.personalportfolio.components.SectionTitle
+import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.models.Theme
-import org.example.personalportfolio.util.Constants.About
-import org.example.personalportfolio.util.Constants.FONT_FAMILY
+import org.example.personalportfolio.util.Constants
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
@@ -30,11 +29,11 @@ import org.jetbrains.compose.web.dom.Text
 fun PresentationSection() {
     Box(
         modifier = Modifier
-            .fillMaxHeight(28.percent)
+            .id(Section.About.id)
+            .fillMaxHeight(45.percent)
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
-        Header()
         PresentationContent()
     }
 }
@@ -42,22 +41,27 @@ fun PresentationSection() {
 @Composable
 fun PresentationContent() {
     Column(
-        modifier = Modifier.fillMaxWidth().margin(topBottom = 100.px),
-        verticalArrangement = Arrangement.Bottom,
+        modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        SectionTitle(
+            section = Section.About
+        )
         SimpleGrid(
             modifier = Modifier.fillMaxWidth(),
             numColumns = numColumns(base = 1, md = 2)
         ) {
-            PresentationMe()
+            MyDescription()
+            MyProfessionalPhoto()
         }
     }
 }
 
 @Composable
-fun PresentationMe() {
+fun MyDescription() {
     Row(
+        modifier = Modifier.fillMaxWidth()
+            .margin(left = 45.px),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -66,7 +70,7 @@ fun PresentationMe() {
                 attrs = Modifier
                     .margin(all = 20.px)
                     .fontSize(50.px)
-                    .fontFamily(FONT_FAMILY)
+                    .fontFamily(Constants.FONT_FAMILY)
                     .fontWeight(FontWeight.Bolder)
                     .color(Colors.Gray)
                     .toAttrs()
@@ -78,7 +82,7 @@ fun PresentationMe() {
                 attrs = Modifier
                     .margin(left = 20.px, bottom = 0.px)
                     .fontSize(20.px)
-                    .fontFamily(FONT_FAMILY)
+                    .fontFamily(Constants.FONT_FAMILY)
                     .fontWeight(FontWeight.Bold)
                     .color(Colors.Gray)
                     .toAttrs()
@@ -94,7 +98,7 @@ fun PresentationMe() {
             P(
                 attrs = Modifier
                     .margin(all = 20.px)
-                    .maxWidth(500.px)
+                    .maxWidth(570.px)
                     .fontSize(20.px)
                     .fontFamily("Montserrat", "sans-serif")
                     .textAlign(TextAlign.Justify)
@@ -102,9 +106,26 @@ fun PresentationMe() {
                     .color(Theme.Primary.rgb)
                     .toAttrs()
             ) {
-                Text(About)
+                Text(Constants.About)
             }
-            SocialBar()
+        }
+    }
+}
+
+@Composable
+fun MyProfessionalPhoto() {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column {
+            Image(
+                modifier = Modifier
+                    .margin(left = 110.px)
+                    .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.Gray)
+                    .fillMaxSize(50.percent),
+                src = Res.Image.profilePhoto
+            )
         }
     }
 }

@@ -6,10 +6,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.core.Page
-import org.example.personalportfolio.sections.AcademicSection
-import org.example.personalportfolio.sections.ExperienceSection
-import org.example.personalportfolio.sections.PresentationSection
-import org.example.personalportfolio.sections.SkillSection
+import org.example.personalportfolio.sections.*
 
 @Page
 @Composable
@@ -22,6 +19,7 @@ fun HomePage() {
             modifier = Modifier
                 .fillMaxSize()
         ) {
+            MainSection()
             PresentationSection()
             SkillSection()
             AcademicSection()

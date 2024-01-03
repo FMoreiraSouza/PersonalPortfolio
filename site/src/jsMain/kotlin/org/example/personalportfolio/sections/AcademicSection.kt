@@ -19,7 +19,6 @@ fun AcademicSection() {
     Box(
         modifier = Modifier
             .id(Section.Academics.id)
-//            .margin(bottom = 50.px)
             .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {

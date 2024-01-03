@@ -17,7 +17,6 @@ import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import org.example.personalportfolio.models.Experience
 import org.example.personalportfolio.models.Theme
-import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.P
@@ -128,11 +127,7 @@ fun ExperienceIcon(
         Box(
             modifier = Modifier
                 .size(60.px)
-                .border(
-                    width = 1.px,
-                    style = LineStyle.Solid,
-                    color = Colors.Black
-                )
+                .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.Gray)
                 .backgroundColor(Colors.White)
                 .borderRadius(50.percent),
             contentAlignment = Alignment.Center

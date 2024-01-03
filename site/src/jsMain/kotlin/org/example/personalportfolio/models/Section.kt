@@ -5,6 +5,11 @@ enum class Section(
     val title: String,
     val path: String
 ) {
+    About(
+        id = "about",
+        title = "Quem sou",
+        path = "#about"
+    ),
     Skills(
         id = "skills",
         title = "Habilidades",
