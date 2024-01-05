@@ -23,6 +23,7 @@ fun HomePage() {
             PresentationSection()
             SkillSection()
             AcademicSection()
+            ProjectSection()
             ExperienceSection()
         }
     }

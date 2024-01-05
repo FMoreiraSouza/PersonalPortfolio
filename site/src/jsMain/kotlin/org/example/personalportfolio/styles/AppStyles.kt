@@ -1,6 +1,7 @@
 package org.example.personalportfolio.styles
 
 import com.varabyte.kobweb.compose.css.CSSTransition
+import com.varabyte.kobweb.compose.css.Visibility
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
@@ -85,5 +86,51 @@ val AcademicStyle by ComponentStyle {
 
     cssRule(":hover > :last-child") {
         Modifier.backgroundColor(Colors.SkyBlue)
+    }
+}
+
+val PortfolioStyle by ComponentStyle{
+    cssRule(" > #linkParent > #boxParent > #blueCurtain"){
+        Modifier
+            .width(0.px)
+            .transition(CSSTransition(property = "width", duration = 500.ms))
+    }
+    cssRule(":hover > #linkParent > #boxParent > #blueCurtain"){
+        Modifier
+            .width(300.px)
+    }
+    cssRule(" > #linkParent > #boxParent > #blueCurtain > #linkIcon"){
+        Modifier
+            .size(0.px)
+            .visibility(Visibility.Hidden)
+            .transition(CSSTransition(property = "visibility", duration = 200.ms))
+            .transition(CSSTransition(property = "size", duration = 200.ms))
+    }
+    cssRule(":hover > #linkParent > #boxParent > #blueCurtain > #linkIcon"){
+        Modifier
+            .size(32.px)
+            .visibility(Visibility.Visible)
+    }
+    cssRule(" > #linkParent > #projectTitle"){
+        Modifier
+            .color(Colors.Gray)
+            .translate(0.percent)
+            .transition(CSSTransition(property = "color", duration = 200.ms))
+            .transition(CSSTransition(property = "translate", duration = 200.ms))
+    }
+    cssRule(":hover > #linkParent > #projectTitle"){
+        Modifier
+            .color(Colors.SkyBlue)
+            .translate(5.percent)
+    }
+    cssRule(" > #linkParent > #projectPlatform"){
+        Modifier
+            .translate(0.percent)
+            .transition(CSSTransition(property = "color", duration = 200.ms))
+            .transition(CSSTransition(property = "translate", duration = 200.ms))
+    }
+    cssRule(":hover > #linkParent > #projectPlatform"){
+        Modifier
+            .translate(5.percent)
     }
 }

@@ -2,7 +2,7 @@ package org.example.personalportfolio.models
 
 import org.example.personalportfolio.util.Res.Icon.ufcCoatOfArms
 
-enum class Academics(
+enum class Academic(
     val coatOfArms: String,
     val title: String,
     val subtitle: String,

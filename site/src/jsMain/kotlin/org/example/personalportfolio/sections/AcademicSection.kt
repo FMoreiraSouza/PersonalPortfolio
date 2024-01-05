@@ -10,7 +10,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import org.example.personalportfolio.components.AcademicCard
 import org.example.personalportfolio.components.SectionTitle
-import org.example.personalportfolio.models.Academics
+import org.example.personalportfolio.models.Academic
 import org.example.personalportfolio.models.Section
 import org.jetbrains.compose.web.css.percent
 
@@ -37,6 +37,8 @@ fun AcademicContent() {
         SectionTitle(
             section = Section.Academics
         )
-        AcademicCard(academics = Academics.Bachelor)
+        Academic.values().forEach { academic ->
+            AcademicCard(academic = academic)
+        }
     }
 }

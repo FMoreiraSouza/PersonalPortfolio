@@ -13,21 +13,26 @@ enum class Section(
     Skills(
         id = "skills",
         title = "Habilidades",
-        path = "#skills",
+        path = "#skills"
     ),
     Academics(
         id = "academics",
         title = "Formações",
-        path = "#academics",
+        path = "#academics"
     ),
-    Experience(
+    Projects(
+        id = "projects",
+        title = "Projetos",
+        path = "#projects"
+    ),
+    Experiences(
         id = "experience",
         title = "Experiência",
-        path = "#experience",
+        path = "#experience"
     ),
     Contact(
         id = "contact",
         title = "Contato",
-        path = "#contact",
+        path = "#contact"
     )
 }

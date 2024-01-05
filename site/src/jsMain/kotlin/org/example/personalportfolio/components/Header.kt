@@ -9,6 +9,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
@@ -61,10 +62,11 @@ fun ProfessionalLogo() {
 
 @Composable
 fun Topics() {
+    var colorMode by ColorMode.currentState
     Row(
         modifier = Modifier
             .margin(bottom = 2.px, left = 20.px)
-            .fillMaxWidth(50.percent),
+            .fillMaxWidth(60.percent),
         horizontalArrangement = Arrangement.Center
     ) {
         Section.values().take(6).forEach { section ->
@@ -75,7 +77,7 @@ fun Topics() {
                     .fontSize(18.px)
                     .fontWeight(FontWeight.Normal)
                     .textDecorationLine(TextDecorationLine.None)
-                    .color(Theme.Primary.rgb),
+                    .color(if (colorMode.isLight) Theme.Primary.rgb else Colors.Gray),
                 path = section.path,
                 text = section.title,
             )
