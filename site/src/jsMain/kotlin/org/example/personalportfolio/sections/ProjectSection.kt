@@ -9,7 +9,6 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.id
-import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import org.example.personalportfolio.components.ProjectCard
 import org.example.personalportfolio.components.SectionTitle
@@ -24,7 +23,6 @@ fun ProjectSection() {
         modifier = Modifier
             .id(Section.Projects.id)
             .fillMaxWidth(80.percent)
-            .margin(left = 100.px)
             .padding(topBottom = 20.px),
         contentAlignment = Alignment.Center
     ) {

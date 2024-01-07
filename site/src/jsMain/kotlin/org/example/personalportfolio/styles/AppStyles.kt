@@ -18,60 +18,58 @@ val CircleButtonVariant by ButtonStyle.addVariantBase {
     Modifier.padding(0.px).borderRadius(50.percent)
 }
 
-val NavigationStyle by ComponentStyle{
+val NavigationStyle by ComponentStyle {
     base {
         Modifier
             .transition(CSSTransition(property = "color", duration = 200.ms))
     }
-    hover{
+    hover {
         Modifier
             .border(width = 1.px, style = LineStyle.Solid, color = Colors.SkyBlue)
             .backgroundColor(Colors.SkyBlue)
     }
 }
 
-val ButtonStyle by ComponentStyle{
-    cssRule(" > :first-child"){
+val ButtonStyle by ComponentStyle {
+    cssRule(" > :first-child") {
         Modifier
             .backgroundColor(Colors.RoyalBlue)
             .transition(CSSTransition(property = "background", duration = 200.ms))
     }
-    cssRule(":hover > :first-child"){
+    cssRule(":hover > :first-child") {
         Modifier
             .backgroundColor(Colors.White)
     }
-
-    cssRule(" > :last-child"){
+    cssRule(" > :last-child") {
         Modifier
             .color(Colors.White)
             .transition(CSSTransition(property = "color", duration = 200.ms))
     }
-
-    cssRule(":hover > :last-child"){
+    cssRule(":hover > :last-child") {
         Modifier
             .color(Colors.RoyalBlue)
     }
 }
 
-val SocialLinkStyle by ComponentStyle{
+val SocialLinkStyle by ComponentStyle {
     base {
         Modifier
             .color(Colors.Gray)
             .transition(CSSTransition(property = "color", duration = 200.ms))
     }
-    hover{
+    hover {
         Modifier
             .color(Colors.SkyBlue)
     }
 }
 
-val SkillStyle by ComponentStyle{
+val SkillStyle by ComponentStyle {
     base {
         Modifier
             .color(Colors.Gray)
             .transition(CSSTransition(property = "color", duration = 200.ms))
     }
-    hover{
+    hover {
         Modifier
             .color(Colors.SkyBlue)
     }
@@ -83,54 +81,65 @@ val AcademicStyle by ComponentStyle {
             .backgroundColor(Colors.Gray)
             .transition(CSSTransition(property = "background", duration = 200.ms))
     }
-
     cssRule(":hover > :last-child") {
         Modifier.backgroundColor(Colors.SkyBlue)
     }
 }
 
-val PortfolioStyle by ComponentStyle{
-    cssRule(" > #linkParent > #boxParent > #blueCurtain"){
+val PortfolioStyle by ComponentStyle {
+    cssRule(" > #linkParent > #boxParent > #blueCurtain") {
         Modifier
             .width(0.px)
             .transition(CSSTransition(property = "width", duration = 500.ms))
     }
-    cssRule(":hover > #linkParent > #boxParent > #blueCurtain"){
+    cssRule(":hover > #linkParent > #boxParent > #blueCurtain") {
         Modifier
             .width(300.px)
     }
-    cssRule(" > #linkParent > #boxParent > #blueCurtain > #linkIcon"){
+    cssRule(" > #linkParent > #boxParent > #blueCurtain > #linkIcon") {
         Modifier
             .size(0.px)
             .visibility(Visibility.Hidden)
             .transition(CSSTransition(property = "visibility", duration = 200.ms))
             .transition(CSSTransition(property = "size", duration = 200.ms))
     }
-    cssRule(":hover > #linkParent > #boxParent > #blueCurtain > #linkIcon"){
+    cssRule(":hover > #linkParent > #boxParent > #blueCurtain > #linkIcon") {
         Modifier
             .size(32.px)
             .visibility(Visibility.Visible)
     }
-    cssRule(" > #linkParent > #projectTitle"){
+    cssRule(" > #linkParent > #projectTitle") {
         Modifier
             .color(Colors.Gray)
             .translate(0.percent)
             .transition(CSSTransition(property = "color", duration = 200.ms))
             .transition(CSSTransition(property = "translate", duration = 200.ms))
     }
-    cssRule(":hover > #linkParent > #projectTitle"){
+    cssRule(":hover > #linkParent > #projectTitle") {
         Modifier
             .color(Colors.SkyBlue)
             .translate(5.percent)
     }
-    cssRule(" > #linkParent > #projectPlatform"){
+    cssRule(" > #linkParent > #projectPlatform") {
         Modifier
             .translate(0.percent)
             .transition(CSSTransition(property = "color", duration = 200.ms))
             .transition(CSSTransition(property = "translate", duration = 200.ms))
     }
-    cssRule(":hover > #linkParent > #projectPlatform"){
+    cssRule(":hover > #linkParent > #projectPlatform") {
         Modifier
             .translate(5.percent)
+    }
+}
+
+val FormStyle by ComponentStyle {
+    base {
+        Modifier
+            .border(2.px, LineStyle.Solid, Colors.Gray)
+            .transition(CSSTransition(property = "border", duration = 200.ms))
+    }
+    hover {
+        Modifier
+            .border(2.px, LineStyle.Solid, Colors.RoyalBlue)
     }
 }

@@ -71,7 +71,7 @@ fun SocialLinks() {
                 .height(40.px)
                 .border(width = 0.px)
                 .borderRadius(r = 5.px)
-                .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.DarkGray)
+                .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.LightGray)
                 .cursor(Cursor.Pointer)
                 .toAttrs()
         ) {

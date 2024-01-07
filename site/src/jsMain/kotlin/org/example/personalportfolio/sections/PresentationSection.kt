@@ -30,7 +30,6 @@ fun PresentationSection() {
     Box(
         modifier = Modifier
             .id(Section.About.id)
-            .fillMaxHeight(45.percent)
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
