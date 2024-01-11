@@ -15,23 +15,23 @@ enum class Experience(
     First(
         icon = fitbank450,
         jobPosition = "Desenvolvedor Backend",
-        description = "Atuei como um membro do time do Sistema de Pagamentos Brasileiro (SPB) desenvolvendo soluções no lado do servidor e em contexto bancário relacionadas a débito e crédito de contas via Transferência Eletrônica Disponível.",
+        description = "Atuei na criação de soluções em contexto bancário para o Sistema de Pagamentos Brasileiro, essas relacionadas a débito e crédito em contas via Transferência Eletrônica Disponível.",
         company = "Fitbank 450",
         from = "Abril 2022",
         to = "Fevereiro 2023"
     ),
     Second(
         icon = nemo,
-        jobPosition = "Desenvolvedor de Aplicativos Móveis",
-        description = "Se trata de um aplicativo de plataforma cruzada com o intuito de possibilitar a Comarca de Limoeiro do Norte a intermediar solicitações de pensões alimentícias.",
-        company = "Núcleo de Estudos Avançados em Aprendizado de Máquina e Otimização",
+        jobPosition = "Desenvolvedor Mobile",
+        description = "Desenvolvi um aplicativo de plataforma cruzada com o intuito de possibilitar a Comarca de Limoeiro do Norte a intermediar solicitações de pensões.",
+        company = "Núcleo de Estudos em Aprendizado de Máquina e Otimização",
         from = "Abril 2022",
         to = "Dezembro 2022"
     ),
     Third(
         icon = ufc,
-        jobPosition = "Monitor nas disciplinas de Arquitetura de Computadores e Sistemas Operacionais",
-        description = "Auxílio para os professores de ambas as disciplinas envolvidas, onde foram desenvolvidos desafios práticos de programação para os alunos da instituição.",
+        jobPosition = "Assistente em Docência",
+        description = "Criei desafios práticos de programação para os alunos da instituição, para assim, auxíliar na docência das disciplinas de Arquitetura de Computadores e Sistemas Operacionais.",
         company = "Universidade Federal do Ceará",
         from = "Maio 2021",
         to = "Fevereiro 2022"

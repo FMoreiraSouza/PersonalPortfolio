@@ -21,12 +21,12 @@ val CircleButtonVariant by ButtonStyle.addVariantBase {
 val NavigationStyle by ComponentStyle {
     base {
         Modifier
+            .backgroundColor(Colors.Transparent)
             .transition(CSSTransition(property = "color", duration = 200.ms))
     }
     hover {
         Modifier
-            .border(width = 1.px, style = LineStyle.Solid, color = Colors.SkyBlue)
-            .backgroundColor(Colors.SkyBlue)
+            .backgroundColor(Colors.RoyalBlue)
     }
 }
 
@@ -47,7 +47,7 @@ val ButtonStyle by ComponentStyle {
     }
     cssRule(":hover > :last-child") {
         Modifier
-            .color(Colors.RoyalBlue)
+            .color(Colors.SkyBlue)
     }
 }
 
@@ -86,7 +86,7 @@ val AcademicStyle by ComponentStyle {
     }
 }
 
-val PortfolioStyle by ComponentStyle {
+val PortfolioStyleLandscape by ComponentStyle {
     cssRule(" > #linkParent > #boxParent > #blueCurtain") {
         Modifier
             .width(0.px)
@@ -105,7 +105,7 @@ val PortfolioStyle by ComponentStyle {
     }
     cssRule(":hover > #linkParent > #boxParent > #blueCurtain > #linkIcon") {
         Modifier
-            .size(32.px)
+            .size(30.px)
             .visibility(Visibility.Visible)
     }
     cssRule(" > #linkParent > #projectTitle") {
@@ -132,6 +132,52 @@ val PortfolioStyle by ComponentStyle {
     }
 }
 
+val PortfolioStylePortrait by ComponentStyle {
+    cssRule(" > #linkParent > #boxParent > #blueCurtain") {
+        Modifier
+            .width(0.px)
+            .transition(CSSTransition(property = "width", duration = 500.ms))
+    }
+    cssRule(":hover > #linkParent > #boxParent > #blueCurtain") {
+        Modifier
+            .width(200.px)
+    }
+    cssRule(" > #linkParent > #boxParent > #blueCurtain > #linkIcon") {
+        Modifier
+            .size(0.px)
+            .visibility(Visibility.Hidden)
+            .transition(CSSTransition(property = "visibility", duration = 200.ms))
+            .transition(CSSTransition(property = "size", duration = 200.ms))
+    }
+    cssRule(":hover > #linkParent > #boxParent > #blueCurtain > #linkIcon") {
+        Modifier
+            .size(15.px)
+            .visibility(Visibility.Visible)
+    }
+    cssRule(" > #linkParent > #projectTitle") {
+        Modifier
+            .color(Colors.Gray)
+            .translate(0.percent)
+            .transition(CSSTransition(property = "color", duration = 200.ms))
+            .transition(CSSTransition(property = "translate", duration = 200.ms))
+    }
+    cssRule(":hover > #linkParent > #projectTitle") {
+        Modifier
+            .color(Colors.SkyBlue)
+            .translate(2.percent)
+    }
+    cssRule(" > #linkParent > #projectPlatform") {
+        Modifier
+            .translate(0.percent)
+            .transition(CSSTransition(property = "color", duration = 200.ms))
+            .transition(CSSTransition(property = "translate", duration = 200.ms))
+    }
+    cssRule(":hover > #linkParent > #projectPlatform") {
+        Modifier
+            .translate(2.percent)
+    }
+}
+
 val FormStyle by ComponentStyle {
     base {
         Modifier
@@ -141,5 +187,17 @@ val FormStyle by ComponentStyle {
     hover {
         Modifier
             .border(2.px, LineStyle.Solid, Colors.RoyalBlue)
+    }
+}
+
+val ButtonToTopStyle by ComponentStyle {
+    base {
+        Modifier
+            .backgroundColor(Colors.RoyalBlue)
+            .transition(CSSTransition(property = "color", duration = 200.ms))
+    }
+    hover {
+        Modifier
+            .backgroundColor(Colors.SkyBlue)
     }
 }

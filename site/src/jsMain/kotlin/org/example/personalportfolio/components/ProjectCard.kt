@@ -15,10 +15,12 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.navigation.Link
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.models.Project
-import org.example.personalportfolio.styles.PortfolioStyle
-import org.example.personalportfolio.util.Constants
+import org.example.personalportfolio.styles.PortfolioStyleLandscape
+import org.example.personalportfolio.styles.PortfolioStylePortrait
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.P
@@ -28,8 +30,13 @@ import org.jetbrains.compose.web.dom.Text
 fun ProjectCard(
     project: Project,
 ) {
+    val breakpoint = rememberBreakpoint()
     Column(
-        modifier = PortfolioStyle.toModifier()
+
+        modifier = if (breakpoint >= Breakpoint.SM)
+            PortfolioStyleLandscape.toModifier()
+        else
+            PortfolioStylePortrait.toModifier()
     ) {
         Link(
             modifier = Modifier
@@ -41,11 +48,11 @@ fun ProjectCard(
             Box(
                 modifier = Modifier
                     .id("boxParent")
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
             ) {
                 Image(
                     modifier = Modifier
-                        .size(300.px),
+                        .size(if(breakpoint >= Breakpoint.SM) 300.px else 200.px),
                     src = project.image
                 )
                 Box(
@@ -68,9 +75,9 @@ fun ProjectCard(
                     .id("projectTitle")
                     .margin(topBottom = 0.px)
                     .textAlign(TextAlign.Start)
-                    .fontFamily(Constants.FONT_FAMILY)
+                    .fontFamily("Roboto")
                     .fontWeight(FontWeight.Bold)
-                    .fontSize(20.px)
+                    .fontSize(if(breakpoint >= Breakpoint.SM) 20.px else 18.px)
                     .toAttrs()
             ) {
                 Text(project.title)
@@ -81,9 +88,9 @@ fun ProjectCard(
                     .margin(topBottom = 0.px)
                     .textAlign(TextAlign.Start)
                     .color(Colors.Gray)
-                    .fontFamily(Constants.FONT_FAMILY)
+                    .fontFamily("Roboto")
                     .fontWeight(FontWeight.Normal)
-                    .fontSize(18.px)
+                    .fontSize(if(breakpoint >= Breakpoint.SM) 18.px else 16.px)
                     .toAttrs()
             ) {
                 Text(project.platform)

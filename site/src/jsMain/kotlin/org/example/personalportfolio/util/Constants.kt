@@ -1,7 +1,6 @@
 package org.example.personalportfolio.util
 
 object Constants {
-    const val FONT_FAMILY = "Roboto"
     const val LINKEDIN = "https://www.linkedin.com/in/felipe-moreira-b16147200/"
     const val GITHUB = "https://github.com/Fmoreira12"
     const val personalPortfolio = "https://github.com/Fmoreira12/PersonalPortfolio.git"
@@ -18,7 +17,6 @@ object Res {
     }
 
     object Icon {
-        const val mobilePhone = "MobileIcon.png"
         const val android = "AndroidIcon.svg"
         const val apacheKafka = "ApacheKafkaIcon.svg"
         const val firebase = "FirebaseIcon.svg"

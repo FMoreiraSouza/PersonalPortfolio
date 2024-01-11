@@ -28,7 +28,6 @@ import org.jetbrains.compose.web.dom.Text
 fun SocialBar() {
     Row(
         modifier = Modifier
-            .margin(right = 25.px)
             .padding(bottom = 10.px)
             .minWidth(40.px)
             .borderRadius(r = 20.px),
@@ -36,6 +35,7 @@ fun SocialBar() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         SocialLinks()
+        GetInTouch()
     }
 }
 
@@ -48,7 +48,7 @@ fun SocialLinks() {
         FaLinkedin(
             modifier = SocialLinkStyle.toModifier()
                 .margin(bottom = 40.px, left = 20.px),
-            size = IconSize.LG
+            size = IconSize.XXL
         )
     }
     Link(
@@ -58,17 +58,21 @@ fun SocialLinks() {
         FaGithub(
             modifier = SocialLinkStyle.toModifier()
                 .margin(bottom = 40.px, left = 20.px),
-            size = IconSize.LG
+            size = IconSize.XXL
         )
     }
+}
+
+@Composable
+fun GetInTouch() {
     Link(
-        modifier = ButtonStyle.toModifier(),
-        path = Section.Contact.path
+        modifier = ButtonStyle.toModifier()
+            .margin(bottom = 20.px, left = 20.px),
+                path = Section . Contact . path
     ) {
         Button(
             attrs = Modifier
-                .margin(bottom = 20.px, left = 20.px)
-                .height(40.px)
+                .height(50.px)
                 .border(width = 0.px)
                 .borderRadius(r = 5.px)
                 .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.LightGray)

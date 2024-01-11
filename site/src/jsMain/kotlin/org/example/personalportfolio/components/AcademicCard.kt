@@ -5,15 +5,17 @@ import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.graphics.Image
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.models.Academic
 import org.example.personalportfolio.styles.AcademicStyle
-import org.example.personalportfolio.util.Constants.FONT_FAMILY
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.P
@@ -23,21 +25,22 @@ import org.jetbrains.compose.web.dom.Text
 fun AcademicCard(
     academic: Academic
 ) {
+    val breakpoint = rememberBreakpoint()
     Column(
         modifier = AcademicStyle.toModifier()
-            .fillMaxWidth()
+            .fillMaxWidth(90.percent),
+        horizontalAlignment = if(breakpoint > Breakpoint.SM) Alignment.Start else Alignment.CenterHorizontally
     ) {
         Image(
-            modifier = Modifier
-                .fillMaxSize(10.percent),
+            modifier = Modifier,
             src = academic.coatOfArms
         )
         P(
             attrs = Modifier
                 .margin(topBottom = 0.px)
-                .textAlign(TextAlign.Center)
                 .color(Colors.Gray)
-                .fontFamily(FONT_FAMILY)
+                .fontFamily("Roboto")
+                .textAlign(if(breakpoint > Breakpoint.SM) TextAlign.Start else TextAlign.Center)
                 .fontWeight(FontWeight.Bold)
                 .fontSize(20.px)
                 .toAttrs()
@@ -47,9 +50,9 @@ fun AcademicCard(
         P(
             attrs = Modifier
                 .margin(topBottom = 0.px)
-                .textAlign(TextAlign.Center)
                 .color(Colors.Gray)
-                .fontFamily(FONT_FAMILY)
+                .fontFamily("Roboto")
+                .textAlign(if(breakpoint > Breakpoint.SM) TextAlign.Start else TextAlign.Center)
                 .fontWeight(FontWeight.Bold)
                 .fontSize(14.px)
                 .toAttrs()
@@ -59,9 +62,9 @@ fun AcademicCard(
         P(
             attrs = Modifier
                 .margin(topBottom = 0.px)
-                .textAlign(TextAlign.Center)
                 .color(Colors.Black)
-                .fontFamily(FONT_FAMILY)
+                .fontFamily("Roboto")
+                .textAlign(if(breakpoint > Breakpoint.SM) TextAlign.Start else TextAlign.Center)
                 .fontWeight(FontWeight.Normal)
                 .fontSize(14.px)
                 .toAttrs()
@@ -70,9 +73,9 @@ fun AcademicCard(
         }
         Box(
             modifier = Modifier
-                .margin(top = 4.px)
+                .margin(topBottom = 4.px)
                 .height(2.px)
-                .width(1100.px)
+                .width(100.percent)
                 .borderRadius(50.px)
         )
     }

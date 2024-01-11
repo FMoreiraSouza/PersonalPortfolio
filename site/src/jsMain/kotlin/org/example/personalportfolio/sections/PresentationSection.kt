@@ -15,6 +15,8 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.components.SectionTitle
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.models.Theme
@@ -58,9 +60,9 @@ fun PresentationContent() {
 
 @Composable
 fun MyDescription() {
+    val breakpoint = rememberBreakpoint()
     Row(
-        modifier = Modifier.fillMaxWidth()
-            .margin(left = 45.px),
+        modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -68,31 +70,14 @@ fun MyDescription() {
             P(
                 attrs = Modifier
                     .margin(all = 20.px)
-                    .fontSize(50.px)
-                    .fontFamily(Constants.FONT_FAMILY)
+                    .fontSize(if(breakpoint >= Breakpoint.LG) 44.px else 22.px)
+                    .fontFamily("Roboto")
                     .fontWeight(FontWeight.Bolder)
                     .color(Colors.Gray)
                     .toAttrs()
             )
             {
                 Text("Prazer, Felipe Moreira")
-            }
-            P(
-                attrs = Modifier
-                    .margin(left = 20.px, bottom = 0.px)
-                    .fontSize(20.px)
-                    .fontFamily(Constants.FONT_FAMILY)
-                    .fontWeight(FontWeight.Bold)
-                    .color(Colors.Gray)
-                    .toAttrs()
-            )
-            {
-                Text("Desenvolvedor Mobile")
-                Image(
-                    modifier = Modifier
-                        .fillMaxSize(5.percent),
-                    src = Res.Icon.mobilePhone
-                )
             }
             P(
                 attrs = Modifier
@@ -117,11 +102,12 @@ fun MyProfessionalPhoto() {
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
             Image(
                 modifier = Modifier
-                    .margin(left = 110.px)
-                    .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.Gray)
                     .fillMaxSize(50.percent),
                 src = Res.Image.profilePhoto
             )

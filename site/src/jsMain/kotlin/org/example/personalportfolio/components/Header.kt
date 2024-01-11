@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.FontWeight
+import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -16,8 +17,12 @@ import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.MoonIcon
 import com.varabyte.kobweb.silk.components.icons.SunIcon
+import com.varabyte.kobweb.silk.components.icons.fa.FaBars
+import com.varabyte.kobweb.silk.components.icons.fa.IconSize
 import com.varabyte.kobweb.silk.components.navigation.Link
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.models.Theme
@@ -31,49 +36,55 @@ import org.jetbrains.compose.web.css.px
 
 @Composable
 fun Header() {
+    val breakpoint = rememberBreakpoint()
     Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(1.cssRem),
-        horizontalArrangement = Arrangement.Center,
+            .padding(2.cssRem)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        ProfessionalLogo()
-        Topics()
-        ColorModeButton()
+        LeftSide(breakpoint = breakpoint)
+        if (breakpoint > Breakpoint.MD) {
+            RightSide()
+        }
     }
 }
 
 @Composable
-fun ProfessionalLogo() {
+fun LeftSide(breakpoint: Breakpoint) {
     Row(
         modifier = Modifier
-            .margin(bottom = 2.px, right = 290.px)
             .fillMaxSize(20.percent),
-        horizontalArrangement = Arrangement.Center
+        verticalAlignment = Alignment.CenterVertically,
     ) {
+        if (breakpoint <= Breakpoint.MD) {
+            FaBars(
+                modifier = Modifier
+                    .onClick {},
+                size = IconSize.XL,
+            )
+        }
         Image(
-            modifier = Modifier
-                .fillMaxSize(),
             src = Res.Image.professionalLogo
         )
     }
 }
 
 @Composable
-fun Topics() {
+fun RightSide() {
     var colorMode by ColorMode.currentState
     Row(
         modifier = Modifier
-            .margin(bottom = 2.px, left = 20.px)
             .fillMaxWidth(60.percent),
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.End,
     ) {
         Section.values().take(6).forEach { section ->
             Link(
                 modifier = NavigationStyle.toModifier()
                     .margin(all = 10.px)
-                    .fontFamily("Montserrat", "sans-serif")
+                    .fontFamily("Sans-Serif")
+                    .textAlign(TextAlign.Center)
                     .fontSize(18.px)
                     .fontWeight(FontWeight.Normal)
                     .textDecorationLine(TextDecorationLine.None)
@@ -82,17 +93,14 @@ fun Topics() {
                 text = section.title,
             )
         }
-    }
-}
-
-@Composable
-fun ColorModeButton() {
-    var colorMode by ColorMode.currentState
-    Button(
-        onClick = { colorMode = colorMode.opposite },
-        modifier = Modifier.setVariable(ButtonVars.FontSize, 1.em),
-        variant = CircleButtonVariant
-    ) {
-        if (colorMode.isLight) MoonIcon() else SunIcon()
+        var colorMode by ColorMode.currentState
+        Button(
+            onClick = { colorMode = colorMode.opposite },
+            modifier = Modifier
+                .setVariable(ButtonVars.FontSize, 1.em),
+            variant = CircleButtonVariant
+        ) {
+            if (colorMode.isLight) MoonIcon() else SunIcon()
+        }
     }
 }

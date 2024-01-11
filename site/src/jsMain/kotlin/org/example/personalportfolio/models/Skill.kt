@@ -16,7 +16,6 @@ enum class Skill(
     Android(
         icon = android,
         title = "Android"
-
     ),
     ApacheKafka(
         icon = apacheKafka,

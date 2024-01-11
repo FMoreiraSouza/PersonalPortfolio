@@ -12,7 +12,6 @@ import org.example.personalportfolio.components.AcademicCard
 import org.example.personalportfolio.components.SectionTitle
 import org.example.personalportfolio.models.Academic
 import org.example.personalportfolio.models.Section
-import org.jetbrains.compose.web.css.percent
 
 @Composable
 fun AcademicSection() {
@@ -29,8 +28,7 @@ fun AcademicSection() {
 @Composable
 fun AcademicContent() {
     Column(
-        modifier = Modifier
-            .fillMaxWidth(90.percent),
+        modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

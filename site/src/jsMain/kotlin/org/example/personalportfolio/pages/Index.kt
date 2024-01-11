@@ -8,6 +8,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.core.Page
+import org.example.personalportfolio.components.ButtonToTop
 import org.example.personalportfolio.sections.*
 
 @Page
@@ -23,13 +24,15 @@ fun HomePage() {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MainSection()
+            BeginSection()
             PresentationSection()
             SkillSection()
             AcademicSection()
             ProjectSection()
             ExperienceSection()
             ContactSection()
+            EndSection()
         }
+        ButtonToTop()
     }
 }

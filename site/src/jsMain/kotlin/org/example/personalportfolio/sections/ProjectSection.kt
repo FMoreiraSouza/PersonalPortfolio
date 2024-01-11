@@ -10,6 +10,8 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.padding
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.components.ProjectCard
 import org.example.personalportfolio.components.SectionTitle
 import org.example.personalportfolio.models.Project
@@ -32,6 +34,7 @@ fun ProjectSection() {
 
 @Composable
 fun ProjectContent() {
+    val breakpoint = rememberBreakpoint()
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -41,7 +44,7 @@ fun ProjectContent() {
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start
+            horizontalArrangement = if(breakpoint >= Breakpoint.SM) Arrangement.Start else Arrangement.Center
         ) {
             Project.values().forEach {project ->
                 ProjectCard(project = project)

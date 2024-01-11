@@ -10,21 +10,22 @@ import com.varabyte.kobweb.compose.ui.attrsModifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.models.Theme
 import org.example.personalportfolio.styles.ButtonStyle
 import org.example.personalportfolio.styles.FormStyle
 import org.jetbrains.compose.web.attributes.InputType
-import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.*
 
 @Composable
-fun ContactForm() {
+fun ContactMeans() {
+    val breakpoint = rememberBreakpoint()
     Form(
         action = "https://submit-form.com/KvfKb669C",
         attrs = Modifier
-            .fillMaxWidth(50.percent)
             .attrsModifier {
                 attr("method", "POST")
             }
@@ -37,7 +38,11 @@ fun ContactForm() {
                 .classNames("form-control")
                 .backgroundColor(Theme.LighterGray.rgb)
                 .height(40.px)
-                .width(500.px)
+                .width(
+                    if (breakpoint >= Breakpoint.MD) 500.px
+                    else if (breakpoint >= Breakpoint.SM) 300.px
+                    else 250.px
+                )
                 .borderRadius(r = 5.px)
                 .boxShadow(0.px, 0.px, 0.px, 0.px, null)
                 .attrsModifier {
@@ -54,9 +59,13 @@ fun ContactForm() {
                 .classNames("form-control")
                 .backgroundColor(Theme.LighterGray.rgb)
                 .height(40.px)
-                .width(500.px)
+                .width(
+                    if (breakpoint >= Breakpoint.MD) 500.px
+                    else if (breakpoint >= Breakpoint.SM) 300.px
+                    else 250.px
+                )
                 .borderRadius(r = 5.px)
-                .margin(topBottom = 10.px)
+                .margin(top = 10.px)
                 .boxShadow(0.px, 0.px, 0.px, 0.px, null)
                 .attrsModifier {
                     attr("placeholder", "Endereço de Email")
@@ -72,9 +81,13 @@ fun ContactForm() {
                 .classNames("form-control")
                 .backgroundColor(Theme.LighterGray.rgb)
                 .borderRadius(r = 5.px)
-                .margin(bottom = 10.px)
+                .margin(topBottom = 10.px)
                 .height(150.px)
-                .width(500.px)
+                .width(
+                    if (breakpoint >= Breakpoint.MD) 500.px
+                    else if (breakpoint >= Breakpoint.SM) 300.px
+                    else 250.px
+                )
                 .boxShadow(0.px, 0.px, 0.px, 0.px, null)
                 .attrsModifier {
                     attr("placeholder", "Sua Mensagem")
@@ -85,12 +98,18 @@ fun ContactForm() {
         )
         Box(
             modifier = ButtonStyle.toModifier()
+                .margin(
+                    left = when{
+                        breakpoint >= Breakpoint.MD -> 210.px
+                        breakpoint >= Breakpoint.SM -> 110.px
+                        else -> 95.px
+                    }
+                )
                 .width(Width.MaxContent),
             contentAlignment = Alignment.Center,
-        ){
+        ) {
             Button(
                 attrs = Modifier
-                    .margin(left = 210.px)
                     .height(40.px)
                     .width(80.px)
                     .border(width = 0.px)

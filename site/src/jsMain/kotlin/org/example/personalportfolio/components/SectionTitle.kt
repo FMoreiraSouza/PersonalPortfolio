@@ -9,7 +9,6 @@ import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import org.example.personalportfolio.models.Section
-import org.example.personalportfolio.util.Constants.FONT_FAMILY
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
@@ -23,7 +22,7 @@ fun SectionTitle(section: Section) {
             attrs = Modifier
                 .textAlign(TextAlign.Center)
                 .color(Colors.Gray)
-                .fontFamily(FONT_FAMILY)
+                .fontFamily("Roboto")
                 .fontWeight(FontWeight.Bold)
                 .fontSize(40.px)
                 .toAttrs()

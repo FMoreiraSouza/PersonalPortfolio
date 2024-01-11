@@ -12,7 +12,6 @@ import org.example.personalportfolio.components.ExperienceCard
 import org.example.personalportfolio.components.SectionTitle
 import org.example.personalportfolio.models.Experience
 import org.example.personalportfolio.models.Section
-import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 @Composable
@@ -20,7 +19,7 @@ fun ExperienceSection() {
     Box(
         modifier = Modifier
             .id(Section.Experiences.id)
-            .fillMaxWidth(80.percent)
+            .fillMaxWidth()
             .padding(topBottom = 20.px),
         contentAlignment = Alignment.Center
     ) {
