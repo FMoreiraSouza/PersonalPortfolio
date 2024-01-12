@@ -8,7 +8,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.margin
-import org.example.personalportfolio.components.ContactMeans
+import org.example.personalportfolio.components.ContactForm
 import org.example.personalportfolio.components.SectionTitle
 import org.example.personalportfolio.models.Section
 import org.jetbrains.compose.web.css.percent
@@ -36,6 +36,6 @@ fun ContactContent() {
         SectionTitle(
             section = Section.Contact,
         )
-        ContactMeans()
+        ContactForm()
     }
 }

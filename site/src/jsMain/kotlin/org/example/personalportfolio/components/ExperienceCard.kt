@@ -1,6 +1,8 @@
 package org.example.personalportfolio.components
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
@@ -17,8 +19,8 @@ import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Experience
-import org.example.personalportfolio.models.Theme
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.P
@@ -32,25 +34,26 @@ fun ExperienceCard(experience: Experience) {
             modifier = Modifier.fillMaxWidth(90.percent),
             numColumns = numColumns(base = 1, md = 2)
         ) {
-            ExperienceDescription(experience.description)
-            ExperienceDetails(experience)
+            ExperienceDescription(experience.description, breakpoint)
+            ExperienceDetails(experience, breakpoint)
         }
     } else {
         SimpleGrid(
             modifier = Modifier.fillMaxWidth(95.percent),
             numColumns = numColumns(base = 1)
         ) {
-            ExperienceDetails(experience)
-            ExperienceDescription(experience.description)
+            ExperienceDetails(experience, breakpoint)
+            ExperienceDescription(experience.description, breakpoint)
         }
     }
 }
 
 @Composable
 fun ExperienceDescription(
-    description: String
+    description: String,
+    breakpoint: Breakpoint
 ) {
-    val breakpoint = rememberBreakpoint()
+    var colorMode by ColorMode.currentState
     Box(
         modifier = Modifier
             .margin(right = 10.px, bottom = 5.px, top = 5.px)
@@ -64,7 +67,7 @@ fun ExperienceDescription(
                 .textAlign(TextAlign.Justify)
                 .lineHeight(1.7)
                 .fontWeight(FontWeight.Normal)
-                .color(Theme.Primary.rgb)
+                .color(if (colorMode.isLight) Colors.Black else Colors.White)
                 .toAttrs()
         ) {
             Text(description)
@@ -74,9 +77,10 @@ fun ExperienceDescription(
 
 @Composable
 fun ExperienceDetails(
-    experience: Experience
+    experience: Experience,
+    breakpoint: Breakpoint
 ) {
-    val breakpoint = rememberBreakpoint()
+    var colorMode by ColorMode.currentState
     if (breakpoint > Breakpoint.MD) {
         Row(
             modifier = Modifier
@@ -84,7 +88,7 @@ fun ExperienceDetails(
                 .margin(left = 20.px),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            ExperienceIcon(experience)
+            ExperienceIcon(experience, breakpoint)
             Column(
                 Modifier
                     .margin(0.px)
@@ -94,10 +98,10 @@ fun ExperienceDetails(
                 P(
                     attrs = Modifier
                         .margin(topBottom = 0.px)
-                        .fontFamily("Sans-Serif")
+                        .fontFamily("Roboto")
                         .fontSize(20.px)
                         .fontWeight(FontWeight.Bold)
-                        .color(Theme.Primary.rgb)
+                        .color(if (colorMode.isLight) Colors.Black else Colors.White)
                         .toAttrs()
                 ) {
                     Text(experience.jobPosition)
@@ -105,27 +109,26 @@ fun ExperienceDetails(
                 P(
                     attrs = Modifier
                         .margin(topBottom = 0.px)
-                        .fontFamily("Sans-Serif")
-                        .fontSize(10.px)
-                        .fontWeight(FontWeight.Normal)
-                        .color(Theme.Primary.rgb)
+                        .fontFamily("Roboto")
+                        .fontSize(14.px)
+                        .fontWeight(FontWeight.Bold)
+                        .color(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue)
                         .toAttrs()
                 ) {
-                    Text("${experience.from} - ${experience.to}")
+                    Text(experience.company)
                 }
                 P(
                     attrs = Modifier
                         .margin(topBottom = 0.px)
                         .fontFamily("Sans-Serif")
                         .fontSize(10.px)
-                        .fontWeight(FontWeight.Bold)
-                        .color(Colors.RoyalBlue)
+                        .fontWeight(FontWeight.Normal)
+                        .color(Colors.Gray)
                         .toAttrs()
                 ) {
-                    Text(experience.company)
+                    Text("${experience.from} - ${experience.to}")
                 }
             }
-
         }
     } else {
         Column(
@@ -133,42 +136,42 @@ fun ExperienceDetails(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ExperienceIcon(experience)
+            ExperienceIcon(experience, breakpoint)
             P(
                 attrs = Modifier
-                    .margin(top = 5.px)
-                    .fontFamily("Sans-Serif")
+                    .margin(topBottom = 0.px)
+                    .fontFamily("Roboto")
                     .textAlign(TextAlign.Center)
-                    .fontSize(18.px)
+                    .fontSize(20.px)
                     .fontWeight(FontWeight.Bold)
-                    .color(Theme.Primary.rgb)
+                    .color(if (colorMode.isLight) Colors.Black else Colors.White)
                     .toAttrs()
             ) {
                 Text(experience.jobPosition)
             }
             P(
                 attrs = Modifier
-                    .margin(top = 5.px)
+                    .margin(topBottom = 0.px)
+                    .fontFamily("Roboto")
+                    .textAlign(TextAlign.Center)
+                    .fontSize(14.px)
+                    .fontWeight(FontWeight.Bold)
+                    .color(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue)
+                    .toAttrs()
+            ) {
+                Text(experience.company)
+            }
+            P(
+                attrs = Modifier
+                    .margin(topBottom = 0.px)
                     .fontFamily("Sans-Serif")
                     .textAlign(TextAlign.Center)
                     .fontSize(10.px)
                     .fontWeight(FontWeight.Normal)
-                    .color(Theme.Primary.rgb)
+                    .color(Colors.Gray)
                     .toAttrs()
             ) {
                 Text("${experience.from} - ${experience.to}")
-            }
-            P(
-                attrs = Modifier
-                    .margin(top = 5.px)
-                    .fontFamily("Sans-Serif")
-                    .textAlign(TextAlign.Center)
-                    .fontSize(10.px)
-                    .fontWeight(FontWeight.Bold)
-                    .color(Colors.RoyalBlue)
-                    .toAttrs()
-            ) {
-                Text(experience.company)
             }
         }
     }
@@ -176,17 +179,18 @@ fun ExperienceDetails(
 
 @Composable
 fun ExperienceIcon(
-    experience: Experience
+    experience: Experience,
+    breakpoint: Breakpoint
 ) {
-    val breakpoint = rememberBreakpoint()
+    val colorMode by ColorMode.currentState
     Box(
         modifier = Modifier
             .fillMaxHeight()
-            .width(3.px)
+            .width(2.px)
             .margin(
                 right = if (breakpoint > Breakpoint.MD) 50.px else 0.px
             )
-            .backgroundColor(Colors.RoyalBlue),
+            .backgroundColor(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue),
         contentAlignment = Alignment.Center
     ) {
         Box(

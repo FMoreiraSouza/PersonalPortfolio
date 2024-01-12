@@ -7,20 +7,17 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.id
-import com.varabyte.kobweb.compose.ui.modifiers.padding
 import org.example.personalportfolio.components.ExperienceCard
 import org.example.personalportfolio.components.SectionTitle
 import org.example.personalportfolio.models.Experience
 import org.example.personalportfolio.models.Section
-import org.jetbrains.compose.web.css.px
 
 @Composable
 fun ExperienceSection() {
     Box(
         modifier = Modifier
             .id(Section.Experiences.id)
-            .fillMaxWidth()
-            .padding(topBottom = 20.px),
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
         ExperienceContent()

@@ -1,19 +1,22 @@
 package org.example.personalportfolio.components
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.Width
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.attrsModifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
-import org.example.personalportfolio.models.Theme
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.styles.ButtonStyle
 import org.example.personalportfolio.styles.FormStyle
 import org.jetbrains.compose.web.attributes.InputType
@@ -21,10 +24,11 @@ import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.*
 
 @Composable
-fun ContactMeans() {
+fun ContactForm() {
+    var colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
     Form(
-        action = "https://submit-form.com/KvfKb669C",
+        action = "https://formkeep.com/p/b7aa131b08210916fe3fc65d94786bf8",
         attrs = Modifier
             .attrsModifier {
                 attr("method", "POST")
@@ -36,7 +40,7 @@ fun ContactMeans() {
             attrs = FormStyle.toModifier()
                 .id("inputName")
                 .classNames("form-control")
-                .backgroundColor(Theme.LighterGray.rgb)
+                .backgroundColor((if (colorMode.isLight) Color.argb(0.1f, 211, 211, 212) else Color.argb(1.0f, 211, 211, 212)))
                 .height(40.px)
                 .width(
                     if (breakpoint >= Breakpoint.MD) 500.px
@@ -57,7 +61,7 @@ fun ContactMeans() {
             attrs = FormStyle.toModifier()
                 .id("inputEmail")
                 .classNames("form-control")
-                .backgroundColor(Theme.LighterGray.rgb)
+                .backgroundColor((if (colorMode.isLight) Color.argb(0.1f, 211, 211, 212) else Color.argb(1.0f, 211, 211, 212)))
                 .height(40.px)
                 .width(
                     if (breakpoint >= Breakpoint.MD) 500.px
@@ -79,7 +83,7 @@ fun ContactMeans() {
                 .id("inputMessage")
                 .fontSize(15.px)
                 .classNames("form-control")
-                .backgroundColor(Theme.LighterGray.rgb)
+                .backgroundColor((if (colorMode.isLight) Color.argb(0.1f, 211, 211, 212) else Color.argb(1.0f, 211, 211, 212)))
                 .borderRadius(r = 5.px)
                 .margin(topBottom = 10.px)
                 .height(150.px)
@@ -100,9 +104,9 @@ fun ContactMeans() {
             modifier = ButtonStyle.toModifier()
                 .margin(
                     left = when{
-                        breakpoint >= Breakpoint.MD -> 210.px
-                        breakpoint >= Breakpoint.SM -> 110.px
-                        else -> 95.px
+                        breakpoint >= Breakpoint.MD -> 200.px
+                        breakpoint >= Breakpoint.SM -> 100.px
+                        else -> 75.px
                     }
                 )
                 .width(Width.MaxContent),
@@ -110,8 +114,8 @@ fun ContactMeans() {
         ) {
             Button(
                 attrs = Modifier
-                    .height(40.px)
-                    .width(80.px)
+                    .height(50.px)
+                    .width(100.px)
                     .border(width = 0.px)
                     .borderRadius(r = 5.px)
                     .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.LightGray)

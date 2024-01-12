@@ -9,7 +9,6 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.id
-import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.components.ProjectCard
@@ -17,15 +16,13 @@ import org.example.personalportfolio.components.SectionTitle
 import org.example.personalportfolio.models.Project
 import org.example.personalportfolio.models.Section
 import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.px
 
 @Composable
 fun ProjectSection() {
     Box(
         modifier = Modifier
             .id(Section.Projects.id)
-            .fillMaxWidth(80.percent)
-            .padding(topBottom = 20.px),
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
         ProjectContent()
@@ -36,7 +33,7 @@ fun ProjectSection() {
 fun ProjectContent() {
     val breakpoint = rememberBreakpoint()
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(90.percent),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SectionTitle(
@@ -47,7 +44,7 @@ fun ProjectContent() {
             horizontalArrangement = if(breakpoint >= Breakpoint.SM) Arrangement.Start else Arrangement.Center
         ) {
             Project.values().forEach {project ->
-                ProjectCard(project = project)
+                ProjectCard(project, breakpoint)
             }
         }
     }

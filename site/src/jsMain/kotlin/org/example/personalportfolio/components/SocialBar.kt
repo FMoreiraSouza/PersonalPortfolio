@@ -28,8 +28,6 @@ import org.jetbrains.compose.web.dom.Text
 fun SocialBar() {
     Row(
         modifier = Modifier
-            .padding(bottom = 10.px)
-            .minWidth(40.px)
             .borderRadius(r = 20.px),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
@@ -42,22 +40,24 @@ fun SocialBar() {
 @Composable
 fun SocialLinks() {
     Link(
+        modifier = Modifier
+            .margin(bottom = 20.px, left = 20.px),
         path = LINKEDIN,
         openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
     ) {
         FaLinkedin(
-            modifier = SocialLinkStyle.toModifier()
-                .margin(bottom = 40.px, left = 20.px),
+            modifier = SocialLinkStyle.toModifier(),
             size = IconSize.XXL
         )
     }
     Link(
+        modifier = Modifier
+            .margin(bottom = 20.px, left = 20.px),
         path = GITHUB,
         openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
     ) {
         FaGithub(
-            modifier = SocialLinkStyle.toModifier()
-                .margin(bottom = 40.px, left = 20.px),
+            modifier = SocialLinkStyle.toModifier(),
             size = IconSize.XXL
         )
     }
@@ -68,11 +68,12 @@ fun GetInTouch() {
     Link(
         modifier = ButtonStyle.toModifier()
             .margin(bottom = 20.px, left = 20.px),
-                path = Section . Contact . path
+        path = Section.Contact.path
     ) {
         Button(
             attrs = Modifier
                 .height(50.px)
+                .width(100.px)
                 .border(width = 0.px)
                 .borderRadius(r = 5.px)
                 .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.LightGray)

@@ -18,7 +18,19 @@ val CircleButtonVariant by ButtonStyle.addVariantBase {
     Modifier.padding(0.px).borderRadius(50.percent)
 }
 
-val NavigationStyle by ComponentStyle {
+val NavigationLightStyle by ComponentStyle {
+    base {
+        Modifier
+            .backgroundColor(Colors.Transparent)
+            .transition(CSSTransition(property = "color", duration = 200.ms))
+    }
+    hover {
+        Modifier
+            .backgroundColor(Colors.SkyBlue)
+    }
+}
+
+val NavigationDarkStyle by ComponentStyle {
     base {
         Modifier
             .backgroundColor(Colors.Transparent)

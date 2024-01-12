@@ -17,7 +17,6 @@ import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.models.Project
 import org.example.personalportfolio.styles.PortfolioStyleLandscape
 import org.example.personalportfolio.styles.PortfolioStylePortrait
@@ -29,11 +28,11 @@ import org.jetbrains.compose.web.dom.Text
 @Composable
 fun ProjectCard(
     project: Project,
+    breakpoint: Breakpoint
 ) {
-    val breakpoint = rememberBreakpoint()
     Column(
 
-        modifier = if (breakpoint >= Breakpoint.SM)
+        modifier = if (breakpoint > Breakpoint.SM)
             PortfolioStyleLandscape.toModifier()
         else
             PortfolioStylePortrait.toModifier()
@@ -48,16 +47,15 @@ fun ProjectCard(
             Box(
                 modifier = Modifier
                     .id("boxParent")
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
             ) {
                 Image(
                     modifier = Modifier
-                        .size(if(breakpoint >= Breakpoint.SM) 300.px else 200.px),
+                        .size(if(breakpoint > Breakpoint.SM) 300.px else 225.px),
                     src = project.image
                 )
                 Box(
                     modifier = Modifier
-                        .backgroundColor(Colors.Blue)
                         .id("blueCurtain")
                         .fillMaxHeight()
                         .backgroundColor(argb(0.5f, 135, 206, 235)),

@@ -24,7 +24,6 @@ import org.jetbrains.compose.web.css.px
 @Composable
 fun ButtonToTop() {
     var scroll: Double? by remember { mutableStateOf(null) }
-
     LaunchedEffect(Unit) {
         window.addEventListener(type = "scroll", callback = {
             scroll = document.documentElement?.scrollTop

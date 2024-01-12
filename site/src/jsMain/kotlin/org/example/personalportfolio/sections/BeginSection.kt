@@ -38,14 +38,13 @@ fun BeginSection() {
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
-        Header()
-        BeginContent()
+        Header(breakpoint)
+        BeginContent(breakpoint)
     }
 }
 
 @Composable
-fun BeginContent() {
-    val breakpoint = rememberBreakpoint()
+fun BeginContent(breakpoint: Breakpoint) {
     Column(
         modifier = Modifier.fillMaxWidth()
             .margin(top = 122.px),
@@ -55,7 +54,7 @@ fun BeginContent() {
         Image(
             modifier = Modifier
                 .fillMaxSize(35.percent),
-            src = Res.Icon.computer,
+            src = Res.Image.computer,
         )
         P(
             attrs = Modifier

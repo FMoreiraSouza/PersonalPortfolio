@@ -22,12 +22,11 @@ import com.varabyte.kobweb.silk.components.icons.fa.IconSize
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Section
-import org.example.personalportfolio.models.Theme
 import org.example.personalportfolio.styles.CircleButtonVariant
-import org.example.personalportfolio.styles.NavigationStyle
+import org.example.personalportfolio.styles.NavigationDarkStyle
+import org.example.personalportfolio.styles.NavigationLightStyle
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.em
@@ -35,16 +34,17 @@ import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 @Composable
-fun Header() {
-    val breakpoint = rememberBreakpoint()
+fun Header(
+    breakpoint: Breakpoint
+) {
     Row(
         modifier = Modifier
-            .padding(2.cssRem)
+            .padding(1.cssRem)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        LeftSide(breakpoint = breakpoint)
+        LeftSide(breakpoint)
         if (breakpoint > Breakpoint.MD) {
             RightSide()
         }
@@ -81,14 +81,15 @@ fun RightSide() {
     ) {
         Section.values().take(6).forEach { section ->
             Link(
-                modifier = NavigationStyle.toModifier()
-                    .margin(all = 10.px)
+                modifier = (if (colorMode.isLight) NavigationLightStyle.toModifier() else NavigationDarkStyle.toModifier())
+                    .padding(all = 10.px)
+                    .margin(right = 5.px)
                     .fontFamily("Sans-Serif")
                     .textAlign(TextAlign.Center)
                     .fontSize(18.px)
                     .fontWeight(FontWeight.Normal)
                     .textDecorationLine(TextDecorationLine.None)
-                    .color(if (colorMode.isLight) Theme.Primary.rgb else Colors.Gray),
+                    .color(if (colorMode.isLight) Colors.Black else Colors.White),
                 path = section.path,
                 text = section.title,
             )
