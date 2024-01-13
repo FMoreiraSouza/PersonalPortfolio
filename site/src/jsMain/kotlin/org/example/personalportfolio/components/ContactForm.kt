@@ -28,7 +28,7 @@ fun ContactForm() {
     var colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
     Form(
-        action = "https://formkeep.com/p/b7aa131b08210916fe3fc65d94786bf8",
+        action = "https://submit-form.com/ZDEc8vIUB",
         attrs = Modifier
             .attrsModifier {
                 attr("method", "POST")

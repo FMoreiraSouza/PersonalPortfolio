@@ -51,13 +51,20 @@ fun BeginContent(breakpoint: Breakpoint) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            modifier = Modifier
-                .fillMaxSize(35.percent),
-            src = Res.Image.computer,
-        )
+        if(breakpoint >= Breakpoint.SM){
+            Image(
+                src = Res.Image.computer
+            )
+        }
+        else{
+            Image(
+                modifier = Modifier.width(235.px),
+                src = Res.Image.computer
+            )
+        }
         P(
             attrs = Modifier
+                .margin(bottom = 18.px)
                 .fontSize(if(breakpoint >= Breakpoint.SM) 30.px else 20.px)
                 .textAlign(TextAlign.Center)
                 .fontFamily("Roboto")

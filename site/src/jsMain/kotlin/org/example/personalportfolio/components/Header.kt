@@ -65,9 +65,17 @@ fun LeftSide(breakpoint: Breakpoint) {
                 size = IconSize.XL,
             )
         }
-        Image(
-            src = Res.Image.professionalLogo
-        )
+        if(breakpoint >= Breakpoint.SM){
+            Image(
+                src = Res.Image.professionalLogo
+            )
+        }
+        else{
+            Image(
+                modifier = Modifier.width(235.px),
+                src = Res.Image.professionalLogo
+            )
+        }
     }
 }
 
@@ -76,14 +84,14 @@ fun RightSide() {
     var colorMode by ColorMode.currentState
     Row(
         modifier = Modifier
-            .fillMaxWidth(60.percent),
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.End,
     ) {
         Section.values().take(6).forEach { section ->
             Link(
                 modifier = (if (colorMode.isLight) NavigationLightStyle.toModifier() else NavigationDarkStyle.toModifier())
-                    .padding(all = 10.px)
-                    .margin(right = 5.px)
+                    .padding(topBottom = 10.px, leftRight = 5.px)
+                    .margin(right = 10.px)
                     .fontFamily("Sans-Serif")
                     .textAlign(TextAlign.Center)
                     .fontSize(18.px)

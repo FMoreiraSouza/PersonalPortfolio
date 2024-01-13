@@ -3,6 +3,7 @@ package org.example.personalportfolio.components
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
+import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -14,7 +15,9 @@ import com.varabyte.kobweb.silk.components.icons.fa.FaGithub
 import com.varabyte.kobweb.silk.components.icons.fa.FaLinkedin
 import com.varabyte.kobweb.silk.components.icons.fa.IconSize
 import com.varabyte.kobweb.silk.components.navigation.Link
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.styles.ButtonStyle
 import org.example.personalportfolio.styles.SocialLinkStyle
@@ -26,14 +29,32 @@ import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun SocialBar() {
-    Row(
-        modifier = Modifier
-            .borderRadius(r = 20.px),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        SocialLinks()
-        GetInTouch()
+    val breakpoint = rememberBreakpoint()
+    if (breakpoint >= Breakpoint.SM) {
+        Row(
+            modifier = Modifier
+                .borderRadius(r = 20.px),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            SocialLinks()
+            GetInTouch(breakpoint)
+        }
+    } else {
+        Column(
+            modifier = Modifier
+                .borderRadius(r = 20.px),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            GetInTouch(breakpoint)
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                SocialLinks()
+            }
+        }
     }
 }
 
@@ -41,7 +62,7 @@ fun SocialBar() {
 fun SocialLinks() {
     Link(
         modifier = Modifier
-            .margin(bottom = 20.px, left = 20.px),
+            .margin(bottom = 20.px, right = 10.px),
         path = LINKEDIN,
         openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
     ) {
@@ -52,7 +73,7 @@ fun SocialLinks() {
     }
     Link(
         modifier = Modifier
-            .margin(bottom = 20.px, left = 20.px),
+            .margin(bottom = 20.px, left = 10.px),
         path = GITHUB,
         openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
     ) {
@@ -64,10 +85,13 @@ fun SocialLinks() {
 }
 
 @Composable
-fun GetInTouch() {
+fun GetInTouch(breakpoint: Breakpoint) {
     Link(
         modifier = ButtonStyle.toModifier()
-            .margin(bottom = 20.px, left = 20.px),
+            .margin(
+                bottom = if (breakpoint >= Breakpoint.SM) 20.px else 35.px,
+                left = if (breakpoint >= Breakpoint.SM) 20.px else 0.px
+            ),
         path = Section.Contact.path
     ) {
         Button(
