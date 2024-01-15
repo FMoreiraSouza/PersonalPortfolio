@@ -16,6 +16,7 @@ import com.varabyte.kobweb.silk.components.icons.fa.IconSize
 import com.varabyte.kobweb.silk.components.style.toModifier
 import kotlinx.browser.document
 import kotlinx.browser.window
+import kotlinx.coroutines.launch
 import org.example.personalportfolio.styles.ButtonToTopStyle
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.percent
@@ -23,6 +24,7 @@ import org.jetbrains.compose.web.css.px
 
 @Composable
 fun ButtonToTop() {
+    val scope = rememberCoroutineScope()
     var scroll: Double? by remember { mutableStateOf(null) }
     LaunchedEffect(Unit) {
         window.addEventListener(type = "scroll", callback = {
@@ -51,7 +53,9 @@ fun ButtonToTop() {
                 .borderRadius(20.percent)
                 .cursor(Cursor.Pointer)
                 .onClick {
-                    document.documentElement?.scroll(x = 0.0, y = 0.0)
+                     scope.launch{
+                        document.documentElement?.scroll(x = 0.0, y = 0.0)
+                    }
                 }
                 .styleModifier {
                     property("pointer-events", "auto")

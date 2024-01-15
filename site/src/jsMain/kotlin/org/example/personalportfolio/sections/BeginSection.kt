@@ -23,7 +23,9 @@ import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun BeginSection() {
+fun BeginSection(
+    onMenuClicked: () -> Unit
+) {
     val breakpoint = rememberBreakpoint()
     Box(
         modifier = Modifier
@@ -38,7 +40,10 @@ fun BeginSection() {
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
-        Header(breakpoint)
+        Header(
+            breakpoint,
+            onMenuClicked
+        )
         BeginContent(breakpoint)
     }
 }
@@ -51,12 +56,11 @@ fun BeginContent(breakpoint: Breakpoint) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if(breakpoint >= Breakpoint.SM){
+        if (breakpoint >= Breakpoint.SM) {
             Image(
                 src = Res.Image.computer
             )
-        }
-        else{
+        } else {
             Image(
                 modifier = Modifier.width(235.px),
                 src = Res.Image.computer
@@ -65,7 +69,7 @@ fun BeginContent(breakpoint: Breakpoint) {
         P(
             attrs = Modifier
                 .margin(bottom = 18.px)
-                .fontSize(if(breakpoint >= Breakpoint.SM) 30.px else 20.px)
+                .fontSize(if (breakpoint >= Breakpoint.SM) 30.px else 20.px)
                 .textAlign(TextAlign.Center)
                 .fontFamily("Roboto")
                 .fontWeight(FontWeight.Bold)

@@ -30,7 +30,7 @@ fun SkillBar() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (breakpoint > Breakpoint.MD) {
-            Skill.values().forEach { skill ->
+            Skill.entries.forEach { skill ->
                 Column(
                     modifier = SkillStyle.toModifier()
                         .fillMaxSize(8.percent)
@@ -47,7 +47,8 @@ fun SkillBar() {
                     Text(skill.title)
                 }
             }
-        } else {
+        }
+        else {
             SimpleGrid(
                 numColumns = numColumns(base = 2, sm = 4),
                 modifier = Modifier.alignContent(AlignContent.Center)
@@ -56,7 +57,7 @@ fun SkillBar() {
                     Column(
                         modifier = SkillStyle.toModifier()
                             .fillMaxSize(50.percent)
-                            .margin(left = if(breakpoint >= Breakpoint.SM) 32.px else 42.px)
+                            .margin(left = if (breakpoint >= Breakpoint.SM) 32.px else 42.px)
                             .textAlign(TextAlign.Center),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally

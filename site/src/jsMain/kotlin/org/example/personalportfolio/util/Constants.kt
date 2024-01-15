@@ -15,7 +15,10 @@ object Res {
     }
 
     object Icon {
-        const val android = "AndroidIcon.svg"
+        const val ufc = "UFC.png"
+        const val fitbank450 = "Fitbank450.png"
+        const val nemo = "Nemo.png"
+        const val amazonWebServices = "AmazonWebServicesIcon.svg"
         const val apacheKafka = "ApacheKafkaIcon.svg"
         const val firebase = "FirebaseIcon.svg"
         const val jetpackCompose = "JetpackComposeIcon.png"
@@ -24,8 +27,5 @@ object Res {
         const val ktorFramework = "KtorIcon.png"
         const val postgreSQL = "PostgreSQLIcon.svg"
         const val redirect = "RedirectIcon.png"
-        const val ufc = "UFC.png"
-        const val fitbank450 = "Fitbank450.png"
-        const val nemo = "Nemo.png"
     }
 }

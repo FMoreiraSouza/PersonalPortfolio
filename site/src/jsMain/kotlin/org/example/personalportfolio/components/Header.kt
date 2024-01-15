@@ -30,12 +30,12 @@ import org.example.personalportfolio.styles.NavigationLightStyle
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.em
-import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 @Composable
 fun Header(
-    breakpoint: Breakpoint
+    breakpoint: Breakpoint,
+    onMenuClicked: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -44,33 +44,38 @@ fun Header(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        LeftSide(breakpoint)
+        LeftSide(
+            breakpoint,
+            onMenuClicked
+        )
         if (breakpoint > Breakpoint.MD) {
-            RightSide()
+            RightSide(breakpoint)
         }
     }
 }
 
 @Composable
-fun LeftSide(breakpoint: Breakpoint) {
+fun LeftSide(
+    breakpoint: Breakpoint,
+    onMenuClicked: () -> Unit
+) {
     Row(
-        modifier = Modifier
-            .fillMaxSize(20.percent),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (breakpoint <= Breakpoint.MD) {
             FaBars(
                 modifier = Modifier
-                    .onClick {},
+                    .onClick {
+                        onMenuClicked()
+                    },
                 size = IconSize.XL,
             )
         }
-        if(breakpoint >= Breakpoint.SM){
+        if (breakpoint >= Breakpoint.SM) {
             Image(
                 src = Res.Image.professionalLogo
             )
-        }
-        else{
+        } else {
             Image(
                 modifier = Modifier.width(235.px),
                 src = Res.Image.professionalLogo
@@ -80,14 +85,14 @@ fun LeftSide(breakpoint: Breakpoint) {
 }
 
 @Composable
-fun RightSide() {
+fun RightSide(breakpoint: Breakpoint) {
     var colorMode by ColorMode.currentState
     Row(
         modifier = Modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.End,
     ) {
-        Section.values().take(6).forEach { section ->
+        Section.values().forEach { section ->
             Link(
                 modifier = (if (colorMode.isLight) NavigationLightStyle.toModifier() else NavigationDarkStyle.toModifier())
                     .padding(topBottom = 10.px, leftRight = 5.px)
@@ -102,14 +107,24 @@ fun RightSide() {
                 text = section.title,
             )
         }
-        var colorMode by ColorMode.currentState
-        Button(
-            onClick = { colorMode = colorMode.opposite },
-            modifier = Modifier
-                .setVariable(ButtonVars.FontSize, 1.em),
-            variant = CircleButtonVariant
-        ) {
-            if (colorMode.isLight) MoonIcon() else SunIcon()
-        }
+        ToogleColorThemeButton(breakpoint)
+    }
+}
+
+@Composable
+fun ToogleColorThemeButton(breakpoint: Breakpoint) {
+
+    var colorMode by ColorMode.currentState
+    Button(
+        onClick = { colorMode = colorMode.opposite },
+        modifier = Modifier
+            .setVariable(ButtonVars.FontSize, 1.em)
+            .margin(
+                top = if (breakpoint <= Breakpoint.MD) 2.px else 0.px,
+                left = if(breakpoint <= Breakpoint.MD) 6.px else 0.px
+            ),
+        variant = CircleButtonVariant,
+    ) {
+        if (colorMode.isLight) MoonIcon() else SunIcon()
     }
 }
