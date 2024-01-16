@@ -1,6 +1,7 @@
 package org.example.personalportfolio.components
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -16,16 +17,23 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.models.Skill
 import org.example.personalportfolio.styles.SkillStyle
-import org.jetbrains.compose.web.css.AlignContent
-import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun SkillBar() {
+fun SkillBar(animatedMargin: CSSSizeValue<CSSUnit.px>) {
     val breakpoint = rememberBreakpoint()
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .margin(left = if (breakpoint > Breakpoint.MD) animatedMargin else 0.px)
+            .transition(
+                CSSTransition(
+                    property = "margin",
+                    duration = 1.s,
+                    delay = 100.ms
+                )
+            ),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -35,7 +43,7 @@ fun SkillBar() {
                     modifier = SkillStyle.toModifier()
                         .fillMaxSize(8.percent)
                         .textAlign(TextAlign.Center)
-                        .padding(all = 20.px),
+                        .padding(leftRight = 20.px),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -47,13 +55,12 @@ fun SkillBar() {
                     Text(skill.title)
                 }
             }
-        }
-        else {
+        } else {
             SimpleGrid(
                 numColumns = numColumns(base = 2, sm = 4),
                 modifier = Modifier.alignContent(AlignContent.Center)
             ) {
-                Skill.values().forEach { skill ->
+                Skill.entries.forEach { skill ->
                     Column(
                         modifier = SkillStyle.toModifier()
                             .fillMaxSize(50.percent)

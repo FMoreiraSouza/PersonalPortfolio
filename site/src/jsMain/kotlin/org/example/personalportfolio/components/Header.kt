@@ -92,7 +92,7 @@ fun RightSide(breakpoint: Breakpoint) {
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.End,
     ) {
-        Section.values().forEach { section ->
+        Section.entries.forEach { section ->
             Link(
                 modifier = (if (colorMode.isLight) NavigationLightStyle.toModifier() else NavigationDarkStyle.toModifier())
                     .padding(topBottom = 10.px, leftRight = 5.px)

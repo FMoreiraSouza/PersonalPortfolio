@@ -1,6 +1,7 @@
 package org.example.personalportfolio.components
 
 import androidx.compose.runtime.Composable
+import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.TextDecorationLine
@@ -21,21 +22,41 @@ import org.example.personalportfolio.models.Project
 import org.example.personalportfolio.styles.PortfolioStyleLandscape
 import org.example.personalportfolio.styles.PortfolioStylePortrait
 import org.example.personalportfolio.util.Res
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun ProjectCard(
     project: Project,
-    breakpoint: Breakpoint
+    breakpoint: Breakpoint,
+    animatedMargin: CSSSizeValue<CSSUnit.px>
 ) {
     Column(
-
-        modifier = if (breakpoint > Breakpoint.SM)
+        modifier = if (breakpoint > Breakpoint.SM) {
             PortfolioStyleLandscape.toModifier()
-        else
-            PortfolioStylePortrait.toModifier()
+                .margin(
+                    left = animatedMargin,
+                )
+                .transition(
+                    CSSTransition(
+                        property = "margin",
+                        duration = 1.s,
+                        delay = 100.ms
+                    )
+                )
+        } else {
+            PortfolioStylePortrait
+                .toModifier()
+                .margin(left = animatedMargin)
+                .transition(
+                    CSSTransition(
+                        property = "margin",
+                        duration = 1.s,
+                        delay = 100.ms
+                    )
+                )
+        }
     ) {
         Link(
             modifier = Modifier
@@ -51,7 +72,7 @@ fun ProjectCard(
             ) {
                 Image(
                     modifier = Modifier
-                        .size(if(breakpoint > Breakpoint.SM) 300.px else 225.px),
+                        .size(if (breakpoint > Breakpoint.SM) 300.px else 225.px),
                     src = project.image
                 )
                 Box(
@@ -75,7 +96,7 @@ fun ProjectCard(
                     .textAlign(TextAlign.Start)
                     .fontFamily("Roboto")
                     .fontWeight(FontWeight.Bold)
-                    .fontSize(if(breakpoint >= Breakpoint.SM) 20.px else 18.px)
+                    .fontSize(if (breakpoint >= Breakpoint.SM) 20.px else 18.px)
                     .toAttrs()
             ) {
                 Text(project.title)
@@ -88,7 +109,7 @@ fun ProjectCard(
                     .color(Colors.Gray)
                     .fontFamily("Roboto")
                     .fontWeight(FontWeight.Normal)
-                    .fontSize(if(breakpoint >= Breakpoint.SM) 18.px else 16.px)
+                    .fontSize(if (breakpoint >= Breakpoint.SM) 18.px else 16.px)
                     .toAttrs()
             ) {
                 Text(project.platform)

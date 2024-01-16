@@ -33,9 +33,7 @@ fun ContactContent() {
         modifier = Modifier.fillMaxWidth(30.percent),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SectionTitle(
-            section = Section.Contact,
-        )
+        SectionTitle(section = Section.Contact)
         ContactForm()
     }
 }

@@ -27,23 +27,30 @@ import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun ExperienceCard(experience: Experience) {
+fun ExperienceCard(
+    experience: Experience,
+) {
     val breakpoint = rememberBreakpoint()
     if (breakpoint > Breakpoint.MD) {
         SimpleGrid(
-            modifier = Modifier.fillMaxWidth(90.percent),
+            modifier = Modifier
+                .fillMaxWidth(90.percent),
             numColumns = numColumns(base = 1, md = 2)
         ) {
-            ExperienceDescription(experience.description, breakpoint)
-            ExperienceDetails(experience, breakpoint)
+            ExperienceDescription(experience.description, breakpoint,
+            )
+            ExperienceDetails(experience, breakpoint,
+            )
         }
     } else {
         SimpleGrid(
             modifier = Modifier.fillMaxWidth(95.percent),
             numColumns = numColumns(base = 1)
         ) {
-            ExperienceDetails(experience, breakpoint)
-            ExperienceDescription(experience.description, breakpoint)
+            ExperienceDetails(experience, breakpoint,
+            )
+            ExperienceDescription(experience.description, breakpoint,
+            )
         }
     }
 }
@@ -51,20 +58,21 @@ fun ExperienceCard(experience: Experience) {
 @Composable
 fun ExperienceDescription(
     description: String,
-    breakpoint: Breakpoint
+    breakpoint: Breakpoint,
 ) {
     var colorMode by ColorMode.currentState
-    Box(
+    Column(
         modifier = Modifier
-            .margin(right = 10.px, bottom = 5.px, top = 5.px)
+            .margin(
+                right = 10.px, bottom = 5.px, top = 5.px)
             .padding(all = 14.px)
     ) {
         P(
             attrs = Modifier
                 .margin(topBottom = 0.px)
                 .fontFamily("Sans-Serif")
-                .fontSize(if(breakpoint >= Breakpoint.SM) 14.px else 12.px)
-                .textAlign(TextAlign.Justify)
+                .fontSize(if (breakpoint >= Breakpoint.SM) 18.px else 14.px)
+                .textAlign(if (breakpoint > Breakpoint.MD) TextAlign.Left else TextAlign.Center)
                 .lineHeight(1.7)
                 .fontWeight(FontWeight.Normal)
                 .color(if (colorMode.isLight) Colors.Black else Colors.White)
@@ -78,17 +86,22 @@ fun ExperienceDescription(
 @Composable
 fun ExperienceDetails(
     experience: Experience,
-    breakpoint: Breakpoint
+    breakpoint: Breakpoint,
 ) {
     var colorMode by ColorMode.currentState
     if (breakpoint > Breakpoint.MD) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .margin(left = 20.px),
+                .margin(
+                    left = 20.px,
+                ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            ExperienceIcon(experience, breakpoint)
+            ExperienceIcon(
+                experience,
+                breakpoint,
+            )
             Column(
                 Modifier
                     .margin(0.px)
@@ -99,7 +112,7 @@ fun ExperienceDetails(
                     attrs = Modifier
                         .margin(topBottom = 0.px)
                         .fontFamily("Roboto")
-                        .fontSize(20.px)
+                        .fontSize(22.px)
                         .fontWeight(FontWeight.Bold)
                         .color(if (colorMode.isLight) Colors.Black else Colors.White)
                         .toAttrs()
@@ -110,7 +123,7 @@ fun ExperienceDetails(
                     attrs = Modifier
                         .margin(topBottom = 0.px)
                         .fontFamily("Roboto")
-                        .fontSize(14.px)
+                        .fontSize(18.px)
                         .fontWeight(FontWeight.Bold)
                         .color(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue)
                         .toAttrs()
@@ -121,7 +134,7 @@ fun ExperienceDetails(
                     attrs = Modifier
                         .margin(topBottom = 0.px)
                         .fontFamily("Sans-Serif")
-                        .fontSize(10.px)
+                        .fontSize(14.px)
                         .fontWeight(FontWeight.Normal)
                         .color(Colors.Gray)
                         .toAttrs()
@@ -136,7 +149,10 @@ fun ExperienceDetails(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ExperienceIcon(experience, breakpoint)
+            ExperienceIcon(
+                experience,
+                breakpoint,
+            )
             P(
                 attrs = Modifier
                     .margin(topBottom = 0.px)
@@ -180,7 +196,7 @@ fun ExperienceDetails(
 @Composable
 fun ExperienceIcon(
     experience: Experience,
-    breakpoint: Breakpoint
+    breakpoint: Breakpoint,
 ) {
     val colorMode by ColorMode.currentState
     Box(

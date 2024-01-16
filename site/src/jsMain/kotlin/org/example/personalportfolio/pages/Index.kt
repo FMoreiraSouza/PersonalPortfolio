@@ -28,9 +28,7 @@ fun HomePage() {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BeginSection(
-                {menuOpened = true}
-            )
+            BeginSection { menuOpened = true }
             PresentationSection()
             SkillSection()
             AcademicSection()
@@ -40,6 +38,6 @@ fun HomePage() {
             EndSection()
         }
         ButtonToTop()
-        if(menuOpened) MenuBar({menuOpened = false})
+        if (menuOpened) MenuBar { menuOpened = false }
     }
 }

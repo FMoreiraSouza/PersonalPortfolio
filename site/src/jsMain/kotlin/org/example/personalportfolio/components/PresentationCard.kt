@@ -3,7 +3,7 @@ package org.example.personalportfolio.components
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.varabyte.kobweb.compose.css.FontVariantAlternates
+import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
@@ -22,21 +22,21 @@ import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.util.Constants
 import org.example.personalportfolio.util.Res
-import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun PresentationCard(){
+fun PresentationCard(animatedMargin: CSSSizeValue<CSSUnit.px>) {
     val breakpoint = rememberBreakpoint()
     if (breakpoint > Breakpoint.MD) {
         SimpleGrid(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth(),
             numColumns = numColumns(base = 1, md = 2)
         ) {
-            MyDescription(breakpoint)
-            MyProfessionalPhoto(breakpoint)
+            MyDescription(breakpoint, animatedMargin)
+            MyProfessionalPhoto(breakpoint, animatedMargin)
         }
     } else {
         Column(
@@ -44,14 +44,14 @@ fun PresentationCard(){
                 .fillMaxWidth(80.percent),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MyDescription(breakpoint)
-            MyProfessionalPhoto(breakpoint)
+            MyDescription(breakpoint, animatedMargin)
+            MyProfessionalPhoto(breakpoint, animatedMargin)
         }
     }
 }
 
 @Composable
-fun MyDescription(breakpoint: Breakpoint) {
+fun MyDescription(breakpoint: Breakpoint, animatedMargin: CSSSizeValue<CSSUnit.px>) {
     var colorMode by ColorMode.currentState
     Row(
         modifier = Modifier
@@ -66,7 +66,7 @@ fun MyDescription(breakpoint: Breakpoint) {
         ) {
             P(
                 attrs = Modifier
-                    .margin(left = if (breakpoint > Breakpoint.MD) 200.px else 0.px)
+                    .margin(left = if (breakpoint > Breakpoint.MD) animatedMargin * 2 else 0.px)
                     .padding(right = 10.px)
                     .fontSize(
                         when {
@@ -75,6 +75,14 @@ fun MyDescription(breakpoint: Breakpoint) {
                             else -> 22.px
                         }
                     )
+                    .transition(
+                        CSSTransition(
+                            property = "margin",
+                            duration = 1.s,
+                            delay = 100.ms
+                        )
+                    )
+//                    .fillMaxWidth()
                     .fontFamily("Roboto")
                     .fontWeight(FontWeight.Bolder)
                     .color(Colors.Gray)
@@ -85,13 +93,23 @@ fun MyDescription(breakpoint: Breakpoint) {
             }
             P(
                 attrs = Modifier
-                    .margin(left = if (breakpoint > Breakpoint.MD) 200.px else 0.px)
+                    .margin(
+                        left = if (breakpoint > Breakpoint.MD) 200.px else 0.px,
+                        bottom = if (breakpoint > Breakpoint.MD) animatedMargin else 0.px
+                    )
                     .padding(right = 10.px)
-                    .fontSize(if (breakpoint >= Breakpoint.MD) 14.px else 12.px)
+                    .fillMaxWidth(if (breakpoint >= Breakpoint.MD) 80.percent else 100.percent)
+                    .fontSize(if (breakpoint >= Breakpoint.MD) 18.px else 14.px)
+                    .textAlign(if (breakpoint > Breakpoint.MD) TextAlign.Left else TextAlign.Center)
                     .fontFamily("Sans-Serif")
-                    .fontVariant(FontVariantAlternates.Inherit)
-                    .textAlign(TextAlign.Justify)
                     .fontWeight(FontWeight.Normal)
+                    .transition(
+                        CSSTransition(
+                            property = "margin",
+                            duration = 1.s,
+                            delay = 100.ms
+                        )
+                    )
                     .color(if (colorMode.isLight) Colors.Black else Colors.White)
                     .toAttrs()
             ) {
@@ -102,7 +120,7 @@ fun MyDescription(breakpoint: Breakpoint) {
 }
 
 @Composable
-fun MyProfessionalPhoto(breakpoint: Breakpoint) {
+fun MyProfessionalPhoto(breakpoint: Breakpoint, animatedMargin: CSSSizeValue<CSSUnit.px>) {
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
@@ -111,7 +129,7 @@ fun MyProfessionalPhoto(breakpoint: Breakpoint) {
             modifier = Modifier
                 .margin(
                     right = if (breakpoint > Breakpoint.MD) 200.px else 0.px,
-                    top = if (breakpoint > Breakpoint.MD) 0.px else 5.px
+                    top = if (breakpoint > Breakpoint.MD) 0.px else 5.px,
                 )
                 .padding(left = if (breakpoint > Breakpoint.MD) 10.px else 0.px),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -119,6 +137,14 @@ fun MyProfessionalPhoto(breakpoint: Breakpoint) {
         ) {
             Image(
                 modifier = Modifier
+                    .margin(left = if (breakpoint > Breakpoint.MD) animatedMargin else 0.px)
+                    .transition(
+                        CSSTransition(
+                            property = "margin",
+                            duration = 1.s,
+                            delay = 100.ms
+                        )
+                    )
                     .size(if (breakpoint >= Breakpoint.MD) 300.px else 250.px),
                 src = Res.Image.profilePhoto
             )

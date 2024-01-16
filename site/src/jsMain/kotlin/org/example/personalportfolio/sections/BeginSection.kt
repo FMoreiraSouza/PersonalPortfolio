@@ -44,15 +44,21 @@ fun BeginSection(
             breakpoint,
             onMenuClicked
         )
-        BeginContent(breakpoint)
+        BeginContent(
+            breakpoint,
+        )
     }
 }
 
 @Composable
-fun BeginContent(breakpoint: Breakpoint) {
+fun BeginContent(
+    breakpoint: Breakpoint,
+) {
     Column(
         modifier = Modifier.fillMaxWidth()
-            .margin(top = 122.px),
+            .margin(
+                top = 122.px,
+            ),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
