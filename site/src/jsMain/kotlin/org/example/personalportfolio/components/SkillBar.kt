@@ -15,23 +15,34 @@ import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
+import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.models.Skill
 import org.example.personalportfolio.styles.SkillStyle
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun SkillBar(animatedMargin: CSSSizeValue<CSSUnit.px>) {
+fun SkillBar(animatedMargin: CSSSizeValue<CSSUnit.px>, section: Section) {
     val breakpoint = rememberBreakpoint()
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .margin(left = if (breakpoint > Breakpoint.MD) animatedMargin else 0.px)
+            .margin(
+                left = if (breakpoint <= Breakpoint.MD) {
+                    if (section.id == Section.Skills.id) {
+                        0.px
+                    } else {
+                        animatedMargin
+                    }
+                } else {
+                    animatedMargin
+                },
+            )
             .transition(
                 CSSTransition(
                     property = "margin",
-                    duration = 1.s,
-                    delay = 100.ms
+                    duration = 2.s,
+                    delay = 200.ms
                 )
             ),
         horizontalArrangement = Arrangement.Center,

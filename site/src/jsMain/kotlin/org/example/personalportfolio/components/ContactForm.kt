@@ -40,12 +40,15 @@ fun ContactForm() {
             attrs = FormStyle.toModifier()
                 .id("inputName")
                 .classNames("form-control")
-                .backgroundColor((if (colorMode.isLight) Color.argb(0.1f, 211, 211, 212) else Color.argb(1.0f, 211, 211, 212)))
+                .backgroundColor(
+                    (if (colorMode.isLight) Color.argb(0.1f, 211, 211, 212) else Color.argb(1.0f, 211, 211, 212)))
                 .height(40.px)
                 .width(
-                    if (breakpoint >= Breakpoint.MD) 500.px
-                    else if (breakpoint >= Breakpoint.SM) 300.px
-                    else 250.px
+                    when {
+                        breakpoint >= Breakpoint.MD -> 500.px
+                        breakpoint >= Breakpoint.SM -> 300.px
+                        else -> 250.px
+                    }
                 )
                 .borderRadius(r = 5.px)
                 .boxShadow(0.px, 0.px, 0.px, 0.px, null)
@@ -103,7 +106,7 @@ fun ContactForm() {
         Box(
             modifier = ButtonStyle.toModifier()
                 .margin(
-                    left = when{
+                    left = when {
                         breakpoint >= Breakpoint.MD -> 200.px
                         breakpoint >= Breakpoint.SM -> 100.px
                         else -> 75.px

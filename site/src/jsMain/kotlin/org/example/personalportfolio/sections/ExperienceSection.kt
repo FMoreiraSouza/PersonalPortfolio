@@ -36,9 +36,7 @@ fun ExperienceContent() {
     ) {
         SectionTitle(section = Section.Experiences)
         Experience.entries.forEach { experience ->
-            ExperienceCard(
-                experience,
-            )
+            ExperienceCard(experience)
         }
     }
 }

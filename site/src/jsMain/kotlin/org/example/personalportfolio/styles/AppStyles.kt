@@ -3,6 +3,7 @@ package org.example.personalportfolio.styles
 import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.Visibility
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
@@ -72,6 +73,30 @@ val SocialLinkStyle by ComponentStyle {
     hover {
         Modifier
             .color(Colors.SkyBlue)
+    }
+}
+
+val LighterPresentationColumnStyle by ComponentStyle {
+    base {
+        Modifier
+            .backgroundColor(Color.argb(0.7f, 211, 211, 212))
+            .transition(CSSTransition(property = "background", duration = 200.ms))
+    }
+    hover {
+        Modifier
+            .backgroundColor(Colors.SkyBlue)
+    }
+}
+
+val DarkerPresentationColumnStyle by ComponentStyle {
+    base {
+        Modifier
+            .backgroundColor(Color.argb(0.2f, 211, 211, 212))
+            .transition(CSSTransition(property = "background", duration = 200.ms))
+    }
+    hover {
+        Modifier
+            .backgroundColor(Colors.RoyalBlue)
     }
 }
 
@@ -152,7 +177,7 @@ val PortfolioStylePortrait by ComponentStyle {
     }
     cssRule(":hover > #linkParent > #boxParent > #blueCurtain") {
         Modifier
-            .width(200.px)
+            .width(225.px)
     }
     cssRule(" > #linkParent > #boxParent > #blueCurtain > #linkIcon") {
         Modifier

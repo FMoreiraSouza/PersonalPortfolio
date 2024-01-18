@@ -15,6 +15,7 @@ import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import kotlinx.coroutines.launch
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.util.ObserveViewportEntered
+import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.s
 import org.jetbrains.compose.web.dom.P
@@ -30,7 +31,7 @@ fun SectionTitle(
 
     ObserveViewportEntered(
         sectionId = section.id,
-        distanceFromTop = 500.0,
+        distanceFromTop = 700.0,
         onViewportEntered = {
             scope.launch {
                 titleMargin = 0.px
@@ -46,12 +47,23 @@ fun SectionTitle(
                 .textAlign(
                     TextAlign.Center
                 )
-                .margin(left = if (breakpoint > Breakpoint.MD) titleMargin else 0.px)
+                .margin(
+                    left =
+                    if (breakpoint <= Breakpoint.MD) {
+                        if (section.id == Section.About.id || section.id == Section.Skills.id) {
+                            0.px
+                        } else {
+                            titleMargin
+                        }
+                    } else {
+                        titleMargin
+                    }
+                )
                 .color(Colors.Gray)
                 .fontFamily("Roboto")
                 .fontWeight(FontWeight.Bold)
                 .fontSize(40.px)
-                .transition(CSSTransition(property = "margin", duration = 1.s))
+                .transition(CSSTransition(property = "margin", duration = 1.s, delay = 100.ms))
                 .toAttrs()
         )
         {

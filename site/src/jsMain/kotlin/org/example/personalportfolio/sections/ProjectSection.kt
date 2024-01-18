@@ -38,10 +38,10 @@ fun ProjectSection() {
 fun ProjectContent() {
     val breakpoint = rememberBreakpoint()
     val scope = rememberCoroutineScope()
-    var animatedMargin by remember { mutableStateOf((-500).px) }
+    var animatedMargin by remember { mutableStateOf((-400).px) }
     ObserveViewportEntered(
         sectionId = Section.About.id,
-        distanceFromTop = 500.0,
+        distanceFromTop = 5.0,
         onViewportEntered = {
             scope.launch {
                 animatedMargin = 0.px
@@ -58,11 +58,7 @@ fun ProjectContent() {
             horizontalArrangement = if (breakpoint >= Breakpoint.SM) Arrangement.Start else Arrangement.Center
         ) {
             Project.entries.forEach { project ->
-                ProjectCard(
-                    project,
-                    breakpoint,
-                    animatedMargin
-                )
+                ProjectCard(project, breakpoint, animatedMargin)
             }
         }
     }

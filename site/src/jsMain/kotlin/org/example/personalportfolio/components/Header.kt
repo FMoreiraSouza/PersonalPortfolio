@@ -3,6 +3,7 @@ package org.example.personalportfolio.components
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.TextDecorationLine
@@ -12,6 +13,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.graphics.Image
@@ -65,19 +67,20 @@ fun LeftSide(
         if (breakpoint <= Breakpoint.MD) {
             FaBars(
                 modifier = Modifier
+                    .margin(bottom = if (breakpoint < Breakpoint.SM) 6.px else 8.px)
+                    .cursor(Cursor.Pointer)
                     .onClick {
                         onMenuClicked()
                     },
                 size = IconSize.XL,
             )
         }
-        if (breakpoint >= Breakpoint.SM) {
+        Link(
+            path = "http://localhost:8080/",
+            openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+        ) {
             Image(
-                src = Res.Image.professionalLogo
-            )
-        } else {
-            Image(
-                modifier = Modifier.width(235.px),
+                modifier = Modifier.fillMaxSize(),
                 src = Res.Image.professionalLogo
             )
         }
@@ -96,7 +99,7 @@ fun RightSide(breakpoint: Breakpoint) {
             Link(
                 modifier = (if (colorMode.isLight) NavigationLightStyle.toModifier() else NavigationDarkStyle.toModifier())
                     .padding(topBottom = 10.px, leftRight = 5.px)
-                    .margin(right = 10.px)
+                    .margin(right = 5.px, bottom = 4.px)
                     .fontFamily("Sans-Serif")
                     .textAlign(TextAlign.Center)
                     .fontSize(18.px)
@@ -120,8 +123,8 @@ fun ToogleColorThemeButton(breakpoint: Breakpoint) {
         modifier = Modifier
             .setVariable(ButtonVars.FontSize, 1.em)
             .margin(
-                top = if (breakpoint <= Breakpoint.MD) 2.px else 0.px,
-                left = if(breakpoint <= Breakpoint.MD) 6.px else 0.px
+                top = if (breakpoint <= Breakpoint.MD) 10.px else 0.px,
+                left = if (breakpoint <= Breakpoint.MD) 6.px else 0.px
             ),
         variant = CircleButtonVariant,
     ) {

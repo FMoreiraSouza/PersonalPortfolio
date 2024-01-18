@@ -28,7 +28,7 @@ fun MyApp(content: @Composable () -> Unit) {
 
     SilkApp {
         val colorMode = ColorMode.current
-        LaunchedEffect(colorMode){
+        LaunchedEffect(colorMode) {
             localStorage.setItem(COLOR_MODE_KEY.toString(), colorMode.name)
         }
         Surface(SmoothColorStyle.toModifier().minHeight(100.vh)) {

@@ -36,7 +36,7 @@ fun AcademicContent() {
     var animatedMargin by remember { mutableStateOf((-2020).px) }
     ObserveViewportEntered(
         sectionId = Section.About.id,
-        distanceFromTop = 500.0,
+        distanceFromTop = 50.0,
         onViewportEntered = {
             scope.launch {
                 animatedMargin = 0.px

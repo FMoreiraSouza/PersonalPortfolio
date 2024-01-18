@@ -1,15 +1,14 @@
 package org.example.personalportfolio.components
 
 import androidx.compose.runtime.*
-import com.varabyte.kobweb.compose.css.CSSTransition
-import com.varabyte.kobweb.compose.css.FontWeight
-import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.css.TextDecorationLine
+import com.varabyte.kobweb.compose.css.*
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.fa.FaXmark
 import com.varabyte.kobweb.silk.components.icons.fa.IconSize
@@ -42,16 +41,22 @@ fun MenuBar(onMenuClosed: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth(if (breakpoint >= Breakpoint.MD) 50.percent else 100.percent)
-            .height(48.vh)
+            .height(50.vh)
             .position(Position.Fixed)
+            .cursor(Cursor.Pointer)
             .translate(tx = translateX)
             .transition(CSSTransition(property = "translate", duration = 500.ms))
             .backgroundColor((if (colorMode.isLight) Colors.White else Colors.Black)),
     ) {
-        Row {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             FaXmark(
                 modifier = Modifier
-                    .margin(top = 22.px, left = 10.px)
+                    .margin(
+                        top = 10.px,
+                        left = 10.px
+                    )
                     .onClick {
                         scope.launch {
                             onMenuClosed()
@@ -60,11 +65,14 @@ fun MenuBar(onMenuClosed: () -> Unit) {
                 size = IconSize.LG
             )
             ToogleColorThemeButton(breakpoint)
-            if (breakpoint <= Breakpoint.MD) {
+            Link(
+                path = "http://localhost:8080/",
+                openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
+            ) {
                 Image(
                     modifier = Modifier
-                        .margin(top = 5.px)
-                        .fillMaxSize(80.percent),
+                        .margin(top = 15.px)
+                        .fillMaxSize(),
                     src = Res.Image.professionalLogo
                 )
             }
@@ -75,8 +83,7 @@ fun MenuBar(onMenuClosed: () -> Unit) {
             Section.entries.forEach { section ->
                 Link(
                     modifier = (if (colorMode.isLight) NavigationLightStyle.toModifier() else NavigationDarkStyle.toModifier())
-                        .padding(topBottom = 10.px, leftRight = 5.px)
-                        .margin(right = 10.px)
+                        .padding(topBottom = 5.px, leftRight = 5.px)
                         .fontFamily("Sans-Serif")
                         .textAlign(TextAlign.Center)
                         .fontSize(18.px)

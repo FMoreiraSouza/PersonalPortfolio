@@ -18,9 +18,12 @@ import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Experience
+import org.example.personalportfolio.styles.DarkerPresentationColumnStyle
+import org.example.personalportfolio.styles.LighterPresentationColumnStyle
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.P
@@ -31,25 +34,30 @@ fun ExperienceCard(
     experience: Experience,
 ) {
     val breakpoint = rememberBreakpoint()
-    if (breakpoint > Breakpoint.MD) {
+    if (breakpoint >= Breakpoint.MD) {
         SimpleGrid(
             modifier = Modifier
                 .fillMaxWidth(90.percent),
             numColumns = numColumns(base = 1, md = 2)
         ) {
-            ExperienceDescription(experience.description, breakpoint,
+            ExperienceDescription(
+                experience.description, breakpoint,
             )
-            ExperienceDetails(experience, breakpoint,
+            ExperienceDetails(
+                experience, breakpoint,
             )
         }
-    } else {
+    }
+    else {
         SimpleGrid(
             modifier = Modifier.fillMaxWidth(95.percent),
             numColumns = numColumns(base = 1)
         ) {
-            ExperienceDetails(experience, breakpoint,
+            ExperienceDetails(
+                experience, breakpoint,
             )
-            ExperienceDescription(experience.description, breakpoint,
+            ExperienceDescription(
+                experience.description, breakpoint,
             )
         }
     }
@@ -62,17 +70,24 @@ fun ExperienceDescription(
 ) {
     var colorMode by ColorMode.currentState
     Column(
-        modifier = Modifier
+        modifier = (if (colorMode.isLight)
+            LighterPresentationColumnStyle.toModifier() else DarkerPresentationColumnStyle.toModifier())
+            .fillMaxWidth(if (breakpoint >= Breakpoint.MD) 90.percent else 100.percent)
             .margin(
-                right = 10.px, bottom = 5.px, top = 5.px)
-            .padding(all = 14.px)
+                left = if (breakpoint > Breakpoint.MD) 10.px else 0.px,
+                bottom = if (breakpoint >= Breakpoint.MD) 5.px else 10.px,
+                top = 5.px,
+
+                )
+            .padding(all = 14.px),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         P(
             attrs = Modifier
                 .margin(topBottom = 0.px)
                 .fontFamily("Sans-Serif")
                 .fontSize(if (breakpoint >= Breakpoint.SM) 18.px else 14.px)
-                .textAlign(if (breakpoint > Breakpoint.MD) TextAlign.Left else TextAlign.Center)
+                .textAlign(if (breakpoint >= Breakpoint.MD) TextAlign.Left else TextAlign.Center)
                 .lineHeight(1.7)
                 .fontWeight(FontWeight.Normal)
                 .color(if (colorMode.isLight) Colors.Black else Colors.White)
@@ -89,13 +104,10 @@ fun ExperienceDetails(
     breakpoint: Breakpoint,
 ) {
     var colorMode by ColorMode.currentState
-    if (breakpoint > Breakpoint.MD) {
+    if (breakpoint >= Breakpoint.MD) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .margin(
-                    left = 20.px,
-                ),
+                .fillMaxWidth(90.percent),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             ExperienceIcon(
@@ -143,7 +155,8 @@ fun ExperienceDetails(
                 }
             }
         }
-    } else {
+    }
+    else {
         Column(
             Modifier,
             verticalArrangement = Arrangement.Center,
@@ -204,7 +217,9 @@ fun ExperienceIcon(
             .fillMaxHeight()
             .width(2.px)
             .margin(
-                right = if (breakpoint > Breakpoint.MD) 50.px else 0.px
+                right = if (breakpoint >= Breakpoint.MD) 45.px else 0.px,
+                bottom = if (breakpoint >= Breakpoint.MD) 0.px else 5.px,
+                left = 5.px
             )
             .backgroundColor(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue),
         contentAlignment = Alignment.Center

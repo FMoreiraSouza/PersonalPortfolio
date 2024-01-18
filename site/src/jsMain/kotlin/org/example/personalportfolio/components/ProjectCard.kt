@@ -35,14 +35,12 @@ fun ProjectCard(
     Column(
         modifier = if (breakpoint > Breakpoint.SM) {
             PortfolioStyleLandscape.toModifier()
-                .margin(
-                    left = animatedMargin,
-                )
+                .margin(left = animatedMargin)
                 .transition(
                     CSSTransition(
                         property = "margin",
-                        duration = 1.s,
-                        delay = 100.ms
+                        duration = 2.s,
+                        delay = 500.ms
                     )
                 )
         } else {
@@ -52,8 +50,8 @@ fun ProjectCard(
                 .transition(
                     CSSTransition(
                         property = "margin",
-                        duration = 1.s,
-                        delay = 100.ms
+                        duration = 2.s,
+                        delay = 500.ms
                     )
                 )
         }

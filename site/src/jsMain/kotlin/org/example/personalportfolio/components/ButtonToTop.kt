@@ -45,7 +45,7 @@ fun ButtonToTop() {
         Box(
             modifier = ButtonToTopStyle.toModifier()
                 .visibility(
-                    if(scroll != null && scroll!! > 400.0) Visibility.Visible
+                    if (scroll != null && scroll!! > 400.0) Visibility.Visible
                     else Visibility.Hidden
                 )
                 .margin(right = 2.px, bottom = 20.px)
@@ -53,7 +53,7 @@ fun ButtonToTop() {
                 .borderRadius(20.percent)
                 .cursor(Cursor.Pointer)
                 .onClick {
-                     scope.launch{
+                    scope.launch {
                         document.documentElement?.scroll(x = 0.0, y = 0.0)
                     }
                 }

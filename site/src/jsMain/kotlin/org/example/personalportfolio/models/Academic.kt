@@ -8,7 +8,7 @@ enum class Academic(
     val subtitle: String,
     val from: String,
     val to: String,
-){
+) {
     Bachelor(
         coatOfArms = ufc,
         title = "Universidade Federal do Ceará",

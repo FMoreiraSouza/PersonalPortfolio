@@ -43,21 +43,23 @@ fun AcademicCard(
                 .transition(
                     CSSTransition(
                         property = "margin",
-                        duration = 1.s,
-                        delay = 100.ms
+                        duration = 2.s,
+                        delay = 300.ms
                     )
-                ),
+                )
         ) {
             Box(
                 modifier = Modifier
                     .size(250.px)
+                    .margin(left = if (breakpoint >= Breakpoint.MD) 0.px else 5.px)
                     .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.Gray)
                     .backgroundColor(Colors.White)
                     .borderRadius(50.percent),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    modifier = Modifier,
+                    modifier = Modifier
+                        .margin(left = if (breakpoint > Breakpoint.SM) 0.px else 10.px),
                     src = academic.coatOfArms
                 )
             }
@@ -89,7 +91,7 @@ fun AcademicCard(
                 attrs = Modifier
                     .margin(
                         top = 2.px,
-                        left = if (breakpoint < Breakpoint.SM) 50.px else 0.px
+                        left = if (breakpoint < Breakpoint.MD) 50.px else 0.px
                     )
                     .color(if (colorMode.isLight) Colors.Black else Colors.White)
                     .fontFamily("Sans-Serif")
@@ -110,13 +112,13 @@ fun AcademicCard(
                 .transition(
                     CSSTransition(
                         property = "margin",
-                        duration = 1.s,
-                        delay = 500.ms
+                        duration = 2.s,
+                        delay = 300.ms
                     )
                 )
                 .height(2.px)
                 .width(100.percent)
-                .borderRadius(50.px)
+                .borderRadius(50.px),
         )
     }
 }

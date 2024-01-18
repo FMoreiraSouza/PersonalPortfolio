@@ -31,14 +31,15 @@ fun PresentationSection() {
 
 @Composable
 fun PresentationContent() {
+    val section = Section.About
     val scope = rememberCoroutineScope()
-    var animatedMargin by remember { mutableStateOf((50).px) }
+    var animatedMargin by remember { mutableStateOf((-50).px) }
     ObserveViewportEntered(
         sectionId = Section.About.id,
         distanceFromTop = 500.0,
         onViewportEntered = {
             scope.launch {
-                animatedMargin = 100.px
+                animatedMargin = 0.px
             }
         }
     )
@@ -47,6 +48,6 @@ fun PresentationContent() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SectionTitle(section = Section.About)
-        PresentationCard(animatedMargin)
+        PresentationCard(animatedMargin, section)
     }
 }

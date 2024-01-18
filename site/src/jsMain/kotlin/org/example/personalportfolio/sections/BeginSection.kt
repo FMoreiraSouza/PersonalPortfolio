@@ -40,13 +40,8 @@ fun BeginSection(
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
-        Header(
-            breakpoint,
-            onMenuClicked
-        )
-        BeginContent(
-            breakpoint,
-        )
+        Header(breakpoint, onMenuClicked)
+        BeginContent(breakpoint)
     }
 }
 
@@ -64,7 +59,7 @@ fun BeginContent(
     ) {
         if (breakpoint >= Breakpoint.SM) {
             Image(
-                src = Res.Image.computer
+                src = Res.Image.computer,
             )
         } else {
             Image(
@@ -75,7 +70,7 @@ fun BeginContent(
         P(
             attrs = Modifier
                 .margin(bottom = 18.px)
-                .fontSize(if (breakpoint >= Breakpoint.SM) 30.px else 20.px)
+                .fontSize(if (breakpoint >= Breakpoint.SM) 40.px else 30.px)
                 .textAlign(TextAlign.Center)
                 .fontFamily("Roboto")
                 .fontWeight(FontWeight.Bold)
@@ -83,7 +78,7 @@ fun BeginContent(
                 .toAttrs()
         )
         {
-            Text("Desenvolvedor Mobile")
+            Text("Desenvolvedor")
         }
         SocialBar()
     }

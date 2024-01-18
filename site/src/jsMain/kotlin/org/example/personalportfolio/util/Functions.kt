@@ -10,24 +10,23 @@ fun ObserveViewportEntered(
     sectionId: String,
     onViewportEntered: () -> Unit,
     distanceFromTop: Double
-){
-    var viewportEntered by remember{
+) {
+    var viewportEntered by remember {
         mutableStateOf(false)
     }
-    var listener = remember{
-        EventListener{
+    var listener = remember {
+        EventListener {
             val top = document.getElementById(sectionId)?.getBoundingClientRect()?.top
-            if(top != null && top < distanceFromTop){
+            if (top != null && top < distanceFromTop) {
                 viewportEntered = true
             }
         }
     }
-    LaunchedEffect(viewportEntered){
-        if(viewportEntered){
+    LaunchedEffect(viewportEntered) {
+        if (viewportEntered) {
             onViewportEntered()
             window.removeEventListener(type = "scroll", callback = listener)
-        }
-        else{
+        } else {
             window.addEventListener(type = "scroll", callback = listener)
         }
     }
