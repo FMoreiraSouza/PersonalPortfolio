@@ -1,12 +1,12 @@
 package org.example.personalportfolio.models
 
-import org.example.personalportfolio.util.Res.Icon.amazonWebServices
 import org.example.personalportfolio.util.Res.Icon.apacheKafka
 import org.example.personalportfolio.util.Res.Icon.firebase
 import org.example.personalportfolio.util.Res.Icon.jetpackCompose
 import org.example.personalportfolio.util.Res.Icon.kobwebFramework
 import org.example.personalportfolio.util.Res.Icon.kotlin
 import org.example.personalportfolio.util.Res.Icon.ktorFramework
+import org.example.personalportfolio.util.Res.Icon.mongoDB
 import org.example.personalportfolio.util.Res.Icon.postgreSQL
 
 enum class Skill(
@@ -41,8 +41,8 @@ enum class Skill(
         icon = firebase,
         title = "Firebase"
     ),
-    AmazonWebServices(
-        icon = amazonWebServices,
-        title = "Amazon Web Services"
+    MongoDB(
+        icon = mongoDB,
+        title = "MongoDB"
     )
 }
