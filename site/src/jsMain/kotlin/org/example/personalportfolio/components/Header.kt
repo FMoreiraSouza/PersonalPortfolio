@@ -13,7 +13,6 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.graphics.Image
@@ -33,6 +32,7 @@ import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.em
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.dom.A
 
 @Composable
 fun Header(
@@ -75,10 +75,7 @@ fun LeftSide(
                 size = IconSize.XL,
             )
         }
-        Link(
-            path = "https://fmoreiradeveloper.com",
-            openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
-        ) {
+        A(href = "/") {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 src = Res.Image.professionalLogo

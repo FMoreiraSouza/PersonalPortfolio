@@ -8,7 +8,6 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.fa.FaXmark
 import com.varabyte.kobweb.silk.components.icons.fa.IconSize
@@ -23,6 +22,7 @@ import org.example.personalportfolio.styles.NavigationDarkStyle
 import org.example.personalportfolio.styles.NavigationLightStyle
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.dom.A
 
 @Composable
 fun MenuBar(onMenuClosed: () -> Unit) {
@@ -65,10 +65,7 @@ fun MenuBar(onMenuClosed: () -> Unit) {
                 size = IconSize.LG
             )
             ToogleColorThemeButton(breakpoint)
-            Link(
-                path = "https://fmoreiradeveloper.com",
-                openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
-            ) {
+            A(href = "/") {
                 Image(
                     modifier = Modifier
                         .margin(top = 15.px)
