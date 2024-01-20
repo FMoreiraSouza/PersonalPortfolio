@@ -66,7 +66,7 @@ fun MenuBar(onMenuClosed: () -> Unit) {
             )
             ToogleColorThemeButton(breakpoint)
             Link(
-                path = "http://localhost:8080/",
+                path = "https://fmoreiradeveloper.com",
                 openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
             ) {
                 Image(

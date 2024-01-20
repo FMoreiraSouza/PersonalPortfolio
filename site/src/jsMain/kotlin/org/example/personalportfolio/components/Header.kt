@@ -76,7 +76,7 @@ fun LeftSide(
             )
         }
         Link(
-            path = "http://localhost:8080/",
+            path = "https://fmoreiradeveloper.com",
             openExternalLinksStrategy = OpenLinkStrategy.IN_PLACE,
         ) {
             Image(

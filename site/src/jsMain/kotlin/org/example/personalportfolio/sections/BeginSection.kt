@@ -29,6 +29,7 @@ fun BeginSection(
     val breakpoint = rememberBreakpoint()
     Box(
         modifier = Modifier
+            .margin(bottom = if (breakpoint > Breakpoint.MD) 35.px else 0.px)
             .height(
                 when {
                     breakpoint >= Breakpoint.LG -> 43.percent
