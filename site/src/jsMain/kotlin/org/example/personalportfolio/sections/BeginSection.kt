@@ -11,6 +11,8 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
+import com.varabyte.kobweb.core.isExporting
+import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
@@ -41,7 +43,9 @@ fun BeginSection(
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
-        Header(breakpoint, onMenuClicked)
+        if(!rememberPageContext().isExporting){
+            Header(breakpoint, onMenuClicked)
+        }
         BeginContent(breakpoint)
     }
 }
