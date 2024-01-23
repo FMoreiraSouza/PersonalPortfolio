@@ -1,7 +1,6 @@
 package org.example.personalportfolio.sections
 
 import androidx.compose.runtime.*
-import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -10,6 +9,8 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.margin
+import com.varabyte.kobweb.silk.components.layout.SimpleGrid
+import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import kotlinx.coroutines.launch
@@ -18,7 +19,6 @@ import org.example.personalportfolio.components.SectionTitle
 import org.example.personalportfolio.models.Project
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.util.ObserveViewportEntered
-import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 
 @Composable
@@ -49,16 +49,34 @@ fun ProjectContent() {
         }
     )
     Column(
-        modifier = Modifier.fillMaxWidth(90.percent),
+        modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SectionTitle(section = Section.Projects)
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = if (breakpoint >= Breakpoint.SM) Arrangement.Start else Arrangement.Center
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Project.entries.forEach { project ->
-                ProjectCard(project, breakpoint, animatedMargin)
+            if (breakpoint > Breakpoint.MD) {
+                SimpleGrid(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    numColumns = numColumns(base = 1, md = 3)
+                ) {
+                    Project.entries.forEach { project ->
+                        ProjectCard(project, breakpoint, animatedMargin)
+                    }
+                }
+            } else {
+                SimpleGrid(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    numColumns = numColumns(base = 1, sm = 2)
+                ) {
+                    Project.entries.forEach { project ->
+                        ProjectCard(project, breakpoint, animatedMargin)
+                    }
+                }
             }
         }
     }

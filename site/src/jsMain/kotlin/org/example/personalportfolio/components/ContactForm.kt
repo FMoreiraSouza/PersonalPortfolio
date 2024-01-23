@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.Cursor
+import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.Width
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -17,8 +18,10 @@ import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.example.personalportfolio.styles.ButtonStyle
-import org.example.personalportfolio.styles.FormStyle
+import org.example.personalportfolio.styles.DarkerButtonStyle
+import org.example.personalportfolio.styles.DarkerFormStyle
+import org.example.personalportfolio.styles.LighterButtonStyle
+import org.example.personalportfolio.styles.LighterFormStyle
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.*
@@ -37,7 +40,7 @@ fun ContactForm() {
     ) {
         Input(
             type = InputType.Text,
-            attrs = FormStyle.toModifier()
+            attrs = (if (colorMode.isLight) LighterFormStyle else DarkerFormStyle).toModifier()
                 .id("inputName")
                 .classNames("form-control")
                 .backgroundColor(
@@ -61,7 +64,7 @@ fun ContactForm() {
         )
         Input(
             type = InputType.Email,
-            attrs = FormStyle.toModifier()
+            attrs = (if (colorMode.isLight) LighterFormStyle else DarkerFormStyle).toModifier()
                 .id("inputEmail")
                 .classNames("form-control")
                 .backgroundColor((if (colorMode.isLight) Color.argb(0.1f, 211, 211, 212) else Color.argb(1.0f, 211, 211, 212)))
@@ -82,7 +85,7 @@ fun ContactForm() {
                 .toAttrs()
         )
         TextArea(
-            attrs = FormStyle.toModifier()
+            attrs = (if (colorMode.isLight) LighterFormStyle else DarkerFormStyle).toModifier()
                 .id("inputMessage")
                 .fontSize(15.px)
                 .classNames("form-control")
@@ -104,7 +107,7 @@ fun ContactForm() {
                 .toAttrs()
         )
         Box(
-            modifier = ButtonStyle.toModifier()
+            modifier = (if (colorMode.isLight) LighterButtonStyle else DarkerButtonStyle).toModifier()
                 .margin(
                     left = when {
                         breakpoint >= Breakpoint.MD -> 200.px
@@ -117,8 +120,11 @@ fun ContactForm() {
         ) {
             Button(
                 attrs = Modifier
+                    .fontSize(14.px)
+                    .fontWeight(FontWeight.Bold)
                     .height(50.px)
                     .width(100.px)
+                    .color(Colors.White)
                     .border(width = 0.px)
                     .borderRadius(r = 5.px)
                     .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.LightGray)

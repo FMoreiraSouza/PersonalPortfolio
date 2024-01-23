@@ -1,6 +1,8 @@
 package org.example.personalportfolio.components
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
@@ -18,9 +20,10 @@ import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Project
-import org.example.personalportfolio.styles.PortfolioStyleLandscape
-import org.example.personalportfolio.styles.PortfolioStylePortrait
+import org.example.personalportfolio.styles.DarkerPortfolioStyle
+import org.example.personalportfolio.styles.LighterPortfolioStyle
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.P
@@ -32,29 +35,18 @@ fun ProjectCard(
     breakpoint: Breakpoint,
     animatedMargin: CSSSizeValue<CSSUnit.px>
 ) {
+    var colorMode by ColorMode.currentState
     Column(
-        modifier = if (breakpoint > Breakpoint.SM) {
-            PortfolioStyleLandscape.toModifier()
-                .margin(left = animatedMargin)
-                .transition(
-                    CSSTransition(
-                        property = "margin",
-                        duration = 2.s,
-                        delay = 500.ms
-                    )
+        modifier = (if (colorMode.isLight) LighterPortfolioStyle else DarkerPortfolioStyle).toModifier()
+            .margin(left = animatedMargin)
+            .transition(
+                CSSTransition(
+                    property = "margin",
+                    duration = 2.s,
+                    delay = 500.ms
                 )
-        } else {
-            PortfolioStylePortrait
-                .toModifier()
-                .margin(left = animatedMargin)
-                .transition(
-                    CSSTransition(
-                        property = "margin",
-                        duration = 2.s,
-                        delay = 500.ms
-                    )
-                )
-        }
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Link(
             modifier = Modifier
@@ -77,7 +69,10 @@ fun ProjectCard(
                     modifier = Modifier
                         .id("blueCurtain")
                         .fillMaxHeight()
-                        .backgroundColor(argb(0.5f, 135, 206, 235)),
+                        .backgroundColor(
+                            if (colorMode.isLight) argb(0.2f, 135, 206, 235)
+                            else argb(0.2f, 65, 105, 225)
+                        ),
                     contentAlignment = Alignment.Center
                 ) {
                     Image(

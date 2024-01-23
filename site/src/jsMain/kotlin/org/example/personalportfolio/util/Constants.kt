@@ -5,7 +5,7 @@ object Constants {
     const val GITHUB = "https://github.com/Fmoreira12"
     const val personalPortfolio = "https://github.com/Fmoreira12/PersonalPortfolio.git"
     const val About =
-        "Formado em Ciência da Computação pela Universidade Federal do Ceará (UFC). Atuei em uma Infratech construindo soluções para Internet Banking e na construção de um Aplicativo de plataforma cruzada para a Defensoria Pública do Estado do Ceará. Aliado a minha experiência, foco no momento em construir aplicações móveis nativas."
+        "Formado em Ciência da Computação pela Universidade Federal do Ceará (UFC). Tenho experiência na construção de aplicações Back-end e Mobile. Aliado a minha experiência, foco no momento em construir aplicações utilizando tecnologias de desenvolvimento nativo."
 }
 
 object Res {

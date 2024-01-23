@@ -3,16 +3,14 @@ package org.example.personalportfolio.components
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.varabyte.kobweb.compose.css.Cursor
-import com.varabyte.kobweb.compose.css.FontWeight
-import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.css.TextDecorationLine
+import com.varabyte.kobweb.compose.css.*
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.graphics.Image
@@ -26,12 +24,10 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.styles.CircleButtonVariant
-import org.example.personalportfolio.styles.NavigationDarkStyle
-import org.example.personalportfolio.styles.NavigationLightStyle
+import org.example.personalportfolio.styles.DarkerNavigationStyle
+import org.example.personalportfolio.styles.LighterNavigationStyle
 import org.example.personalportfolio.util.Res
-import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.em
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.A
 
 @Composable
@@ -39,10 +35,14 @@ fun Header(
     breakpoint: Breakpoint,
     onMenuClicked: () -> Unit
 ) {
+    var colorMode by ColorMode.currentState
     Row(
         modifier = Modifier
             .padding(1.cssRem)
-            .fillMaxWidth(),
+            .position(Position.Fixed)
+            .zIndex(2)
+            .fillMaxWidth()
+            .backgroundColor(if (colorMode.isLight) Colors.White else Colors.Black),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -50,8 +50,8 @@ fun Header(
             breakpoint,
             onMenuClicked
         )
-        if (breakpoint > Breakpoint.MD) {
-            RightSide(breakpoint)
+        if (breakpoint >= Breakpoint.MD) {
+            RightSide(breakpoint, colorMode)
         }
     }
 }
@@ -64,7 +64,7 @@ fun LeftSide(
     Row(
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        if (breakpoint <= Breakpoint.MD) {
+        if (breakpoint < Breakpoint.MD) {
             FaBars(
                 modifier = Modifier
                     .margin(bottom = if (breakpoint < Breakpoint.SM) 6.px else 8.px)
@@ -75,7 +75,18 @@ fun LeftSide(
                 size = IconSize.XL,
             )
         }
-        A(href = "/") {
+        A(
+            href = "/",
+            attrs = Modifier
+                .transition(
+                    CSSTransition(
+                        property = "margin",
+                        duration = 2.s,
+                        delay = 500.ms
+                    )
+                )
+                .toAttrs()
+        ) {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 src = Res.Image.professionalLogo
@@ -85,8 +96,7 @@ fun LeftSide(
 }
 
 @Composable
-fun RightSide(breakpoint: Breakpoint) {
-    var colorMode by ColorMode.currentState
+fun RightSide(breakpoint: Breakpoint, colorMode: ColorMode) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -94,12 +104,12 @@ fun RightSide(breakpoint: Breakpoint) {
     ) {
         Section.entries.forEach { section ->
             Link(
-                modifier = (if (colorMode.isLight) NavigationLightStyle.toModifier() else NavigationDarkStyle.toModifier())
+                modifier = (if (colorMode.isLight) LighterNavigationStyle else DarkerNavigationStyle).toModifier()
                     .padding(topBottom = 10.px, leftRight = 5.px)
                     .margin(right = 5.px, bottom = 4.px)
                     .fontFamily("Sans-Serif")
                     .textAlign(TextAlign.Center)
-                    .fontSize(18.px)
+                    .fontSize(if (breakpoint > Breakpoint.MD) 18.px else 14.px)
                     .fontWeight(FontWeight.Normal)
                     .textDecorationLine(TextDecorationLine.None)
                     .color(if (colorMode.isLight) Colors.Black else Colors.White),
@@ -113,15 +123,14 @@ fun RightSide(breakpoint: Breakpoint) {
 
 @Composable
 fun ToogleColorThemeButton(breakpoint: Breakpoint) {
-
     var colorMode by ColorMode.currentState
     Button(
         onClick = { colorMode = colorMode.opposite },
         modifier = Modifier
             .setVariable(ButtonVars.FontSize, 1.em)
             .margin(
-                top = if (breakpoint <= Breakpoint.MD) 10.px else 0.px,
-                left = if (breakpoint <= Breakpoint.MD) 6.px else 0.px
+                top = if (breakpoint < Breakpoint.MD) 10.px else 0.px,
+                left = if (breakpoint < Breakpoint.MD) 6.px else 0.px
             ),
         variant = CircleButtonVariant,
     ) {

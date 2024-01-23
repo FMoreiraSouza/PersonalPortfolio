@@ -21,7 +21,6 @@ import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.styles.DarkerPresentationColumnStyle
 import org.example.personalportfolio.styles.LighterPresentationColumnStyle
 import org.example.personalportfolio.util.Constants
@@ -31,7 +30,7 @@ import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun PresentationCard(animatedMargin: CSSSizeValue<CSSUnit.px>, section: Section) {
+fun PresentationCard(animatedMargin: CSSSizeValue<CSSUnit.px>) {
     val breakpoint = rememberBreakpoint()
     if (breakpoint >= Breakpoint.MD) {
         SimpleGrid(
@@ -39,45 +38,39 @@ fun PresentationCard(animatedMargin: CSSSizeValue<CSSUnit.px>, section: Section)
                 .fillMaxWidth(90.percent),
             numColumns = numColumns(base = 1, md = 2)
         ) {
-            MyDescription(breakpoint, animatedMargin, section)
-            MyProfessionalPhoto(breakpoint, animatedMargin, section)
+            MyDescription(breakpoint, animatedMargin)
+            MyProfessionalPhoto(breakpoint, animatedMargin)
         }
-    } else {
+    }
+    else {
         Column(
             modifier = Modifier
                 .fillMaxWidth(80.percent),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            MyDescription(breakpoint, animatedMargin, section)
-            MyProfessionalPhoto(breakpoint, animatedMargin, section)
+            MyDescription(breakpoint, animatedMargin)
+            MyProfessionalPhoto(breakpoint, animatedMargin)
         }
     }
 }
 
 @Composable
-fun MyDescription(breakpoint: Breakpoint, animatedMargin: CSSSizeValue<CSSUnit.px>, section: Section) {
+fun MyDescription(breakpoint: Breakpoint, animatedMargin: CSSSizeValue<CSSUnit.px>) {
     var colorMode by ColorMode.currentState
     Column(
-        modifier = (if (colorMode.isLight) LighterPresentationColumnStyle.toModifier() else DarkerPresentationColumnStyle.toModifier())
-            .margin(
-                left = if (breakpoint <= Breakpoint.MD) {
-                    if (section.id == Section.About.id) {
-                        0.px
-                    }
-                    else {
-                        animatedMargin
-                    }
-                }
-                else {
-                    animatedMargin
-                }
-            )
+        modifier = (if (colorMode.isLight) LighterPresentationColumnStyle else DarkerPresentationColumnStyle).toModifier()
+            .margin(left = animatedMargin)
             .transition(
                 CSSTransition(
                     property = "margin",
                     duration = 2.s,
                     delay = 100.ms
-                )
+                ),
+                CSSTransition(
+                    property = "opacity",
+                    duration = 2.s,
+                    delay = 100.ms
+                ),
             )
             .fillMaxWidth(),
         horizontalAlignment = if (breakpoint >= Breakpoint.MD) Alignment.Start else Alignment.CenterHorizontally
@@ -116,7 +109,7 @@ fun MyDescription(breakpoint: Breakpoint, animatedMargin: CSSSizeValue<CSSUnit.p
 }
 
 @Composable
-fun MyProfessionalPhoto(breakpoint: Breakpoint, animatedMargin: CSSSizeValue<CSSUnit.px>, section: Section) {
+fun MyProfessionalPhoto(breakpoint: Breakpoint, animatedMargin: CSSSizeValue<CSSUnit.px>) {
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
@@ -124,23 +117,20 @@ fun MyProfessionalPhoto(breakpoint: Breakpoint, animatedMargin: CSSSizeValue<CSS
         Column(
             modifier = Modifier
                 .margin(
-                    left = if (breakpoint <= Breakpoint.MD) {
-                        if (section.id == Section.About.id) {
-                            0.px
-                        } else {
-                            animatedMargin
-                        }
-                    } else {
-                        animatedMargin
-                    },
-                    top = if (breakpoint >= Breakpoint.MD) 0.px else 5.px,
+                    left = animatedMargin,
+                    top = if (breakpoint < Breakpoint.MD) 5.px else 0.px
                 )
                 .transition(
                     CSSTransition(
                         property = "margin",
                         duration = 2.s,
                         delay = 100.ms
-                    )
+                    ),
+                    CSSTransition(
+                        property = "opacity",
+                        duration = 2.s,
+                        delay = 100.ms
+                    ),
                 )
                 .padding(left = if (breakpoint >= Breakpoint.MD) 10.px else 0.px)
                 .fillMaxWidth(),

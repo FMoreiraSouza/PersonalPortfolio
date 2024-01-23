@@ -23,7 +23,7 @@ enum class Experience(
     Second(
         icon = nemo,
         jobPosition = "Desenvolvedor Mobile",
-        description = "Desenvolvi um aplicativo de plataforma cruzada com o intuito de possibilitar a Comarca de Limoeiro do Norte a intermediar solicitações de pensões.",
+        description = "Desenvolvi um aplicativo de plataforma cruzada com o intuito de possibilitar a intermediação de solicitações de pensões alimentícias.",
         company = "Núcleo de Estudos em Aprendizado de Máquina e Otimização",
         from = "Abril 2022",
         to = "Dezembro 2022"

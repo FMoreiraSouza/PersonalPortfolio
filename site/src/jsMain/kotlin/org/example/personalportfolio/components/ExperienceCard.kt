@@ -36,8 +36,7 @@ fun ExperienceCard(
     val breakpoint = rememberBreakpoint()
     if (breakpoint >= Breakpoint.MD) {
         SimpleGrid(
-            modifier = Modifier
-                .fillMaxWidth(90.percent),
+            modifier = Modifier.fillMaxWidth(90.percent),
             numColumns = numColumns(base = 1, md = 2)
         ) {
             ExperienceDescription(
@@ -47,10 +46,9 @@ fun ExperienceCard(
                 experience, breakpoint,
             )
         }
-    }
-    else {
+    } else {
         SimpleGrid(
-            modifier = Modifier.fillMaxWidth(95.percent),
+            modifier = Modifier.fillMaxWidth(80.percent),
             numColumns = numColumns(base = 1)
         ) {
             ExperienceDetails(
@@ -70,16 +68,13 @@ fun ExperienceDescription(
 ) {
     var colorMode by ColorMode.currentState
     Column(
-        modifier = (if (colorMode.isLight)
-            LighterPresentationColumnStyle.toModifier() else DarkerPresentationColumnStyle.toModifier())
+        modifier = (if (colorMode.isLight) LighterPresentationColumnStyle else DarkerPresentationColumnStyle).toModifier()
             .fillMaxWidth(if (breakpoint >= Breakpoint.MD) 90.percent else 100.percent)
             .margin(
                 left = if (breakpoint > Breakpoint.MD) 10.px else 0.px,
                 bottom = if (breakpoint >= Breakpoint.MD) 5.px else 10.px,
                 top = 5.px,
-
-                )
-            .padding(all = 14.px),
+            ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         P(
@@ -109,11 +104,9 @@ fun ExperienceDetails(
             modifier = Modifier
                 .fillMaxWidth(90.percent),
             verticalAlignment = Alignment.CenterVertically,
-        ) {
-            ExperienceIcon(
-                experience,
-                breakpoint,
-            )
+        )
+        {
+            ExperienceIcon(experience, breakpoint)
             Column(
                 Modifier
                     .margin(0.px)
@@ -155,17 +148,13 @@ fun ExperienceDetails(
                 }
             }
         }
-    }
-    else {
+    } else {
         Column(
             Modifier,
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ExperienceIcon(
-                experience,
-                breakpoint,
-            )
+            ExperienceIcon(experience, breakpoint)
             P(
                 attrs = Modifier
                     .margin(topBottom = 0.px)
@@ -217,9 +206,9 @@ fun ExperienceIcon(
             .fillMaxHeight()
             .width(2.px)
             .margin(
+                left = if (breakpoint >= Breakpoint.MD) 2.px else 0.px,
                 right = if (breakpoint >= Breakpoint.MD) 45.px else 0.px,
                 bottom = if (breakpoint >= Breakpoint.MD) 0.px else 5.px,
-                left = 5.px
             )
             .backgroundColor(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue),
         contentAlignment = Alignment.Center

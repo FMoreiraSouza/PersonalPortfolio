@@ -14,6 +14,6 @@ enum class Academic(
         title = "Universidade Federal do Ceará",
         subtitle = "Bacharelado em Ciência da Computação",
         from = "Agosto 2017",
-        to = "Dezembro 2022",
+        to = "Dezembro 2022"
     )
 }

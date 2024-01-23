@@ -2,12 +2,14 @@ package org.example.personalportfolio.components
 
 import androidx.compose.runtime.*
 import com.varabyte.kobweb.compose.css.*
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.fa.FaXmark
 import com.varabyte.kobweb.silk.components.icons.fa.IconSize
@@ -18,8 +20,8 @@ import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.coroutines.launch
 import org.example.personalportfolio.models.Section
-import org.example.personalportfolio.styles.NavigationDarkStyle
-import org.example.personalportfolio.styles.NavigationLightStyle
+import org.example.personalportfolio.styles.DarkerNavigationStyle
+import org.example.personalportfolio.styles.LighterNavigationStyle
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.A
@@ -40,13 +42,15 @@ fun MenuBar(onMenuClosed: () -> Unit) {
     }
     Column(
         modifier = Modifier
-            .fillMaxWidth(if (breakpoint >= Breakpoint.MD) 50.percent else 100.percent)
+            .fillMaxWidth()
             .height(50.vh)
+            .zIndex(2)
             .position(Position.Fixed)
             .cursor(Cursor.Pointer)
             .translate(tx = translateX)
             .transition(CSSTransition(property = "translate", duration = 500.ms))
-            .backgroundColor((if (colorMode.isLight) Colors.White else Colors.Black)),
+            .backgroundColor(if (colorMode.isLight) Colors.White else Colors.Black),
+        verticalArrangement = Arrangement.Top
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -65,7 +69,18 @@ fun MenuBar(onMenuClosed: () -> Unit) {
                 size = IconSize.LG
             )
             ToogleColorThemeButton(breakpoint)
-            A(href = "/") {
+            A(
+                href = "/",
+                attrs = Modifier
+                    .transition(
+                        CSSTransition(
+                            property = "margin",
+                            duration = 2.s,
+                            delay = 500.ms
+                        )
+                    )
+                    .toAttrs()
+            ) {
                 Image(
                     modifier = Modifier
                         .margin(top = 15.px)
@@ -79,7 +94,7 @@ fun MenuBar(onMenuClosed: () -> Unit) {
         ) {
             Section.entries.forEach { section ->
                 Link(
-                    modifier = (if (colorMode.isLight) NavigationLightStyle.toModifier() else NavigationDarkStyle.toModifier())
+                    modifier = (if (colorMode.isLight) LighterNavigationStyle else DarkerNavigationStyle).toModifier()
                         .padding(topBottom = 5.px, leftRight = 5.px)
                         .fontFamily("Sans-Serif")
                         .textAlign(TextAlign.Center)

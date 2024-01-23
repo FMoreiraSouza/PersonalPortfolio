@@ -34,7 +34,6 @@ fun SkillSection() {
 
 @Composable
 fun SkillContent() {
-    val section = Section.Skills
     val scope = rememberCoroutineScope()
     var animatedMargin by remember { mutableStateOf((-50).px) }
     ObserveViewportEntered(
@@ -53,6 +52,6 @@ fun SkillContent() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SectionTitle(section = Section.Skills)
-        SkillBar(animatedMargin, section)
+        SkillBar(animatedMargin)
     }
 }

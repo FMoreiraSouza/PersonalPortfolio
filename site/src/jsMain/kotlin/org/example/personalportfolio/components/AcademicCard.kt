@@ -18,7 +18,8 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Academic
-import org.example.personalportfolio.styles.AcademicStyle
+import org.example.personalportfolio.styles.DarkerAcademicStyle
+import org.example.personalportfolio.styles.LighterAcademicStyle
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
@@ -31,9 +32,9 @@ fun AcademicCard(
     val colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
     Column(
-        modifier = AcademicStyle
-            .toModifier()
-            .fillMaxWidth(90.percent),
+        modifier = (if (colorMode.isLight) LighterAcademicStyle else DarkerAcademicStyle).toModifier()
+            .margin(bottom = 20.px)
+            .fillMaxWidth(if (breakpoint > Breakpoint.SM) 90.percent else 80.percent),
         horizontalAlignment = if (breakpoint > Breakpoint.SM) Alignment.Start else Alignment.CenterHorizontally
     )
     {
@@ -46,22 +47,18 @@ fun AcademicCard(
                         duration = 2.s,
                         delay = 300.ms
                     )
-                )
+                ),
+            horizontalAlignment = if (breakpoint > Breakpoint.SM) Alignment.Start else Alignment.CenterHorizontally
         ) {
             Box(
                 modifier = Modifier
                     .size(250.px)
-                    .margin(left = if (breakpoint >= Breakpoint.MD) 0.px else 5.px)
                     .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.Gray)
                     .backgroundColor(Colors.White)
                     .borderRadius(50.percent),
                 contentAlignment = Alignment.Center
             ) {
-                Image(
-                    modifier = Modifier
-                        .margin(left = if (breakpoint > Breakpoint.SM) 0.px else 10.px),
-                    src = academic.coatOfArms
-                )
+                Image(src = academic.coatOfArms)
             }
             P(
                 attrs = Modifier
@@ -89,10 +86,7 @@ fun AcademicCard(
             }
             P(
                 attrs = Modifier
-                    .margin(
-                        top = 2.px,
-                        left = if (breakpoint < Breakpoint.MD) 50.px else 0.px
-                    )
+                    .margin(top = 2.px)
                     .color(if (colorMode.isLight) Colors.Black else Colors.White)
                     .fontFamily("Sans-Serif")
                     .textAlign(if (breakpoint > Breakpoint.SM) TextAlign.Start else TextAlign.Center)

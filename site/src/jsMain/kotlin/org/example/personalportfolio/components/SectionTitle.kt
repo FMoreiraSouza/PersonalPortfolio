@@ -10,8 +10,6 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import kotlinx.coroutines.launch
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.util.ObserveViewportEntered
@@ -25,7 +23,6 @@ import org.jetbrains.compose.web.dom.Text
 fun SectionTitle(
     section: Section,
 ) {
-    val breakpoint = rememberBreakpoint()
     val scope = rememberCoroutineScope()
     var titleMargin by remember { mutableStateOf((-100).px) }
 
@@ -44,21 +41,8 @@ fun SectionTitle(
     ) {
         P(
             attrs = Modifier
-                .textAlign(
-                    TextAlign.Center
-                )
-                .margin(
-                    left =
-                    if (breakpoint <= Breakpoint.MD) {
-                        if (section.id == Section.About.id || section.id == Section.Skills.id) {
-                            0.px
-                        } else {
-                            titleMargin
-                        }
-                    } else {
-                        titleMargin
-                    }
-                )
+                .textAlign(TextAlign.Center)
+                .margin(left = titleMargin)
                 .color(Colors.Gray)
                 .fontFamily("Roboto")
                 .fontWeight(FontWeight.Bold)

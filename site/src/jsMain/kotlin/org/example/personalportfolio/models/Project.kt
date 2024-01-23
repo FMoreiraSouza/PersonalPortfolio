@@ -13,6 +13,6 @@ enum class Project(
         link = personalPortfolio,
         title = "PersonalPortfolio",
         image = Res.Image.profilePhoto,
-        platform = "Frontend"
+        platform = "Front-end"
     )
 }
