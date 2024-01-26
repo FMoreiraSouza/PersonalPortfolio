@@ -3,12 +3,9 @@ package org.example.personalportfolio.components
 import GlassBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.TextAlign
-import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
@@ -21,94 +18,105 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Skill
-import org.example.personalportfolio.styles.DarkerSkillStyle
-import org.example.personalportfolio.styles.LighterSkillStyle
+import org.example.personalportfolio.styles.SkillStyle
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun SkillBar(animatedMargin: CSSSizeValue<CSSUnit.px>) {
+fun SkillBar(
+    animatedMargin: CSSSizeValue<CSSUnit.px>,
+    animatedOpacity: CSSSizeValue<CSSUnit.percent>
+) {
     val breakpoint = rememberBreakpoint()
-    var colorMode by ColorMode.currentState
-    Row(
+    val colorMode by ColorMode.currentState
+    SimpleGrid(
         modifier = Modifier
-            .fillMaxWidth()
+            .opacity(animatedOpacity)
             .margin(left = animatedMargin)
             .transition(
                 CSSTransition(
-                    property = "margin",
-                    duration = 2.s,
-                    delay = 200.ms
+                    property = "opacity", duration = 1.s,
+                    timingFunction = AnimationTimingFunction.EaseInOut
+                ),
+                CSSTransition(
+                    property = "margin", duration = 1.s,
+                    timingFunction = AnimationTimingFunction.EaseInOut
                 )
-            ),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+            )
+            .fillMaxWidth(if (breakpoint >= Breakpoint.SM) 75.percent else 95.percent),
+        numColumns = numColumns(base = 1, md = 2)
     ) {
-        SimpleGrid(
+        GlassBox(
             modifier = Modifier
-                .fillMaxWidth(if(breakpoint >= Breakpoint.SM) 75.percent else 95.percent),
-            numColumns = numColumns(base = 1, md = 2)
+                .margin(
+                    bottom =
+                    if (breakpoint > Breakpoint.SM) 0.cssRem
+                    else 1.cssRem,
+                    leftRight = if (breakpoint > Breakpoint.SM) 2.cssRem
+                    else 1.cssRem
+                )
         ) {
-            GlassBox(
-                modifier = Modifier.margin(all = 2.cssRem)
+            SimpleGrid(
+                modifier = Modifier.padding(all = 1.cssRem),
+                numColumns = numColumns(base = 2)
             ) {
-                SimpleGrid(
-                    modifier = Modifier.padding(all = 1.cssRem),
-                    numColumns = numColumns(base = 2)
-                ) {
-                    Skill.entries.take(4).forEach { skill ->
-                        Column(
-                            modifier = (if (colorMode.isLight) LighterSkillStyle else DarkerSkillStyle).toModifier(),
-                            horizontalAlignment = Alignment.CenterHorizontally
+                Skill.entries.take(4).forEach { skill ->
+                    Column(
+                        modifier = SkillStyle.toModifier(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        GlassBox(
+                            modifier = Modifier.size(65.px)
                         ) {
-                            GlassBox(
-                                modifier = Modifier.size(65.px)
-                            ) {
-                                Image(
-                                    modifier = Modifier.size(45.px),
-                                    src = skill.icon
-                                )
-                            }
-                            P(
-                                attrs = Modifier
-                                    .textAlign(TextAlign.Center)
-                                    .toAttrs()
-                            ) {
-                                Text(skill.title)
-                            }
+                            Image(
+                                modifier = Modifier.size(45.px),
+                                src = skill.icon
+                            )
+                        }
+                        P(
+                            attrs = Modifier
+                                .textAlign(TextAlign.Center)
+                                .toAttrs()
+                        ) {
+                            Text(skill.title)
                         }
                     }
                 }
             }
-            GlassBox(
-                modifier = Modifier.margin(all = 2.cssRem)
+        }
+        GlassBox(
+            modifier = Modifier.margin(
+                top = if (breakpoint > Breakpoint.SM) 0.cssRem
+                else 1.cssRem,
+                leftRight = if (breakpoint > Breakpoint.SM) 2.cssRem
+                else 1.cssRem
+            )
+        ) {
+            SimpleGrid(
+                modifier = Modifier.padding(all = 1.cssRem),
+                numColumns = numColumns(base = 2)
             ) {
-                SimpleGrid(
-                    modifier = Modifier.padding(all = 1.cssRem),
-                    numColumns = numColumns(base = 2)
-                ) {
-                    Skill.entries.takeLast(4).forEach { skill ->
-                        Column(
-                            modifier = (if (colorMode.isLight) LighterSkillStyle else DarkerSkillStyle).toModifier(),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        )
-                        {
-                            GlassBox(
-                                modifier = Modifier.size(65.px)
-                            ) {
-                                Image(
-                                    modifier = Modifier.size(45.px),
-                                    src = skill.icon
-                                )
-                            }
-                            P(
-                                attrs = Modifier
-                                    .textAlign(TextAlign.Center)
-                                    .toAttrs()
-                            ) {
-                                Text(skill.title)
-                            }
+                Skill.entries.takeLast(4).forEach { skill ->
+                    Column(
+                        modifier = SkillStyle.toModifier(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    )
+                    {
+                        GlassBox(
+                            modifier = Modifier.size(65.px)
+                        ) {
+                            Image(
+                                modifier = Modifier.size(45.px),
+                                src = skill.icon
+                            )
+                        }
+                        P(
+                            attrs = Modifier
+                                .textAlign(TextAlign.Center)
+                                .toAttrs()
+                        ) {
+                            Text(skill.title)
                         }
                     }
                 }

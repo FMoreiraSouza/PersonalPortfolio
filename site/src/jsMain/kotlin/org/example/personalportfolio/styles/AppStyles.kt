@@ -6,6 +6,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.silk.components.animation.Keyframes
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.style.ComponentStyle
 import com.varabyte.kobweb.silk.components.style.addVariantBase
@@ -19,31 +20,18 @@ val CircleButtonVariant by ButtonStyle.addVariantBase {
     Modifier.padding(0.px).borderRadius(50.percent)
 }
 
-val LighterNavigationStyle by ComponentStyle {
+val NavigationItemStyle by ComponentStyle {
     base {
         Modifier
-            .backgroundColor(Colors.Transparent)
             .transition(CSSTransition(property = "color", duration = 200.ms))
     }
     hover {
         Modifier
-            .backgroundColor(Colors.SkyBlue)
+            .backgroundColor(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue)
     }
 }
 
-val DarkerNavigationStyle by ComponentStyle {
-    base {
-        Modifier
-            .backgroundColor(Colors.Transparent)
-            .transition(CSSTransition(property = "color", duration = 200.ms))
-    }
-    hover {
-        Modifier
-            .backgroundColor(Colors.RoyalBlue)
-    }
-}
-
-val LighterButtonStyle by ComponentStyle {
+val ButtonStyle by ComponentStyle {
     cssRule(" > :only-child") {
         Modifier
             .backgroundColor(Colors.Gray)
@@ -51,47 +39,23 @@ val LighterButtonStyle by ComponentStyle {
     }
     cssRule(":hover > :only-child") {
         Modifier
-            .backgroundColor(Colors.SkyBlue)
+            .backgroundColor(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue)
     }
 }
 
-val DarkerButtonStyle by ComponentStyle {
-    cssRule(" > :only-child") {
-        Modifier
-            .backgroundColor(Colors.Gray)
-            .transition(CSSTransition(property = "background", duration = 200.ms))
-    }
-    cssRule(":hover > :only-child") {
-        Modifier
-            .backgroundColor(Colors.RoyalBlue)
-    }
-}
-
-val LighterSocialLinkStyle by ComponentStyle {
+val SocialLinkStyle by ComponentStyle {
     base {
         Modifier
-            .color(Colors.Gray)
+            .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
             .transition(CSSTransition(property = "color", duration = 200.ms))
     }
     hover {
         Modifier
-            .color(Colors.SkyBlue)
+            .color(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue)
     }
 }
 
-val DarkerSocialLinkStyle by ComponentStyle {
-    base {
-        Modifier
-            .color(Colors.Gray)
-            .transition(CSSTransition(property = "color", duration = 200.ms))
-    }
-    hover {
-        Modifier
-            .color(Colors.RoyalBlue)
-    }
-}
-
-val LighterPresentationColumnStyle by ComponentStyle {
+val PresentationColumnStyle by ComponentStyle {
     base {
         Modifier
             .backgroundColor(Color.argb(0.7f, 211, 211, 212))
@@ -99,69 +63,35 @@ val LighterPresentationColumnStyle by ComponentStyle {
     }
     hover {
         Modifier
-            .backgroundColor(Colors.SkyBlue)
+            .backgroundColor(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue)
     }
 }
 
-val DarkerPresentationColumnStyle by ComponentStyle {
+val SkillStyle by ComponentStyle {
     base {
         Modifier
-            .backgroundColor(Color.argb(0.2f, 211, 211, 212))
-            .transition(CSSTransition(property = "background", duration = 200.ms))
-    }
-    hover {
-        Modifier
-            .backgroundColor(Colors.RoyalBlue)
-    }
-}
-
-val LighterSkillStyle by ComponentStyle {
-    base {
-        Modifier
-            .color(Colors.Gray)
+            .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
             .transition(CSSTransition(property = "color", duration = 200.ms))
     }
     hover {
         Modifier
-            .color(Colors.SkyBlue)
+            .color(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue)
     }
 }
 
-val DarkerSkillStyle by ComponentStyle {
-    base {
-        Modifier
-            .color(Colors.Gray)
-            .transition(CSSTransition(property = "color", duration = 200.ms))
-    }
-    hover {
-        Modifier
-            .color(Colors.RoyalBlue)
-    }
-}
-
-val LighterAcademicStyle by ComponentStyle {
+val AcademicStyle by ComponentStyle {
     cssRule(" > :last-child") {
         Modifier
             .backgroundColor(Colors.Gray)
             .transition(CSSTransition(property = "background", duration = 200.ms))
     }
     cssRule(":hover > :last-child") {
-        Modifier.backgroundColor(Colors.SkyBlue)
-    }
-}
-
-val DarkerAcademicStyle by ComponentStyle {
-    cssRule(" > :last-child") {
         Modifier
-            .backgroundColor(Colors.Gray)
-            .transition(CSSTransition(property = "background", duration = 200.ms))
-    }
-    cssRule(":hover > :last-child") {
-        Modifier.backgroundColor(Colors.RoyalBlue)
+            .backgroundColor(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue)
     }
 }
 
-val LighterPortfolioStyle by ComponentStyle {
+val PortfolioStyle by ComponentStyle {
     cssRule(" > #linkParent > #boxParent > #blueCurtain") {
         Modifier
             .width(0.px)
@@ -185,14 +115,14 @@ val LighterPortfolioStyle by ComponentStyle {
     }
     cssRule(" > #linkParent > #projectTitle") {
         Modifier
-            .color(Colors.Gray)
+            .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
             .translate(0.percent)
             .transition(CSSTransition(property = "color", duration = 200.ms))
             .transition(CSSTransition(property = "translate", duration = 200.ms))
     }
     cssRule(":hover > #linkParent > #projectTitle") {
         Modifier
-            .color(Colors.SkyBlue)
+            .color(if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue)
             .translate(5.percent)
     }
     cssRule(" > #linkParent > #projectPlatform") {
@@ -206,52 +136,7 @@ val LighterPortfolioStyle by ComponentStyle {
     }
 }
 
-val DarkerPortfolioStyle by ComponentStyle {
-    cssRule(" > #linkParent > #boxParent > #blueCurtain") {
-        Modifier
-            .width(0.px)
-            .transition(CSSTransition(property = "width", duration = 500.ms))
-    }
-    cssRule(":hover > #linkParent > #boxParent > #blueCurtain") {
-        Modifier
-            .fillMaxWidth()
-    }
-    cssRule(" > #linkParent > #boxParent > #blueCurtain > #linkIcon") {
-        Modifier
-            .size(0.px)
-            .visibility(Visibility.Hidden)
-            .transition(CSSTransition(property = "visibility", duration = 200.ms))
-            .transition(CSSTransition(property = "size", duration = 200.ms))
-    }
-    cssRule(":hover > #linkParent > #boxParent > #blueCurtain > #linkIcon") {
-        Modifier
-            .size(30.px)
-            .visibility(Visibility.Visible)
-    }
-    cssRule(" > #linkParent > #projectTitle") {
-        Modifier
-            .color(Colors.Gray)
-            .translate(0.percent)
-            .transition(CSSTransition(property = "color", duration = 200.ms))
-            .transition(CSSTransition(property = "translate", duration = 200.ms))
-    }
-    cssRule(":hover > #linkParent > #projectTitle") {
-        Modifier
-            .color(Colors.RoyalBlue)
-            .translate(5.percent)
-    }
-    cssRule(" > #linkParent > #projectPlatform") {
-        Modifier
-            .translate(0.percent)
-            .transition(CSSTransition(property = "translate", duration = 200.ms))
-    }
-    cssRule(":hover > #linkParent > #projectPlatform") {
-        Modifier
-            .translate(5.percent)
-    }
-}
-
-val LighterFormStyle by ComponentStyle {
+val FormStyle by ComponentStyle {
     base {
         Modifier
             .border(2.px, LineStyle.Solid, Colors.Gray)
@@ -259,18 +144,45 @@ val LighterFormStyle by ComponentStyle {
     }
     hover {
         Modifier
-            .border(2.px, LineStyle.Solid, Colors.SkyBlue)
+            .border(2.px, LineStyle.Solid, if (colorMode.isLight) Colors.SkyBlue else Colors.RoyalBlue)
     }
 }
 
-val DarkerFormStyle by ComponentStyle {
-    base {
+val AppearMoveKeyFrames by Keyframes {
+    0.percent {
         Modifier
-            .border(2.px, LineStyle.Solid, Colors.Gray)
-            .transition(CSSTransition(property = "border", duration = 200.ms))
+            .margin(left = (-50).px)
+            .opacity(0)
     }
-    hover {
+    100.percent {
         Modifier
-            .border(2.px, LineStyle.Solid, Colors.RoyalBlue)
+            .margin(left = 0.px)
+            .opacity(1)
+    }
+}
+
+val DisappearParkKeyFrames by Keyframes {
+    0.percent {
+        Modifier
+            .margin(left = (-50).px)
+            .opacity(0)
+    }
+}
+
+val ShowKeyFrames by Keyframes {
+    0.percent {
+        Modifier
+            .opacity(0)
+    }
+    100.percent {
+        Modifier
+            .opacity(1)
+    }
+}
+
+val VanishKeyFrames by Keyframes {
+    100.percent {
+        Modifier
+            .opacity(100)
     }
 }

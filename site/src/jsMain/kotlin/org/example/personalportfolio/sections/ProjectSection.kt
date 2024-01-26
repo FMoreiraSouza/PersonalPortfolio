@@ -1,14 +1,12 @@
 package org.example.personalportfolio.sections
 
 import androidx.compose.runtime.*
+import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.id
-import com.varabyte.kobweb.compose.ui.modifiers.margin
+import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
@@ -19,14 +17,17 @@ import org.example.personalportfolio.components.SectionTitle
 import org.example.personalportfolio.models.Project
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.util.ObserveViewportEntered
+import org.jetbrains.compose.web.css.AnimationTimingFunction
+import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.s
 
 @Composable
 fun ProjectSection() {
     Box(
         modifier = Modifier
             .id(Section.Projects.id)
-            .margin(bottom = 40.px)
+            .margin(top = 50.px)
             .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
@@ -38,44 +39,52 @@ fun ProjectSection() {
 fun ProjectContent() {
     val breakpoint = rememberBreakpoint()
     val scope = rememberCoroutineScope()
-    var animatedMargin by remember { mutableStateOf((-400).px) }
+    var animatedMargin by remember { mutableStateOf((-1010).px) }
+    var animatedOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
-        sectionId = Section.About.id,
-        distanceFromTop = 5.0,
+        sectionId = Section.Projects.id,
+        distanceFromTop = 500.0,
         onViewportEntered = {
             scope.launch {
                 animatedMargin = 0.px
+                animatedOpacity = 100.percent
             }
         }
     )
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        SectionTitle(section = Section.Projects)
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            if (breakpoint > Breakpoint.MD) {
-                SimpleGrid(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    numColumns = numColumns(base = 1, md = 3)
-                ) {
-                    Project.entries.forEach { project ->
-                        ProjectCard(project, breakpoint, animatedMargin)
-                    }
+        SectionTitle(
+            modifier = Modifier
+                .opacity(animatedOpacity)
+                .transition(
+                    CSSTransition(
+                        property = "opacity", duration = 1.s,
+                        timingFunction = AnimationTimingFunction.EaseInOut
+                    )
+                ),
+            section = Section.Projects
+        )
+        if (breakpoint > Breakpoint.MD) {
+            SimpleGrid(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                numColumns = numColumns(base = 1, md = 3)
+            ) {
+                Project.entries.forEach { project ->
+                    ProjectCard(project, breakpoint, animatedMargin)
                 }
-            } else {
-                SimpleGrid(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    numColumns = numColumns(base = 1, sm = 2)
-                ) {
-                    Project.entries.forEach { project ->
-                        ProjectCard(project, breakpoint, animatedMargin)
-                    }
+            }
+        } else {
+            SimpleGrid(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                numColumns = numColumns(base = 1, sm = 2)
+            ) {
+                Project.entries.forEach { project ->
+                    ProjectCard(project, breakpoint, animatedMargin)
                 }
             }
         }

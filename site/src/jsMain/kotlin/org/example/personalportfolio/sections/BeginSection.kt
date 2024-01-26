@@ -1,6 +1,7 @@
 package org.example.personalportfolio.sections
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
@@ -11,16 +12,20 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
-import com.varabyte.kobweb.core.isExporting
-import com.varabyte.kobweb.core.rememberPageContext
+import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.components.Header
 import org.example.personalportfolio.components.SocialBar
+import org.example.personalportfolio.styles.AppearMoveKeyFrames
+import org.example.personalportfolio.styles.ShowKeyFrames
 import org.example.personalportfolio.util.Res
+import org.jetbrains.compose.web.css.AnimationTimingFunction
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.s
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
@@ -43,9 +48,7 @@ fun BeginSection(
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
-        if(!rememberPageContext().isExporting){
-            Header(breakpoint, onMenuClicked)
-        }
+        Header(breakpoint, onMenuClicked)
         BeginContent(breakpoint)
     }
 }
@@ -54,6 +57,7 @@ fun BeginSection(
 fun BeginContent(
     breakpoint: Breakpoint,
 ) {
+    val colorMode by ColorMode.currentState
     Column(
         modifier = Modifier.fillMaxWidth()
             .margin(
@@ -64,22 +68,46 @@ fun BeginContent(
     ) {
         if (breakpoint >= Breakpoint.SM) {
             Image(
+                modifier = Modifier
+                    .animation(
+                        AppearMoveKeyFrames
+                            .toAnimation(
+                                duration = 1.s,
+                                timingFunction = AnimationTimingFunction.EaseInOut
+                            )
+                    ),
                 src = Res.Image.computer,
             )
-        } else {
+        }
+        else {
             Image(
-                modifier = Modifier.width(235.px),
+                modifier = Modifier
+                    .animation(
+                        AppearMoveKeyFrames
+                            .toAnimation(
+                                duration = 1.s,
+                                timingFunction = AnimationTimingFunction.EaseInOut
+                            )
+                    )
+                    .width(235.px),
                 src = Res.Image.computer
             )
         }
         P(
             attrs = Modifier
+                .animation(
+                    ShowKeyFrames
+                        .toAnimation(
+                            duration = 1.s,
+                            timingFunction = AnimationTimingFunction.EaseInOut
+                        )
+                )
                 .margin(bottom = 18.px)
                 .fontSize(if (breakpoint >= Breakpoint.SM) 40.px else 30.px)
                 .textAlign(TextAlign.Center)
                 .fontFamily("Roboto")
                 .fontWeight(FontWeight.Bold)
-                .color(Colors.Gray)
+                .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
                 .toAttrs()
         )
         {

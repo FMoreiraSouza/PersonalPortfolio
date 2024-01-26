@@ -2,7 +2,6 @@ package org.example.personalportfolio.sections
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
@@ -25,7 +24,7 @@ import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun EndSection() {
-    var colorMode by ColorMode.currentState
+    val colorMode by ColorMode.currentState
     Box(
         modifier = Modifier
             .backgroundColor(if (colorMode.isLight) Color.argb(0.7f, 211, 211, 212) else Color.argb(0.2f, 211, 211, 212))
@@ -40,6 +39,7 @@ fun EndSection() {
 @Composable
 fun EndContent() {
     val breakpoint = rememberBreakpoint()
+    val colorMode by ColorMode.currentState
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
@@ -52,7 +52,7 @@ fun EndContent() {
                 .textAlign(TextAlign.Center)
                 .fontFamily("Roboto")
                 .fontWeight(FontWeight.Bold)
-                .color(Colors.Gray)
+                .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
                 .toAttrs()
         )
         {

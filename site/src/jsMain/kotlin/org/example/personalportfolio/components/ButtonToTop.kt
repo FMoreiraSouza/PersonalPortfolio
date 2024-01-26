@@ -10,6 +10,7 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.styleModifier
+import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.icons.fa.FaArrowUp
@@ -19,10 +20,8 @@ import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.launch
 import org.example.personalportfolio.styles.CircleButtonVariant
-import org.jetbrains.compose.web.css.Position
-import org.jetbrains.compose.web.css.em
-import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.px
+import org.example.personalportfolio.styles.ShowKeyFrames
+import org.jetbrains.compose.web.css.*
 import org.w3c.dom.SMOOTH
 import org.w3c.dom.ScrollBehavior
 import org.w3c.dom.ScrollToOptions
@@ -31,12 +30,13 @@ import org.w3c.dom.ScrollToOptions
 fun ButtonToTop() {
     val scope = rememberCoroutineScope()
     var scroll: Double? by remember { mutableStateOf(null) }
+
     LaunchedEffect(Unit) {
         window.addEventListener(type = "scroll", callback = {
             scroll = document.documentElement?.scrollTop
         })
     }
-    var colorMode by ColorMode.currentState
+    val colorMode by ColorMode.currentState
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -65,6 +65,20 @@ fun ButtonToTop() {
                 .size(50.px)
                 .borderRadius(100.percent)
                 .cursor(Cursor.Pointer)
+                .then(
+                    if (show) {
+                        Modifier.animation(
+                            ShowKeyFrames.toAnimation(
+                                null,
+                                duration = 1.s,
+                                timingFunction = AnimationTimingFunction.EaseInOut
+                            )
+                        )
+                    }
+                    else {
+                        Modifier
+                    }
+                )
                 .styleModifier {
                     property("pointer-events", "auto")
                 },

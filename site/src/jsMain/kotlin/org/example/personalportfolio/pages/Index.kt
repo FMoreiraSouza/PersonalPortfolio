@@ -8,6 +8,8 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.core.isExporting
+import com.varabyte.kobweb.core.rememberPageContext
 import org.example.personalportfolio.components.ButtonToTop
 import org.example.personalportfolio.components.MenuBar
 import org.example.personalportfolio.sections.*
@@ -18,26 +20,28 @@ fun HomePage() {
     var menuOpened by remember {
         mutableStateOf(false)
     }
-    Box(
-        Modifier
-            .fillMaxSize(),
-    ) {
-        Column(
-            modifier = Modifier
+    if (!rememberPageContext().isExporting) {
+        Box(
+            Modifier
                 .fillMaxSize(),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            BeginSection { menuOpened = true }
-            PresentationSection()
-            SkillSection()
-            AcademicSection()
-            ProjectSection()
-            ExperienceSection()
-            ContactSection()
-            EndSection()
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Top,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                BeginSection { menuOpened = true }
+                PresentationSection()
+                SkillSection()
+                AcademicSection()
+                ProjectSection()
+                ExperienceSection()
+                ContactSection()
+                EndSection()
+            }
+            ButtonToTop()
+            if (menuOpened) MenuBar { menuOpened = false }
         }
-        ButtonToTop()
-        if (menuOpened) MenuBar { menuOpened = false }
     }
 }

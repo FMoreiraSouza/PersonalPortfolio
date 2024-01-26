@@ -18,8 +18,7 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Academic
-import org.example.personalportfolio.styles.DarkerAcademicStyle
-import org.example.personalportfolio.styles.LighterAcademicStyle
+import org.example.personalportfolio.styles.AcademicStyle
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
@@ -32,8 +31,7 @@ fun AcademicCard(
     val colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
     Column(
-        modifier = (if (colorMode.isLight) LighterAcademicStyle else DarkerAcademicStyle).toModifier()
-            .margin(bottom = 20.px)
+        modifier = AcademicStyle.toModifier()
             .fillMaxWidth(if (breakpoint > Breakpoint.SM) 90.percent else 80.percent),
         horizontalAlignment = if (breakpoint > Breakpoint.SM) Alignment.Start else Alignment.CenterHorizontally
     )
@@ -43,27 +41,29 @@ fun AcademicCard(
                 .margin(left = animatedMargin)
                 .transition(
                     CSSTransition(
-                        property = "margin",
-                        duration = 2.s,
-                        delay = 300.ms
+                        property = "margin", duration = 1.s,
+                        timingFunction = AnimationTimingFunction.EaseInOut
                     )
                 ),
             horizontalAlignment = if (breakpoint > Breakpoint.SM) Alignment.Start else Alignment.CenterHorizontally
         ) {
             Box(
                 modifier = Modifier
-                    .size(250.px)
-                    .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.Gray)
+                    .size(150.px)
+                    .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = if(colorMode.isLight) Colors.LightGray else Colors.Gray)
                     .backgroundColor(Colors.White)
                     .borderRadius(50.percent),
                 contentAlignment = Alignment.Center
             ) {
-                Image(src = academic.coatOfArms)
+                Image(
+                    modifier = Modifier
+                        .fillMaxSize(85.percent),
+                    src = academic.coatOfArms)
             }
             P(
                 attrs = Modifier
                     .margin(top = 5.px)
-                    .color(Colors.Gray)
+                    .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
                     .fontFamily("Roboto")
                     .textAlign(if (breakpoint > Breakpoint.SM) TextAlign.Start else TextAlign.Center)
                     .fontWeight(FontWeight.Bold)
@@ -75,7 +75,7 @@ fun AcademicCard(
             P(
                 attrs = Modifier
                     .margin(topBottom = 0.px)
-                    .color(Colors.Gray)
+                    .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
                     .fontFamily("Roboto")
                     .textAlign(if (breakpoint > Breakpoint.SM) TextAlign.Start else TextAlign.Center)
                     .fontWeight(FontWeight.Bold)
@@ -99,15 +99,11 @@ fun AcademicCard(
         }
         Box(
             modifier = Modifier
-                .margin(
-                    top = 4.px,
-                    left = animatedMargin
-                )
+                .margin(top = 5.px, left = animatedMargin)
                 .transition(
                     CSSTransition(
-                        property = "margin",
-                        duration = 2.s,
-                        delay = 300.ms
+                        property = "margin", duration = 1.s,
+                        timingFunction = AnimationTimingFunction.EaseInOut
                     )
                 )
                 .height(2.px)

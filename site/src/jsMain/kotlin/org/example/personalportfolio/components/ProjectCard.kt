@@ -2,13 +2,13 @@ package org.example.personalportfolio.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color.Companion.argb
@@ -22,8 +22,7 @@ import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Project
-import org.example.personalportfolio.styles.DarkerPortfolioStyle
-import org.example.personalportfolio.styles.LighterPortfolioStyle
+import org.example.personalportfolio.styles.PortfolioStyle
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.P
@@ -35,77 +34,84 @@ fun ProjectCard(
     breakpoint: Breakpoint,
     animatedMargin: CSSSizeValue<CSSUnit.px>
 ) {
-    var colorMode by ColorMode.currentState
-    Column(
-        modifier = (if (colorMode.isLight) LighterPortfolioStyle else DarkerPortfolioStyle).toModifier()
-            .margin(left = animatedMargin)
-            .transition(
-                CSSTransition(
-                    property = "margin",
-                    duration = 2.s,
-                    delay = 500.ms
-                )
-            ),
+    val colorMode by ColorMode.currentState
+    Column (
+        modifier = Modifier
+            .margin(bottom = if(breakpoint <= Breakpoint.MD) 50.px else 0.px)
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Link(
-            modifier = Modifier
-                .id("linkParent")
-                .textDecorationLine(TextDecorationLine.None),
-            path = project.link,
-            openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB,
+    ){
+        Row(
+            modifier = PortfolioStyle.toModifier()
+            .size(if (breakpoint > Breakpoint.SM) 300.px else 225.px)
+                .margin(left = animatedMargin)
+                .transition(
+                    CSSTransition(
+                        property = "margin", duration = 1.s,
+                        timingFunction = AnimationTimingFunction.EaseInOut
+                    )
+                ),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Box(
+            Link(
                 modifier = Modifier
-                    .id("boxParent")
-                    .fillMaxWidth(),
+                    .id("linkParent")
+                    .textDecorationLine(TextDecorationLine.None),
+                path = project.link,
+                openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB,
             ) {
-                Image(
-                    modifier = Modifier
-                        .size(if (breakpoint > Breakpoint.SM) 300.px else 225.px),
-                    src = project.image
-                )
                 Box(
                     modifier = Modifier
-                        .id("blueCurtain")
-                        .fillMaxHeight()
-                        .backgroundColor(
-                            if (colorMode.isLight) argb(0.2f, 135, 206, 235)
-                            else argb(0.2f, 65, 105, 225)
-                        ),
-                    contentAlignment = Alignment.Center
+                        .id("boxParent")
+                        .fillMaxWidth(),
                 ) {
                     Image(
                         modifier = Modifier
-                            .id("linkIcon"),
-                        src = Res.Icon.redirect
+                            .size(if (breakpoint > Breakpoint.SM) 300.px else 225.px),
+                        src = project.image
                     )
+                    Box(
+                        modifier = Modifier
+                            .id("blueCurtain")
+                            .fillMaxHeight()
+                            .backgroundColor(
+                                if (colorMode.isLight) argb(0.2f, 135, 206, 235)
+                                else argb(0.2f, 65, 105, 225)
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Image(
+                            modifier = Modifier
+                                .id("linkIcon"),
+                            src = Res.Icon.redirect
+                        )
+                    }
                 }
-            }
-            P(
-                attrs = Modifier
-                    .id("projectTitle")
-                    .margin(topBottom = 0.px)
-                    .textAlign(TextAlign.Start)
-                    .fontFamily("Roboto")
-                    .fontWeight(FontWeight.Bold)
-                    .fontSize(if (breakpoint >= Breakpoint.SM) 20.px else 18.px)
-                    .toAttrs()
-            ) {
-                Text(project.title)
-            }
-            P(
-                attrs = Modifier
-                    .id("projectPlatform")
-                    .margin(topBottom = 0.px)
-                    .textAlign(TextAlign.Start)
-                    .color(Colors.Gray)
-                    .fontFamily("Roboto")
-                    .fontWeight(FontWeight.Normal)
-                    .fontSize(if (breakpoint >= Breakpoint.SM) 18.px else 16.px)
-                    .toAttrs()
-            ) {
-                Text(project.platform)
+                P(
+                    attrs = Modifier
+                        .id("projectTitle")
+                        .margin(topBottom = 0.px)
+                        .textAlign(TextAlign.Start)
+                        .fontFamily("Roboto")
+                        .fontWeight(FontWeight.Bold)
+                        .fontSize(if (breakpoint >= Breakpoint.SM) 20.px else 18.px)
+                        .toAttrs()
+                ) {
+                    Text(project.title)
+                }
+                P(
+                    attrs = Modifier
+                        .id("projectPlatform")
+                        .margin(topBottom = 0.px)
+                        .textAlign(TextAlign.Start)
+                        .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
+                        .fontFamily("Roboto")
+                        .fontWeight(FontWeight.Normal)
+                        .fontSize(if (breakpoint >= Breakpoint.SM) 18.px else 16.px)
+                        .toAttrs()
+                ) {
+                    Text(project.platform)
+                }
             }
         }
     }

@@ -20,8 +20,7 @@ import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.coroutines.launch
 import org.example.personalportfolio.models.Section
-import org.example.personalportfolio.styles.DarkerNavigationStyle
-import org.example.personalportfolio.styles.LighterNavigationStyle
+import org.example.personalportfolio.styles.NavigationItemStyle
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.A
@@ -30,7 +29,7 @@ import org.jetbrains.compose.web.dom.A
 fun MenuBar(onMenuClosed: () -> Unit) {
     val scope = rememberCoroutineScope()
     val breakpoint = rememberBreakpoint()
-    var colorMode by ColorMode.currentState
+    val colorMode by ColorMode.currentState
     var translateX by remember { mutableStateOf((-100).percent) }
     LaunchedEffect(breakpoint) {
         translateX = 0.percent
@@ -94,7 +93,7 @@ fun MenuBar(onMenuClosed: () -> Unit) {
         ) {
             Section.entries.forEach { section ->
                 Link(
-                    modifier = (if (colorMode.isLight) LighterNavigationStyle else DarkerNavigationStyle).toModifier()
+                    modifier = NavigationItemStyle.toModifier()
                         .padding(topBottom = 5.px, leftRight = 5.px)
                         .fontFamily("Sans-Serif")
                         .textAlign(TextAlign.Center)

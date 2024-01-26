@@ -24,8 +24,7 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.styles.CircleButtonVariant
-import org.example.personalportfolio.styles.DarkerNavigationStyle
-import org.example.personalportfolio.styles.LighterNavigationStyle
+import org.example.personalportfolio.styles.NavigationItemStyle
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.A
@@ -35,7 +34,7 @@ fun Header(
     breakpoint: Breakpoint,
     onMenuClicked: () -> Unit
 ) {
-    var colorMode by ColorMode.currentState
+    val colorMode by ColorMode.currentState
     Row(
         modifier = Modifier
             .padding(1.cssRem)
@@ -96,7 +95,10 @@ fun LeftSide(
 }
 
 @Composable
-fun RightSide(breakpoint: Breakpoint, colorMode: ColorMode) {
+fun RightSide(
+    breakpoint: Breakpoint,
+    colorMode: ColorMode
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -104,7 +106,7 @@ fun RightSide(breakpoint: Breakpoint, colorMode: ColorMode) {
     ) {
         Section.entries.forEach { section ->
             Link(
-                modifier = (if (colorMode.isLight) LighterNavigationStyle else DarkerNavigationStyle).toModifier()
+                modifier = NavigationItemStyle.toModifier()
                     .padding(topBottom = 10.px, leftRight = 5.px)
                     .margin(right = 5.px, bottom = 4.px)
                     .fontFamily("Sans-Serif")

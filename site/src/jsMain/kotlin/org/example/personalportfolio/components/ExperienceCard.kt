@@ -2,7 +2,7 @@ package org.example.personalportfolio.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
@@ -22,21 +22,28 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Experience
-import org.example.personalportfolio.styles.DarkerPresentationColumnStyle
-import org.example.personalportfolio.styles.LighterPresentationColumnStyle
-import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.px
+import org.example.personalportfolio.styles.PresentationColumnStyle
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun ExperienceCard(
     experience: Experience,
+    animatedOpacity: CSSSizeValue<CSSUnit.percent>
 ) {
     val breakpoint = rememberBreakpoint()
     if (breakpoint >= Breakpoint.MD) {
         SimpleGrid(
-            modifier = Modifier.fillMaxWidth(90.percent),
+            modifier = Modifier
+                .opacity(animatedOpacity)
+                .transition(
+                    CSSTransition(
+                        property = "opacity", duration = 1.s,
+                        timingFunction = AnimationTimingFunction.EaseInOut
+                    )
+                )
+                .fillMaxWidth(90.percent),
             numColumns = numColumns(base = 1, md = 2)
         ) {
             ExperienceDescription(
@@ -46,9 +53,18 @@ fun ExperienceCard(
                 experience, breakpoint,
             )
         }
-    } else {
+    }
+    else {
         SimpleGrid(
-            modifier = Modifier.fillMaxWidth(80.percent),
+            modifier = Modifier
+                .opacity(animatedOpacity)
+                .transition(
+                    CSSTransition(
+                        property = "opacity", duration = 1.s,
+                        timingFunction = AnimationTimingFunction.EaseInOut
+                    )
+                )
+                .fillMaxWidth(80.percent),
             numColumns = numColumns(base = 1)
         ) {
             ExperienceDetails(
@@ -66,9 +82,9 @@ fun ExperienceDescription(
     description: String,
     breakpoint: Breakpoint,
 ) {
-    var colorMode by ColorMode.currentState
+    val colorMode by ColorMode.currentState
     Column(
-        modifier = (if (colorMode.isLight) LighterPresentationColumnStyle else DarkerPresentationColumnStyle).toModifier()
+        modifier = PresentationColumnStyle.toModifier()
             .fillMaxWidth(if (breakpoint >= Breakpoint.MD) 90.percent else 100.percent)
             .margin(
                 left = if (breakpoint > Breakpoint.MD) 10.px else 0.px,
@@ -98,7 +114,7 @@ fun ExperienceDetails(
     experience: Experience,
     breakpoint: Breakpoint,
 ) {
-    var colorMode by ColorMode.currentState
+    val colorMode by ColorMode.currentState
     if (breakpoint >= Breakpoint.MD) {
         Row(
             modifier = Modifier
@@ -141,14 +157,15 @@ fun ExperienceDetails(
                         .fontFamily("Sans-Serif")
                         .fontSize(14.px)
                         .fontWeight(FontWeight.Normal)
-                        .color(Colors.Gray)
+                        .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
                         .toAttrs()
                 ) {
                     Text("${experience.from} - ${experience.to}")
                 }
             }
         }
-    } else {
+    }
+    else {
         Column(
             Modifier,
             verticalArrangement = Arrangement.Center,
@@ -186,7 +203,7 @@ fun ExperienceDetails(
                     .textAlign(TextAlign.Center)
                     .fontSize(10.px)
                     .fontWeight(FontWeight.Normal)
-                    .color(Colors.Gray)
+                    .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
                     .toAttrs()
             ) {
                 Text("${experience.from} - ${experience.to}")
@@ -215,8 +232,8 @@ fun ExperienceIcon(
     ) {
         Box(
             modifier = Modifier
-                .size(60.px)
-                .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.Gray)
+                .size(70.px)
+                .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = if(colorMode.isLight) Colors.LightGray else Colors.Gray)
                 .backgroundColor(Colors.White)
                 .borderRadius(50.percent),
             contentAlignment = Alignment.Center

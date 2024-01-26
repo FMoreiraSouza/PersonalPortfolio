@@ -2,7 +2,7 @@ package org.example.personalportfolio.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import com.varabyte.kobweb.compose.css.CSSTransition
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.Width
@@ -18,21 +18,28 @@ import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.example.personalportfolio.styles.DarkerButtonStyle
-import org.example.personalportfolio.styles.DarkerFormStyle
-import org.example.personalportfolio.styles.LighterButtonStyle
-import org.example.personalportfolio.styles.LighterFormStyle
+import org.example.personalportfolio.styles.ButtonStyle
+import org.example.personalportfolio.styles.FormStyle
 import org.jetbrains.compose.web.attributes.InputType
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
 
 @Composable
-fun ContactForm() {
-    var colorMode by ColorMode.currentState
+fun ContactForm(
+    animatedOpacity: CSSSizeValue<CSSUnit.percent>
+) {
+    val colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
     Form(
-        action = "https://submit-form.com/ZDEc8vIUB",
+        action = "https://formcarry.com/s/z64fl1g7XNd",
         attrs = Modifier
+            .opacity(animatedOpacity)
+            .transition(
+                CSSTransition(
+                    property = "opacity", duration = 1.s,
+                    timingFunction = AnimationTimingFunction.EaseInOut
+                )
+            )
             .attrsModifier {
                 attr("method", "POST")
             }
@@ -40,7 +47,7 @@ fun ContactForm() {
     ) {
         Input(
             type = InputType.Text,
-            attrs = (if (colorMode.isLight) LighterFormStyle else DarkerFormStyle).toModifier()
+            attrs = FormStyle.toModifier()
                 .id("inputName")
                 .classNames("form-control")
                 .backgroundColor(
@@ -54,7 +61,6 @@ fun ContactForm() {
                     }
                 )
                 .borderRadius(r = 5.px)
-                .boxShadow(0.px, 0.px, 0.px, 0.px, null)
                 .attrsModifier {
                     attr("placeholder", "Nome Completo")
                     attr("name", "Nome")
@@ -64,7 +70,7 @@ fun ContactForm() {
         )
         Input(
             type = InputType.Email,
-            attrs = (if (colorMode.isLight) LighterFormStyle else DarkerFormStyle).toModifier()
+            attrs = FormStyle.toModifier()
                 .id("inputEmail")
                 .classNames("form-control")
                 .backgroundColor((if (colorMode.isLight) Color.argb(0.1f, 211, 211, 212) else Color.argb(1.0f, 211, 211, 212)))
@@ -76,7 +82,6 @@ fun ContactForm() {
                 )
                 .borderRadius(r = 5.px)
                 .margin(top = 10.px)
-                .boxShadow(0.px, 0.px, 0.px, 0.px, null)
                 .attrsModifier {
                     attr("placeholder", "Endereço de Email")
                     attr("name", "Email")
@@ -85,9 +90,9 @@ fun ContactForm() {
                 .toAttrs()
         )
         TextArea(
-            attrs = (if (colorMode.isLight) LighterFormStyle else DarkerFormStyle).toModifier()
+            attrs = FormStyle.toModifier()
                 .id("inputMessage")
-                .fontSize(15.px)
+                .fontSize(14.px)
                 .classNames("form-control")
                 .backgroundColor((if (colorMode.isLight) Color.argb(0.1f, 211, 211, 212) else Color.argb(1.0f, 211, 211, 212)))
                 .borderRadius(r = 5.px)
@@ -98,7 +103,6 @@ fun ContactForm() {
                     else if (breakpoint >= Breakpoint.SM) 300.px
                     else 250.px
                 )
-                .boxShadow(0.px, 0.px, 0.px, 0.px, null)
                 .attrsModifier {
                     attr("placeholder", "Sua Mensagem")
                     attr("name", " Mensagem")
@@ -107,7 +111,7 @@ fun ContactForm() {
                 .toAttrs()
         )
         Box(
-            modifier = (if (colorMode.isLight) LighterButtonStyle else DarkerButtonStyle).toModifier()
+            modifier = ButtonStyle.toModifier()
                 .margin(
                     left = when {
                         breakpoint >= Breakpoint.MD -> 200.px
@@ -127,7 +131,6 @@ fun ContactForm() {
                     .color(Colors.White)
                     .border(width = 0.px)
                     .borderRadius(r = 5.px)
-                    .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = Colors.LightGray)
                     .cursor(Cursor.Pointer)
                     .toAttrs()
             ) {
