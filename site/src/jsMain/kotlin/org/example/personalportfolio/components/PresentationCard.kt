@@ -138,7 +138,10 @@ fun MyProfessionalPhoto(
         Column(
             modifier = Modifier
                 .opacity(if (breakpoint > Breakpoint.LG && breakpoint >= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedOpacity else 100.percent)
-                .margin(left = if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedMargin else 0.px)
+                .margin(
+                    left = if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedMargin else 0.px,
+                    top = if (breakpoint >= Breakpoint.MD) 0.px else 5.px
+                )
                 .transition(
                     CSSTransition(
                         property = "opacity", duration = 1.s,
