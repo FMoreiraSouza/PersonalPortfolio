@@ -9,6 +9,6 @@ server:
       api: "build/libs/personalportfolio.jar"
     prod:
       script: "build/dist/js/productionExecutable/personalportfolio.js"
-      siteRoot: ".kobweb/site"
+      siteRoot: "kobweb/site"
 
   port: 8080
