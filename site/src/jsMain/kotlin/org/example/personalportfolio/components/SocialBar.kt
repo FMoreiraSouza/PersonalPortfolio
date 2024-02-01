@@ -99,7 +99,7 @@ fun SocialLinks(breakpoint: Breakpoint) {
                         .cursor(Cursor.Pointer)
                         .toAttrs()
                 ) {
-                    Text("Email")
+                    Text("E-mail")
                 }
             }
         }
@@ -129,7 +129,7 @@ fun SocialLinks(breakpoint: Breakpoint) {
                         .cursor(Cursor.Pointer)
                         .toAttrs()
                 ) {
-                    Text("Email")
+                    Text("E-mail")
                 }
             }
             Row(
