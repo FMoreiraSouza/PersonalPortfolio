@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.forms.Button
@@ -46,7 +47,7 @@ fun Header(
             .position(Position.Fixed)
             .zIndex(2)
             .fillMaxWidth()
-            .backgroundColor(if (colorMode.isLight) Colors.White else Colors.Black),
+            .backgroundColor(if (colorMode.isLight) Color.Companion.rgb(255, 255, 255) else Color.Companion.rgb(35, 35, 35)),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -104,7 +105,7 @@ fun RightSide(
                     .textDecorationLine(TextDecorationLine.None)
                     .color(if (colorMode.isLight) Colors.Black else Colors.White),
                 path = section.path,
-                text = section.title,
+                text = section.title
             )
         }
         ToogleColorThemeButton(breakpoint)

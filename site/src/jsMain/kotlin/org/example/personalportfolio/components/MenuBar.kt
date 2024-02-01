@@ -7,6 +7,7 @@ import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.graphics.Image
@@ -52,7 +53,7 @@ fun MenuBar(onMenuClosed: () -> Unit) {
             .position(Position.Fixed)
             .translate(tx = translateX)
             .transition(CSSTransition(property = "translate", duration = 500.ms))
-            .backgroundColor(if (colorMode.isLight) Colors.White else Colors.Black),
+            .backgroundColor(if (colorMode.isLight) Color.Companion.rgb(255, 255, 255) else Color.Companion.rgb(35, 35, 35)),
         verticalArrangement = Arrangement.Top
     ) {
         Row(
@@ -99,7 +100,7 @@ fun MenuBar(onMenuClosed: () -> Unit) {
                         .textDecorationLine(TextDecorationLine.None)
                         .color(if (colorMode.isLight) Colors.Black else Colors.White),
                     path = section.path,
-                    text = section.title,
+                    text = section.title
                 )
             }
         }
