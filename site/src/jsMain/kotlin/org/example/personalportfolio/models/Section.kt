@@ -26,9 +26,9 @@ enum class Section(
         path = "#projects"
     ),
     Experiences(
-        id = "experience",
-        title = "Experiência",
-        path = "#experience"
+        id = "experiences",
+        title = "Experiências",
+        path = "#experiences"
     ),
     Contact(
         id = "contact",
