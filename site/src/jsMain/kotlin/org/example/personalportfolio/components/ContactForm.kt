@@ -34,7 +34,7 @@ fun ContactForm(animatedOpacity: CSSSizeValue<CSSUnit.percent>) {
             .opacity(animatedOpacity)
             .transition(
                 CSSTransition(
-                    property = "opacity", duration = 2.s,
+                    property = "opacity", duration = 1.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 )
             )

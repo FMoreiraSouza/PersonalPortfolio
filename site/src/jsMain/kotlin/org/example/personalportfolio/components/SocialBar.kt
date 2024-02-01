@@ -40,7 +40,7 @@ fun SocialBar() {
             .animation(
                 ShowKeyFrames
                     .toAnimation(
-                        duration = 2.s,
+                        duration = 1.s,
                         timingFunction = AnimationTimingFunction.EaseInOut
                     )
             )

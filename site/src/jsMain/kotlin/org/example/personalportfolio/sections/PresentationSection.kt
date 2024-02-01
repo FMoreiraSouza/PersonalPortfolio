@@ -15,7 +15,6 @@ import org.example.personalportfolio.components.PresentationCard
 import org.example.personalportfolio.components.SectionTitle
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.styles.ShowKeyFrames
-import org.example.personalportfolio.styles.VanishKeyFrames
 import org.example.personalportfolio.util.ObserveViewportEntered
 import org.jetbrains.compose.web.css.AnimationTimingFunction
 import org.jetbrains.compose.web.css.percent
@@ -42,7 +41,7 @@ fun PresentationContent() {
     var animatedOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
         sectionId = Section.About.id,
-        distanceFromTop = 700.0,
+        distanceFromTop = 500.0,
         onViewportEntered = {
             scope.launch {
                 animatedMargin = 0.px
@@ -62,20 +61,22 @@ fun PresentationContent() {
                 )
                 .transition(
                     CSSTransition(
-                        property = "opacity", duration = 2.s,
+                        property = "opacity", duration = 1.s,
                         timingFunction = AnimationTimingFunction.EaseInOut
                     )
                 )
-                .animation(
+                .then(
                     if (breakpoint <= Breakpoint.LG) {
-                        ShowKeyFrames
-                            .toAnimation(
-                                duration = 2.s,
-                                timingFunction = AnimationTimingFunction.EaseInOut
-                            )
+                        Modifier.animation(
+                            ShowKeyFrames
+                                .toAnimation(
+                                    duration = 1.s,
+                                    timingFunction = AnimationTimingFunction.EaseInOut
+                                )
+                        )
                     }
                     else {
-                        VanishKeyFrames.toAnimation()
+                        Modifier
                     }
                 ),
             section = Section.About

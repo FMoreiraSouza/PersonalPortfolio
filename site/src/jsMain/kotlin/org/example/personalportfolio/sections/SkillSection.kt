@@ -16,7 +16,6 @@ import org.example.personalportfolio.components.SectionTitle
 import org.example.personalportfolio.components.SkillCard
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.styles.ShowKeyFrames
-import org.example.personalportfolio.styles.VanishKeyFrames
 import org.example.personalportfolio.util.ObserveViewportEntered
 import org.jetbrains.compose.web.css.AnimationTimingFunction
 import org.jetbrains.compose.web.css.percent
@@ -45,7 +44,7 @@ fun SkillContent() {
     var animatedOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
         sectionId = Section.Skills.id,
-        distanceFromTop = if(breakpoint > Breakpoint.LG || breakpoint < Breakpoint.MD) 700.0 else 1400.0,
+        distanceFromTop = if (breakpoint > Breakpoint.LG) 500.0 else if (breakpoint < Breakpoint.MD) 700.0 else 1400.0,
         onViewportEntered = {
             scope.launch {
                 animatedMargin = 0.px
@@ -63,19 +62,22 @@ fun SkillContent() {
                 .opacity(if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint <= Breakpoint.MD) animatedOpacity else 100.percent)
                 .transition(
                     CSSTransition(
-                        property = "opacity", duration = 2.s,
+                        property = "opacity", duration = 1.s,
                         timingFunction = AnimationTimingFunction.EaseInOut
                     )
-                ).animation(
+                )
+                .then(
                     if (breakpoint > Breakpoint.MD && breakpoint <= Breakpoint.LG) {
-                        ShowKeyFrames
-                            .toAnimation(
-                                duration = 2.s,
-                                timingFunction = AnimationTimingFunction.EaseInOut
-                            )
+                        Modifier.animation(
+                            ShowKeyFrames
+                                .toAnimation(
+                                    duration = 1.s,
+                                    timingFunction = AnimationTimingFunction.EaseInOut
+                                )
+                        )
                     }
                     else {
-                        VanishKeyFrames.toAnimation()
+                        Modifier
                     }
                 ),
             section = Section.Skills

@@ -18,7 +18,6 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.models.Skill
 import org.example.personalportfolio.styles.AppearMoveKeyFrames
-import org.example.personalportfolio.styles.DisappearParkKeyFrames
 import org.example.personalportfolio.styles.SkillStyle
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.P
@@ -36,23 +35,26 @@ fun SkillCard(
             .margin(left = if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint <= Breakpoint.MD) animatedMargin else 0.px)
             .transition(
                 CSSTransition(
-                    property = "opacity", duration = 2.s,
+                    property = "opacity", duration = 1.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 ),
                 CSSTransition(
-                    property = "margin", duration = 2.s,
+                    property = "margin", duration = 1.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 )
-            ).animation(
+            )
+            .then(
                 if (breakpoint > Breakpoint.MD && breakpoint <= Breakpoint.LG) {
-                    AppearMoveKeyFrames
-                        .toAnimation(
-                            duration = 2.s,
-                            timingFunction = AnimationTimingFunction.EaseInOut
-                        )
+                    Modifier.animation(
+                        AppearMoveKeyFrames
+                            .toAnimation(
+                                duration = 1.s,
+                                timingFunction = AnimationTimingFunction.EaseInOut
+                            )
+                    )
                 }
                 else {
-                    DisappearParkKeyFrames.toAnimation()
+                    Modifier
                 }
             )
             .fillMaxWidth(if (breakpoint >= Breakpoint.SM) 75.percent else 95.percent),

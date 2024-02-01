@@ -41,7 +41,7 @@ fun ExperienceContent() {
     var animatedOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
         sectionId = Section.Experiences.id,
-        distanceFromTop = if (breakpoint > Breakpoint.LG || breakpoint < Breakpoint.MD) 700.0 else 1400.0,
+        distanceFromTop = if (breakpoint > Breakpoint.LG) 500.0 else if (breakpoint < Breakpoint.MD) 700.0 else 1400.0,
         onViewportEntered = {
             scope.launch {
                 animatedOpacity = 100.percent
@@ -58,7 +58,7 @@ fun ExperienceContent() {
                 .opacity(animatedOpacity)
                 .transition(
                     CSSTransition(
-                        property = "opacity", duration = 2.s,
+                        property = "opacity", duration = 1.s,
                         timingFunction = AnimationTimingFunction.EaseInOut
                     )
                 ),

@@ -21,7 +21,6 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.styles.AppearMoveKeyFrames
-import org.example.personalportfolio.styles.DisappearParkKeyFrames
 import org.example.personalportfolio.styles.PresentationStyle
 import org.example.personalportfolio.util.Constants
 import org.example.personalportfolio.util.Res
@@ -43,7 +42,8 @@ fun PresentationCard(
             MyDescription(breakpoint, animatedMargin, animatedOpacity)
             MyProfessionalPhoto(breakpoint, animatedMargin, animatedOpacity)
         }
-    } else {
+    }
+    else {
         Column(
             modifier = Modifier.fillMaxWidth(90.percent),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -67,23 +67,26 @@ fun MyDescription(
             .margin(left = if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint >= Breakpoint.SM && breakpoint < Breakpoint.MD) animatedMargin else 0.px)
             .transition(
                 CSSTransition(
-                    property = "opacity", duration = 2.s,
+                    property = "opacity", duration = 1.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 ),
                 CSSTransition(
-                    property = "margin", duration = 2.s,
+                    property = "margin", duration = 1.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 )
             )
-            .animation(
+            .then(
                 if (breakpoint < Breakpoint.SM || breakpoint >= Breakpoint.MD && breakpoint <= Breakpoint.LG) {
-                    AppearMoveKeyFrames
-                        .toAnimation(
-                            duration = 2.s,
-                            timingFunction = AnimationTimingFunction.EaseInOut
-                        )
-                } else {
-                    DisappearParkKeyFrames.toAnimation()
+                    Modifier.animation(
+                        AppearMoveKeyFrames
+                            .toAnimation(
+                                duration = 1.s,
+                                timingFunction = AnimationTimingFunction.EaseInOut
+                            )
+                    )
+                }
+                else {
+                    Modifier
                 }
             )
             .fillMaxWidth(),
@@ -138,23 +141,26 @@ fun MyProfessionalPhoto(
             )
             .transition(
                 CSSTransition(
-                    property = "opacity", duration = 2.s,
+                    property = "opacity", duration = 1.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 ),
                 CSSTransition(
-                    property = "margin", duration = 2.s,
+                    property = "margin", duration = 1.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 )
             )
-            .animation(
+            .then(
                 if (breakpoint >= Breakpoint.MD && breakpoint <= Breakpoint.LG) {
-                    AppearMoveKeyFrames
-                        .toAnimation(
-                            duration = 2.s,
-                            timingFunction = AnimationTimingFunction.EaseInOut
-                        )
-                } else {
-                    DisappearParkKeyFrames.toAnimation()
+                    Modifier.animation(
+                        AppearMoveKeyFrames
+                            .toAnimation(
+                                duration = 1.s,
+                                timingFunction = AnimationTimingFunction.EaseInOut
+                            )
+                    )
+                }
+                else {
+                    Modifier
                 }
             )
             .padding(left = if (breakpoint >= Breakpoint.MD) 10.px else 0.px)

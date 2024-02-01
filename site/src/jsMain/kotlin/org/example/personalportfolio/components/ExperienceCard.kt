@@ -38,7 +38,7 @@ fun ExperienceCard(
             .opacity(animatedOpacity)
             .transition(
                 CSSTransition(
-                    property = "opacity", duration = 2.s,
+                    property = "opacity", duration = 1.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 )
             )
@@ -48,7 +48,8 @@ fun ExperienceCard(
         if (breakpoint >= Breakpoint.MD) {
             ExperienceDescription(experience.description, breakpoint)
             ExperienceDetails(experience, breakpoint)
-        } else {
+        }
+        else {
             ExperienceDetails(experience, breakpoint)
             ExperienceDescription(experience.description, breakpoint)
         }
@@ -141,7 +142,8 @@ fun ExperienceDetails(
                 }
             }
         }
-    } else {
+    }
+    else {
         Column(
             Modifier,
             verticalArrangement = Arrangement.Center,

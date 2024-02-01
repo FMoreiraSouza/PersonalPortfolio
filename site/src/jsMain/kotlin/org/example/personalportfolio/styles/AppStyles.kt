@@ -158,14 +158,6 @@ val AppearMoveKeyFrames by Keyframes {
     }
 }
 
-val DisappearParkKeyFrames by Keyframes {
-    0.percent {
-        Modifier
-            .margin(left = (-50).px)
-            .opacity(0)
-    }
-}
-
 val ShowKeyFrames by Keyframes {
     0.percent {
         Modifier
@@ -174,12 +166,5 @@ val ShowKeyFrames by Keyframes {
     100.percent {
         Modifier
             .opacity(1)
-    }
-}
-
-val VanishKeyFrames by Keyframes {
-    100.percent {
-        Modifier
-            .opacity(100)
     }
 }

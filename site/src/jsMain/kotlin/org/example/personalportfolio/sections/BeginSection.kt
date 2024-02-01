@@ -58,7 +58,7 @@ fun BeginContent(breakpoint: Breakpoint) {
                     .animation(
                         AppearMoveKeyFrames
                             .toAnimation(
-                                duration = 2.s,
+                                duration = 1.s,
                                 timingFunction = AnimationTimingFunction.EaseInOut
                             )
                     ),
@@ -71,7 +71,7 @@ fun BeginContent(breakpoint: Breakpoint) {
                     .animation(
                         AppearMoveKeyFrames
                             .toAnimation(
-                                duration = 2.s,
+                                duration = 1.s,
                                 timingFunction = AnimationTimingFunction.EaseInOut
                             )
                     )
@@ -84,7 +84,7 @@ fun BeginContent(breakpoint: Breakpoint) {
                 .animation(
                     ShowKeyFrames
                         .toAnimation(
-                            duration = 2.s,
+                            duration = 1.s,
                             timingFunction = AnimationTimingFunction.EaseInOut
                         )
                 )

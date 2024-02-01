@@ -36,7 +36,7 @@ fun AcademicCard(
             .margin(left = animatedMargin)
             .transition(
                 CSSTransition(
-                    property = "margin", duration = 2.s,
+                    property = "margin", duration = 1.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 )
             )

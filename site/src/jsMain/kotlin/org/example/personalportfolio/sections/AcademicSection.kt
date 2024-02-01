@@ -39,11 +39,11 @@ fun AcademicSection() {
 fun AcademicContent() {
     val breakpoint = rememberBreakpoint()
     val scope = rememberCoroutineScope()
-    var animatedMargin by remember { mutableStateOf((-2000).px) }
+    var animatedMargin by remember { mutableStateOf((-2500).px) }
     var animatedOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
         sectionId = Section.Academics.id,
-        distanceFromTop = if (breakpoint > Breakpoint.LG || breakpoint < Breakpoint.MD) 700.0 else 1400.0,
+        distanceFromTop = if (breakpoint > Breakpoint.LG) 500.0 else if (breakpoint < Breakpoint.MD) 700.0 else 1400.0,
         onViewportEntered = {
             scope.launch {
                 animatedMargin = 0.px
@@ -61,7 +61,7 @@ fun AcademicContent() {
                 .opacity(animatedOpacity)
                 .transition(
                     CSSTransition(
-                        property = "opacity", duration = 2.s,
+                        property = "opacity", duration = 1.s,
                         timingFunction = AnimationTimingFunction.EaseInOut
                     )
                 ),
