@@ -79,7 +79,7 @@ fun MyDescription(
                 if (breakpoint < Breakpoint.SM || breakpoint >= Breakpoint.MD && breakpoint <= Breakpoint.LG) {
                     AppearMoveKeyFrames
                         .toAnimation(
-                            duration = 1.s,
+                            duration = 2.s,
                             timingFunction = AnimationTimingFunction.EaseInOut
                         )
                 } else {
@@ -150,7 +150,7 @@ fun MyProfessionalPhoto(
                 if (breakpoint >= Breakpoint.MD && breakpoint <= Breakpoint.LG) {
                     AppearMoveKeyFrames
                         .toAnimation(
-                            duration = 1.s,
+                            duration = 2.s,
                             timingFunction = AnimationTimingFunction.EaseInOut
                         )
                 } else {

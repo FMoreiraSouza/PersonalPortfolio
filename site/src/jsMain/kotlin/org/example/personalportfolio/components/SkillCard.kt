@@ -9,6 +9,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
+import com.varabyte.kobweb.silk.components.animation.toAnimation
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
@@ -16,6 +17,8 @@ import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.models.Skill
+import org.example.personalportfolio.styles.AppearMoveKeyFrames
+import org.example.personalportfolio.styles.DisappearParkKeyFrames
 import org.example.personalportfolio.styles.SkillStyle
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.P
@@ -29,8 +32,8 @@ fun SkillCard(
     val breakpoint = rememberBreakpoint()
     SimpleGrid(
         modifier = Modifier
-            .opacity(animatedOpacity)
-            .margin(left = animatedMargin)
+            .opacity(if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint <= Breakpoint.MD) animatedOpacity else 100.percent)
+            .margin(left = if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint <= Breakpoint.MD) animatedMargin else 0.px)
             .transition(
                 CSSTransition(
                     property = "opacity", duration = 2.s,
@@ -40,6 +43,17 @@ fun SkillCard(
                     property = "margin", duration = 2.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 )
+            ).animation(
+                if (breakpoint > Breakpoint.MD && breakpoint <= Breakpoint.LG) {
+                    AppearMoveKeyFrames
+                        .toAnimation(
+                            duration = 2.s,
+                            timingFunction = AnimationTimingFunction.EaseInOut
+                        )
+                }
+                else {
+                    DisappearParkKeyFrames.toAnimation()
+                }
             )
             .fillMaxWidth(if (breakpoint >= Breakpoint.SM) 75.percent else 95.percent),
         numColumns = numColumns(base = 1, md = 2)
