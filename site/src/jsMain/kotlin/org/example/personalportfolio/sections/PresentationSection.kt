@@ -42,7 +42,7 @@ fun PresentationContent() {
     var animatedOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
         sectionId = Section.About.id,
-        distanceFromTop = 500.0,
+        distanceFromTop = 700.0,
         onViewportEntered = {
             scope.launch {
                 animatedMargin = 0.px

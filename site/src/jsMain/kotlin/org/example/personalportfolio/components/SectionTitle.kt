@@ -31,7 +31,7 @@ fun SectionTitle(
     var titleOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
         sectionId = section.id,
-        distanceFromTop = if(breakpoint > Breakpoint.LG || breakpoint < Breakpoint.MD) 500.0 else 1000.0,
+        distanceFromTop = if(breakpoint > Breakpoint.LG || breakpoint < Breakpoint.MD) 700.0 else 1400.0,
         onViewportEntered = {
             scope.launch {
                 titleOpacity = 100.percent
