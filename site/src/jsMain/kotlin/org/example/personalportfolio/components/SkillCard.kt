@@ -31,8 +31,8 @@ fun SkillCard(
     val breakpoint = rememberBreakpoint()
     SimpleGrid(
         modifier = Modifier
-            .opacity(if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint <= Breakpoint.MD) animatedOpacity else 100.percent)
-            .margin(left = if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint <= Breakpoint.MD) animatedMargin else 0.px)
+            .opacity(if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedOpacity else 100.percent)
+            .margin(left = if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedMargin else 0.px)
             .transition(
                 CSSTransition(
                     property = "opacity", duration = 1.s,
@@ -44,7 +44,7 @@ fun SkillCard(
                 )
             )
             .then(
-                if (breakpoint > Breakpoint.MD && breakpoint <= Breakpoint.LG) {
+                if (breakpoint >= Breakpoint.MD && breakpoint <= Breakpoint.LG) {
                     Modifier.animation(
                         AppearMoveKeyFrames
                             .toAnimation(

@@ -59,7 +59,7 @@ fun SkillContent() {
     ) {
         SectionTitle(
             modifier = Modifier
-                .opacity(if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint <= Breakpoint.MD) animatedOpacity else 100.percent)
+                .opacity(if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedOpacity else 100.percent)
                 .transition(
                     CSSTransition(
                         property = "opacity", duration = 1.s,
@@ -67,7 +67,7 @@ fun SkillContent() {
                     )
                 )
                 .then(
-                    if (breakpoint > Breakpoint.MD && breakpoint <= Breakpoint.LG) {
+                    if (breakpoint >= Breakpoint.MD && breakpoint <= Breakpoint.LG) {
                         Modifier.animation(
                             ShowKeyFrames
                                 .toAnimation(
