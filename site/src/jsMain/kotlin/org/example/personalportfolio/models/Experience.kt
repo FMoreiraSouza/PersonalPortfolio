@@ -14,7 +14,7 @@ enum class Experience(
 ) {
     First(
         icon = fitbank450,
-        jobPosition = "Desenvolvedor Backend",
+        jobPosition = "Desenvolvedor Back-end",
         description = "Atuei na criação de soluções em contexto bancário para o Sistema de Pagamentos Brasileiro, essas relacionadas a débito e crédito em contas via Transferência Eletrônica Disponível.",
         company = "Fitbank 450",
         from = "Abril 2022",
