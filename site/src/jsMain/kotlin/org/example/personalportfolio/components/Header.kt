@@ -3,14 +3,16 @@ package org.example.personalportfolio.components
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.varabyte.kobweb.compose.css.*
+import com.varabyte.kobweb.compose.css.Cursor
+import com.varabyte.kobweb.compose.css.FontWeight
+import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.graphics.Image
@@ -24,9 +26,12 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.styles.CircleButtonVariant
-import org.example.personalportfolio.styles.NavigationItemStyle
+import org.example.personalportfolio.styles.NavigationHeaderStyle
 import org.example.personalportfolio.util.Res
-import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.css.Position
+import org.jetbrains.compose.web.css.cssRem
+import org.jetbrains.compose.web.css.em
+import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.A
 
 @Composable
@@ -45,10 +50,7 @@ fun Header(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        LeftSide(
-            breakpoint,
-            onMenuClicked
-        )
+        LeftSide(breakpoint, onMenuClicked)
         if (breakpoint >= Breakpoint.MD) {
             RightSide(breakpoint, colorMode)
         }
@@ -60,9 +62,7 @@ fun LeftSide(
     breakpoint: Breakpoint,
     onMenuClicked: () -> Unit
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         if (breakpoint < Breakpoint.MD) {
             FaBars(
                 modifier = Modifier
@@ -74,18 +74,7 @@ fun LeftSide(
                 size = IconSize.XL,
             )
         }
-        A(
-            href = "/",
-            attrs = Modifier
-                .transition(
-                    CSSTransition(
-                        property = "margin",
-                        duration = 2.s,
-                        delay = 500.ms
-                    )
-                )
-                .toAttrs()
-        ) {
+        A(href = "/") {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 src = Res.Image.professionalLogo
@@ -100,13 +89,12 @@ fun RightSide(
     colorMode: ColorMode
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.End,
     ) {
         Section.entries.forEach { section ->
             Link(
-                modifier = NavigationItemStyle.toModifier()
+                modifier = NavigationHeaderStyle.toModifier()
                     .padding(topBottom = 10.px, leftRight = 5.px)
                     .margin(right = 5.px, bottom = 4.px)
                     .fontFamily("Sans-Serif")
@@ -131,8 +119,8 @@ fun ToogleColorThemeButton(breakpoint: Breakpoint) {
         modifier = Modifier
             .setVariable(ButtonVars.FontSize, 1.em)
             .margin(
-                top = if (breakpoint < Breakpoint.MD) 10.px else 0.px,
-                left = if (breakpoint < Breakpoint.MD) 6.px else 0.px
+                top = if (breakpoint < Breakpoint.MD) 10.px else 1.px,
+                left = if (breakpoint < Breakpoint.MD) 7.px else 0.px
             ),
         variant = CircleButtonVariant,
     ) {

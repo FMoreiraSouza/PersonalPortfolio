@@ -24,10 +24,11 @@ import org.jetbrains.compose.web.css.s
 
 @Composable
 fun ProjectSection() {
+    val breakpoint = rememberBreakpoint()
     Box(
         modifier = Modifier
             .id(Section.Projects.id)
-            .margin(top = 50.px)
+            .margin(top = if(breakpoint >= Breakpoint.MD) 50.px else 0.px)
             .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
@@ -39,11 +40,11 @@ fun ProjectSection() {
 fun ProjectContent() {
     val breakpoint = rememberBreakpoint()
     val scope = rememberCoroutineScope()
-    var animatedMargin by remember { mutableStateOf((-1010).px) }
+    var animatedMargin by remember { mutableStateOf((-1000).px) }
     var animatedOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
         sectionId = Section.Projects.id,
-        distanceFromTop = 500.0,
+        distanceFromTop = if(breakpoint > Breakpoint.LG || breakpoint <= Breakpoint.MD) 500.0 else 1000.0,
         onViewportEntered = {
             scope.launch {
                 animatedMargin = 0.px
@@ -61,7 +62,7 @@ fun ProjectContent() {
                 .opacity(animatedOpacity)
                 .transition(
                     CSSTransition(
-                        property = "opacity", duration = 1.s,
+                        property = "opacity", duration = 2.s,
                         timingFunction = AnimationTimingFunction.EaseInOut
                     )
                 ),
@@ -77,7 +78,8 @@ fun ProjectContent() {
                     ProjectCard(project, breakpoint, animatedMargin)
                 }
             }
-        } else {
+        }
+        else {
             SimpleGrid(
                 modifier = Modifier
                     .fillMaxWidth(),

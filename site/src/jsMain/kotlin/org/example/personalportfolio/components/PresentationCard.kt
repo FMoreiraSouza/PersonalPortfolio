@@ -7,7 +7,6 @@ import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
@@ -23,7 +22,7 @@ import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.styles.AppearMoveKeyFrames
 import org.example.personalportfolio.styles.DisappearParkKeyFrames
-import org.example.personalportfolio.styles.PresentationColumnStyle
+import org.example.personalportfolio.styles.PresentationStyle
 import org.example.personalportfolio.util.Constants
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.*
@@ -38,8 +37,7 @@ fun PresentationCard(
     val breakpoint = rememberBreakpoint()
     if (breakpoint >= Breakpoint.MD) {
         SimpleGrid(
-            modifier = Modifier
-                .fillMaxWidth(90.percent),
+            modifier = Modifier.fillMaxWidth(90.percent),
             numColumns = numColumns(base = 1, md = 2)
         ) {
             MyDescription(breakpoint, animatedMargin, animatedOpacity)
@@ -47,8 +45,7 @@ fun PresentationCard(
         }
     } else {
         Column(
-            modifier = Modifier
-                .fillMaxWidth(80.percent),
+            modifier = Modifier.fillMaxWidth(90.percent),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             MyDescription(breakpoint, animatedMargin, animatedOpacity)
@@ -65,16 +62,16 @@ fun MyDescription(
 ) {
     val colorMode by ColorMode.currentState
     Column(
-        modifier = PresentationColumnStyle.toModifier()
+        modifier = PresentationStyle.toModifier()
             .opacity(if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint >= Breakpoint.SM && breakpoint < Breakpoint.MD) animatedOpacity else 100.percent)
             .margin(left = if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint >= Breakpoint.SM && breakpoint < Breakpoint.MD) animatedMargin else 0.px)
             .transition(
                 CSSTransition(
-                    property = "opacity", duration = 1.s,
+                    property = "opacity", duration = 2.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 ),
                 CSSTransition(
-                    property = "margin", duration = 1.s,
+                    property = "margin", duration = 2.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 )
             )
@@ -131,48 +128,44 @@ fun MyProfessionalPhoto(
     animatedMargin: CSSSizeValue<CSSUnit.px>,
     animatedOpacity: CSSSizeValue<CSSUnit.percent>
 ) {
-    Row(
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Column(
-            modifier = Modifier
-                .opacity(if (breakpoint > Breakpoint.LG && breakpoint >= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedOpacity else 100.percent)
-                .margin(
-                    left = if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedMargin else 0.px,
-                    top = if (breakpoint >= Breakpoint.MD) 0.px else 5.px
-                )
-                .transition(
-                    CSSTransition(
-                        property = "opacity", duration = 1.s,
-                        timingFunction = AnimationTimingFunction.EaseInOut
-                    ),
-                    CSSTransition(
-                        property = "margin", duration = 1.s,
-                        timingFunction = AnimationTimingFunction.EaseInOut
-                    )
-                )
-                .animation(
-                    if (breakpoint >= Breakpoint.MD && breakpoint <= Breakpoint.LG) {
-                        AppearMoveKeyFrames
-                            .toAnimation(
-                                duration = 1.s,
-                                timingFunction = AnimationTimingFunction.EaseInOut
-                            )
-                    } else {
-                        DisappearParkKeyFrames.toAnimation()
-                    }
-                )
-                .padding(left = if (breakpoint >= Breakpoint.MD) 10.px else 0.px)
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Image(
-                modifier = Modifier
-                    .size(if (breakpoint >= Breakpoint.MD) 300.px else 250.px),
-                src = Res.Image.profilePhoto
+    Column(
+        modifier = Modifier
+            .margin(top = if (breakpoint >= Breakpoint.MD) 0.px else 5.px)
+            .opacity(if (breakpoint > Breakpoint.LG && breakpoint >= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedOpacity else 100.percent)
+            .margin(
+                left = if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedMargin else 0.px,
+                top = if (breakpoint >= Breakpoint.MD) 0.px else 5.px
             )
-        }
+            .transition(
+                CSSTransition(
+                    property = "opacity", duration = 2.s,
+                    timingFunction = AnimationTimingFunction.EaseInOut
+                ),
+                CSSTransition(
+                    property = "margin", duration = 2.s,
+                    timingFunction = AnimationTimingFunction.EaseInOut
+                )
+            )
+            .animation(
+                if (breakpoint >= Breakpoint.MD && breakpoint <= Breakpoint.LG) {
+                    AppearMoveKeyFrames
+                        .toAnimation(
+                            duration = 1.s,
+                            timingFunction = AnimationTimingFunction.EaseInOut
+                        )
+                } else {
+                    DisappearParkKeyFrames.toAnimation()
+                }
+            )
+            .padding(left = if (breakpoint >= Breakpoint.MD) 10.px else 0.px)
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Image(
+            modifier = Modifier
+                .size(if (breakpoint >= Breakpoint.MD) 300.px else 250.px),
+            src = Res.Image.profilePhoto
+        )
     }
 }

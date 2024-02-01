@@ -31,39 +31,41 @@ fun AcademicCard(
     val colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
     Column(
-        modifier = AcademicStyle.toModifier()
+        modifier = AcademicStyle
+            .toModifier()
+            .margin(left = animatedMargin)
+            .transition(
+                CSSTransition(
+                    property = "margin", duration = 2.s,
+                    timingFunction = AnimationTimingFunction.EaseInOut
+                )
+            )
             .fillMaxWidth(if (breakpoint > Breakpoint.SM) 90.percent else 80.percent),
         horizontalAlignment = if (breakpoint > Breakpoint.SM) Alignment.Start else Alignment.CenterHorizontally
     )
     {
-        Column(
-            modifier = Modifier
-                .margin(left = animatedMargin)
-                .transition(
-                    CSSTransition(
-                        property = "margin", duration = 1.s,
-                        timingFunction = AnimationTimingFunction.EaseInOut
-                    )
-                ),
-            horizontalAlignment = if (breakpoint > Breakpoint.SM) Alignment.Start else Alignment.CenterHorizontally
-        ) {
+        Column(horizontalAlignment = if (breakpoint > Breakpoint.SM) Alignment.Start else Alignment.CenterHorizontally) {
             Box(
                 modifier = Modifier
                     .size(150.px)
-                    .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = if(colorMode.isLight) Colors.LightGray else Colors.Gray)
+                    .boxShadow(
+                        blurRadius = 5.px,
+                        spreadRadius = 3.px,
+                        color = if (colorMode.isLight) Colors.LightGray else Colors.Gray
+                    )
                     .backgroundColor(Colors.White)
                     .borderRadius(50.percent),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    modifier = Modifier
-                        .fillMaxSize(85.percent),
-                    src = academic.coatOfArms)
+                    modifier = Modifier.fillMaxSize(85.percent),
+                    src = academic.coatOfArms
+                )
             }
             P(
                 attrs = Modifier
                     .margin(top = 5.px)
-                    .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
+                    .color(if (colorMode.isLight) Colors.Gray else Colors.LightGray)
                     .fontFamily("Roboto")
                     .textAlign(if (breakpoint > Breakpoint.SM) TextAlign.Start else TextAlign.Center)
                     .fontWeight(FontWeight.Bold)
@@ -75,7 +77,7 @@ fun AcademicCard(
             P(
                 attrs = Modifier
                     .margin(topBottom = 0.px)
-                    .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
+                    .color(if (colorMode.isLight) Colors.Gray else Colors.LightGray)
                     .fontFamily("Roboto")
                     .textAlign(if (breakpoint > Breakpoint.SM) TextAlign.Start else TextAlign.Center)
                     .fontWeight(FontWeight.Bold)
@@ -99,13 +101,7 @@ fun AcademicCard(
         }
         Box(
             modifier = Modifier
-                .margin(top = 5.px, left = animatedMargin)
-                .transition(
-                    CSSTransition(
-                        property = "margin", duration = 1.s,
-                        timingFunction = AnimationTimingFunction.EaseInOut
-                    )
-                )
+                .margin(top = 5.px)
                 .height(2.px)
                 .width(100.percent)
                 .borderRadius(50.px),

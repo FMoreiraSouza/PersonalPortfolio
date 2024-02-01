@@ -23,28 +23,16 @@ import org.example.personalportfolio.styles.AppearMoveKeyFrames
 import org.example.personalportfolio.styles.ShowKeyFrames
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.AnimationTimingFunction
-import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.s
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun BeginSection(
-    onMenuClicked: () -> Unit
-) {
+fun BeginSection(onMenuClicked: () -> Unit) {
     val breakpoint = rememberBreakpoint()
     Box(
         modifier = Modifier
-            .margin(bottom = if (breakpoint > Breakpoint.MD) 35.px else 0.px)
-            .height(
-                when {
-                    breakpoint >= Breakpoint.LG -> 43.percent
-                    breakpoint >= Breakpoint.MD -> 32.percent
-                    breakpoint >= Breakpoint.SM -> 22.percent
-                    else -> 18.percent
-                }
-            )
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
@@ -54,14 +42,12 @@ fun BeginSection(
 }
 
 @Composable
-fun BeginContent(
-    breakpoint: Breakpoint,
-) {
+fun BeginContent(breakpoint: Breakpoint) {
     val colorMode by ColorMode.currentState
     Column(
         modifier = Modifier.fillMaxWidth()
             .margin(
-                top = 122.px,
+                top = 100.px,
             ),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -72,7 +58,7 @@ fun BeginContent(
                     .animation(
                         AppearMoveKeyFrames
                             .toAnimation(
-                                duration = 1.s,
+                                duration = 2.s,
                                 timingFunction = AnimationTimingFunction.EaseInOut
                             )
                     ),
@@ -85,7 +71,7 @@ fun BeginContent(
                     .animation(
                         AppearMoveKeyFrames
                             .toAnimation(
-                                duration = 1.s,
+                                duration = 2.s,
                                 timingFunction = AnimationTimingFunction.EaseInOut
                             )
                     )
@@ -98,7 +84,7 @@ fun BeginContent(
                 .animation(
                     ShowKeyFrames
                         .toAnimation(
-                            duration = 1.s,
+                            duration = 2.s,
                             timingFunction = AnimationTimingFunction.EaseInOut
                         )
                 )
@@ -107,7 +93,7 @@ fun BeginContent(
                 .textAlign(TextAlign.Center)
                 .fontFamily("Roboto")
                 .fontWeight(FontWeight.Bold)
-                .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
+                .color(if (colorMode.isLight) Colors.Gray else Colors.LightGray)
                 .toAttrs()
         )
         {

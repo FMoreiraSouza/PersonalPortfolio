@@ -22,7 +22,7 @@ import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Experience
-import org.example.personalportfolio.styles.PresentationColumnStyle
+import org.example.personalportfolio.styles.PresentationStyle
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
@@ -33,46 +33,24 @@ fun ExperienceCard(
     animatedOpacity: CSSSizeValue<CSSUnit.percent>
 ) {
     val breakpoint = rememberBreakpoint()
-    if (breakpoint >= Breakpoint.MD) {
-        SimpleGrid(
-            modifier = Modifier
-                .opacity(animatedOpacity)
-                .transition(
-                    CSSTransition(
-                        property = "opacity", duration = 1.s,
-                        timingFunction = AnimationTimingFunction.EaseInOut
-                    )
+    SimpleGrid(
+        modifier = Modifier
+            .opacity(animatedOpacity)
+            .transition(
+                CSSTransition(
+                    property = "opacity", duration = 2.s,
+                    timingFunction = AnimationTimingFunction.EaseInOut
                 )
-                .fillMaxWidth(90.percent),
-            numColumns = numColumns(base = 1, md = 2)
-        ) {
-            ExperienceDescription(
-                experience.description, breakpoint,
             )
-            ExperienceDetails(
-                experience, breakpoint,
-            )
-        }
-    }
-    else {
-        SimpleGrid(
-            modifier = Modifier
-                .opacity(animatedOpacity)
-                .transition(
-                    CSSTransition(
-                        property = "opacity", duration = 1.s,
-                        timingFunction = AnimationTimingFunction.EaseInOut
-                    )
-                )
-                .fillMaxWidth(80.percent),
-            numColumns = numColumns(base = 1)
-        ) {
-            ExperienceDetails(
-                experience, breakpoint,
-            )
-            ExperienceDescription(
-                experience.description, breakpoint,
-            )
+            .fillMaxWidth(90.percent),
+        numColumns = numColumns(base = 1, md = 2)
+    ) {
+        if (breakpoint >= Breakpoint.MD) {
+            ExperienceDescription(experience.description, breakpoint)
+            ExperienceDetails(experience, breakpoint)
+        } else {
+            ExperienceDetails(experience, breakpoint)
+            ExperienceDescription(experience.description, breakpoint)
         }
     }
 }
@@ -84,12 +62,12 @@ fun ExperienceDescription(
 ) {
     val colorMode by ColorMode.currentState
     Column(
-        modifier = PresentationColumnStyle.toModifier()
+        modifier = PresentationStyle.toModifier()
             .fillMaxWidth(if (breakpoint >= Breakpoint.MD) 90.percent else 100.percent)
             .margin(
                 left = if (breakpoint > Breakpoint.MD) 10.px else 0.px,
                 bottom = if (breakpoint >= Breakpoint.MD) 5.px else 10.px,
-                top = 5.px,
+                top = 5.px
             ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -117,8 +95,7 @@ fun ExperienceDetails(
     val colorMode by ColorMode.currentState
     if (breakpoint >= Breakpoint.MD) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth(90.percent),
+            modifier = Modifier.fillMaxWidth(90.percent),
             verticalAlignment = Alignment.CenterVertically,
         )
         {
@@ -157,15 +134,14 @@ fun ExperienceDetails(
                         .fontFamily("Sans-Serif")
                         .fontSize(14.px)
                         .fontWeight(FontWeight.Normal)
-                        .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
+                        .color(if (colorMode.isLight) Colors.Gray else Colors.LightGray)
                         .toAttrs()
                 ) {
                     Text("${experience.from} - ${experience.to}")
                 }
             }
         }
-    }
-    else {
+    } else {
         Column(
             Modifier,
             verticalArrangement = Arrangement.Center,
@@ -203,7 +179,7 @@ fun ExperienceDetails(
                     .textAlign(TextAlign.Center)
                     .fontSize(10.px)
                     .fontWeight(FontWeight.Normal)
-                    .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
+                    .color(if (colorMode.isLight) Colors.Gray else Colors.LightGray)
                     .toAttrs()
             ) {
                 Text("${experience.from} - ${experience.to}")
@@ -223,7 +199,7 @@ fun ExperienceIcon(
             .fillMaxHeight()
             .width(2.px)
             .margin(
-                left = if (breakpoint >= Breakpoint.MD) 2.px else 0.px,
+                left = if (breakpoint > Breakpoint.MD) 4.px else if (breakpoint == Breakpoint.MD) 8.px else 0.px,
                 right = if (breakpoint >= Breakpoint.MD) 45.px else 0.px,
                 bottom = if (breakpoint >= Breakpoint.MD) 0.px else 5.px,
             )
@@ -233,14 +209,17 @@ fun ExperienceIcon(
         Box(
             modifier = Modifier
                 .size(70.px)
-                .boxShadow(blurRadius = 5.px, spreadRadius = 3.px, color = if(colorMode.isLight) Colors.LightGray else Colors.Gray)
+                .boxShadow(
+                    blurRadius = 5.px,
+                    spreadRadius = 3.px,
+                    color = if (colorMode.isLight) Colors.LightGray else Colors.Gray
+                )
                 .backgroundColor(Colors.White)
                 .borderRadius(50.percent),
             contentAlignment = Alignment.Center
         ) {
             Image(
-                modifier = Modifier
-                    .size(50.px),
+                modifier = Modifier.size(50.px),
                 src = experience.icon
             )
         }

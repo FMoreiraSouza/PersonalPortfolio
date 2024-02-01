@@ -25,10 +25,12 @@ import org.jetbrains.compose.web.dom.Text
 @Composable
 fun EndSection() {
     val colorMode by ColorMode.currentState
+    val breakpoint = rememberBreakpoint()
     Box(
         modifier = Modifier
             .backgroundColor(if (colorMode.isLight) Color.argb(0.7f, 211, 211, 212) else Color.argb(0.2f, 211, 211, 212))
-            .height(100.px)
+            .margin(top = 50.px)
+            .height(if(breakpoint >= Breakpoint.SM) 140.px else 180.px)
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
@@ -59,7 +61,7 @@ fun EndContent() {
             Text("Desenvolvedor")
         }
         Row {
-            SocialLinks()
+            SocialLinks(breakpoint)
         }
     }
 }

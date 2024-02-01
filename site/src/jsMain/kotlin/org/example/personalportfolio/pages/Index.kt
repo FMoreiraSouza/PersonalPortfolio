@@ -1,7 +1,6 @@
 package org.example.personalportfolio.pages
 
 import androidx.compose.runtime.*
-import com.binayshaw7777.kotfolio.components.widgets.ButtonToTop
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -11,6 +10,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.isExporting
 import com.varabyte.kobweb.core.rememberPageContext
+import org.example.personalportfolio.components.ButtonToTop
 import org.example.personalportfolio.components.MenuBar
 import org.example.personalportfolio.sections.*
 
@@ -22,12 +22,10 @@ fun HomePage() {
     }
     if (!rememberPageContext().isExporting) {
         Box(
-            Modifier
-                .fillMaxSize(),
+            Modifier.fillMaxSize()
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

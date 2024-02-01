@@ -9,6 +9,8 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.coroutines.launch
 import org.example.personalportfolio.models.Section
@@ -23,16 +25,15 @@ fun SectionTitle(
     modifier: Modifier,
     section: Section
 ) {
+    val breakpoint = rememberBreakpoint()
     val colorMode by ColorMode.currentState
     val scope = rememberCoroutineScope()
-    var titleMargin by remember { mutableStateOf((-100).px) }
     var titleOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
         sectionId = section.id,
-        distanceFromTop = 500.0,
+        distanceFromTop = if(breakpoint > Breakpoint.LG) 500.0 else 1000.0,
         onViewportEntered = {
             scope.launch {
-                titleMargin = 0.px
                 titleOpacity = 100.percent
             }
         }

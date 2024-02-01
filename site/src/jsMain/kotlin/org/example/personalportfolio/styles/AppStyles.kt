@@ -20,7 +20,7 @@ val CircleButtonVariant by ButtonStyle.addVariantBase {
     Modifier.padding(0.px).borderRadius(50.percent)
 }
 
-val NavigationItemStyle by ComponentStyle {
+val NavigationHeaderStyle by ComponentStyle {
     base {
         Modifier
             .transition(CSSTransition(property = "color", duration = 200.ms))
@@ -46,7 +46,7 @@ val ButtonStyle by ComponentStyle {
 val SocialLinkStyle by ComponentStyle {
     base {
         Modifier
-            .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
+            .color(if (colorMode.isLight) Colors.Gray else Colors.LightGray)
             .transition(CSSTransition(property = "color", duration = 200.ms))
     }
     hover {
@@ -55,7 +55,7 @@ val SocialLinkStyle by ComponentStyle {
     }
 }
 
-val PresentationColumnStyle by ComponentStyle {
+val PresentationStyle by ComponentStyle {
     base {
         Modifier
             .backgroundColor(Color.argb(0.7f, 211, 211, 212))
@@ -70,7 +70,7 @@ val PresentationColumnStyle by ComponentStyle {
 val SkillStyle by ComponentStyle {
     base {
         Modifier
-            .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
+            .color(if (colorMode.isLight) Colors.Gray else Colors.LightGray)
             .transition(CSSTransition(property = "color", duration = 200.ms))
     }
     hover {
@@ -95,7 +95,7 @@ val PortfolioStyle by ComponentStyle {
     cssRule(" > #linkParent > #boxParent > #blueCurtain") {
         Modifier
             .width(0.px)
-            .transition(CSSTransition(property = "width", duration = 500.ms))
+            .transition(CSSTransition(property = "width"))
     }
     cssRule(":hover > #linkParent > #boxParent > #blueCurtain") {
         Modifier
@@ -103,21 +103,18 @@ val PortfolioStyle by ComponentStyle {
     }
     cssRule(" > #linkParent > #boxParent > #blueCurtain > #linkIcon") {
         Modifier
-            .size(0.px)
             .visibility(Visibility.Hidden)
-            .transition(CSSTransition(property = "visibility", duration = 200.ms))
-            .transition(CSSTransition(property = "size", duration = 200.ms))
+            .transition(CSSTransition(property = "visibility"))
     }
     cssRule(":hover > #linkParent > #boxParent > #blueCurtain > #linkIcon") {
         Modifier
-            .size(30.px)
             .visibility(Visibility.Visible)
     }
     cssRule(" > #linkParent > #projectTitle") {
         Modifier
-            .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
+            .color(if (colorMode.isLight) Colors.Gray else Colors.LightGray)
             .translate(0.percent)
-            .transition(CSSTransition(property = "color", duration = 200.ms))
+            .transition(CSSTransition(property = "color"))
             .transition(CSSTransition(property = "translate", duration = 200.ms))
     }
     cssRule(":hover > #linkParent > #projectTitle") {

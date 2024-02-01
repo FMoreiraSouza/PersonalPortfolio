@@ -25,18 +25,16 @@ import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
 
 @Composable
-fun ContactForm(
-    animatedOpacity: CSSSizeValue<CSSUnit.percent>
-) {
+fun ContactForm(animatedOpacity: CSSSizeValue<CSSUnit.percent>) {
     val colorMode by ColorMode.currentState
     val breakpoint = rememberBreakpoint()
     Form(
-        action = "https://formcarry.com/s/z64fl1g7XNd",
+        action = "https://formcarry.com/s/oA7nFSSWOMI",
         attrs = Modifier
             .opacity(animatedOpacity)
             .transition(
                 CSSTransition(
-                    property = "opacity", duration = 1.s,
+                    property = "opacity", duration = 2.s,
                     timingFunction = AnimationTimingFunction.EaseInOut
                 )
             )
@@ -50,8 +48,7 @@ fun ContactForm(
             attrs = FormStyle.toModifier()
                 .id("inputName")
                 .classNames("form-control")
-                .backgroundColor(
-                    (if (colorMode.isLight) Color.argb(0.1f, 211, 211, 212) else Color.argb(1.0f, 211, 211, 212)))
+                .backgroundColor((if (colorMode.isLight) Color.argb(0.1f, 211, 211, 212) else Color.argb(1.0f, 211, 211, 212)))
                 .height(40.px)
                 .width(
                     when {

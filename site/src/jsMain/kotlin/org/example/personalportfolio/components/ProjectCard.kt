@@ -35,22 +35,23 @@ fun ProjectCard(
     animatedMargin: CSSSizeValue<CSSUnit.px>
 ) {
     val colorMode by ColorMode.currentState
-    Column (
+    Column(
         modifier = Modifier
-            .margin(bottom = if(breakpoint <= Breakpoint.MD) 50.px else 0.px)
+            .margin(
+                top = 25.px,
+                left = animatedMargin
+            )
+            .transition(
+                CSSTransition(
+                    property = "margin", duration = 2.s,
+                    timingFunction = AnimationTimingFunction.EaseInOut
+                )
+            )
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
+    ) {
         Row(
-            modifier = PortfolioStyle.toModifier()
-            .size(if (breakpoint > Breakpoint.SM) 300.px else 225.px)
-                .margin(left = animatedMargin)
-                .transition(
-                    CSSTransition(
-                        property = "margin", duration = 1.s,
-                        timingFunction = AnimationTimingFunction.EaseInOut
-                    )
-                ),
+            modifier = PortfolioStyle.toModifier().size(if (breakpoint > Breakpoint.SM) 300.px else 225.px),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Link(
@@ -66,8 +67,7 @@ fun ProjectCard(
                         .fillMaxWidth(),
                 ) {
                     Image(
-                        modifier = Modifier
-                            .size(if (breakpoint > Breakpoint.SM) 300.px else 225.px),
+                        modifier = Modifier.size(if (breakpoint > Breakpoint.SM) 300.px else 225.px),
                         src = project.image
                     )
                     Box(
@@ -82,6 +82,7 @@ fun ProjectCard(
                     ) {
                         Image(
                             modifier = Modifier
+                                .size(30.px)
                                 .id("linkIcon"),
                             src = Res.Icon.redirect
                         )
@@ -90,6 +91,7 @@ fun ProjectCard(
                 P(
                     attrs = Modifier
                         .id("projectTitle")
+                        .fillMaxWidth(95.percent)
                         .margin(topBottom = 0.px)
                         .textAlign(TextAlign.Start)
                         .fontFamily("Roboto")
@@ -102,9 +104,10 @@ fun ProjectCard(
                 P(
                     attrs = Modifier
                         .id("projectPlatform")
+                        .fillMaxWidth(95.percent)
                         .margin(topBottom = 0.px)
                         .textAlign(TextAlign.Start)
-                        .color(if(colorMode.isLight) Colors.Gray else Colors.LightGray)
+                        .color(if (colorMode.isLight) Colors.Gray else Colors.LightGray)
                         .fontFamily("Roboto")
                         .fontWeight(FontWeight.Normal)
                         .fontSize(if (breakpoint >= Breakpoint.SM) 18.px else 16.px)

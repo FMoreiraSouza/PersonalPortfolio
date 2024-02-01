@@ -27,7 +27,6 @@ fun PresentationSection() {
     Box(
         modifier = Modifier
             .id(Section.About.id)
-            .margin(bottom = 50.px)
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
@@ -63,20 +62,21 @@ fun PresentationContent() {
                 )
                 .transition(
                     CSSTransition(
-                        property = "opacity", duration = 1.s,
+                        property = "opacity", duration = 2.s,
                         timingFunction = AnimationTimingFunction.EaseInOut
                     )
                 )
                 .animation(
-                        if (breakpoint <= Breakpoint.LG) {
-                            ShowKeyFrames
-                                .toAnimation(
-                                    duration = 1.s,
-                                    timingFunction = AnimationTimingFunction.EaseInOut
-                                )
-                        } else {
-                            VanishKeyFrames.toAnimation()
-                        }
+                    if (breakpoint <= Breakpoint.LG) {
+                        ShowKeyFrames
+                            .toAnimation(
+                                duration = 2.s,
+                                timingFunction = AnimationTimingFunction.EaseInOut
+                            )
+                    }
+                    else {
+                        VanishKeyFrames.toAnimation()
+                    }
                 ),
             section = Section.About
         )

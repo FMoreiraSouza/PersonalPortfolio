@@ -9,7 +9,6 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.icons.fa.FaXmark
 import com.varabyte.kobweb.silk.components.icons.fa.IconSize
@@ -18,9 +17,10 @@ import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.example.personalportfolio.models.Section
-import org.example.personalportfolio.styles.NavigationItemStyle
+import org.example.personalportfolio.styles.NavigationHeaderStyle
 import org.example.personalportfolio.util.Res
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.A
@@ -31,10 +31,15 @@ fun MenuBar(onMenuClosed: () -> Unit) {
     val breakpoint = rememberBreakpoint()
     val colorMode by ColorMode.currentState
     var translateX by remember { mutableStateOf((-100).percent) }
+    var opacity by remember { mutableStateOf(0.percent) }
     LaunchedEffect(breakpoint) {
         translateX = 0.percent
-        if (breakpoint > Breakpoint.MD) {
+        opacity = 100.percent
+        if (breakpoint >= Breakpoint.MD) {
             scope.launch {
+                translateX = (-100).percent
+                opacity = 0.percent
+                delay(500)
                 onMenuClosed()
             }
         }
@@ -45,56 +50,48 @@ fun MenuBar(onMenuClosed: () -> Unit) {
             .height(50.vh)
             .zIndex(2)
             .position(Position.Fixed)
-            .cursor(Cursor.Pointer)
             .translate(tx = translateX)
             .transition(CSSTransition(property = "translate", duration = 500.ms))
             .backgroundColor(if (colorMode.isLight) Colors.White else Colors.Black),
         verticalArrangement = Arrangement.Top
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             FaXmark(
                 modifier = Modifier
                     .margin(
                         top = 10.px,
-                        left = 10.px
+                        left = 14.px
                     )
+                    .cursor(Cursor.Pointer)
                     .onClick {
                         scope.launch {
+                            translateX = (-100).percent
+                            opacity = 0.percent
+                            delay(500)
                             onMenuClosed()
                         }
                     },
-                size = IconSize.LG
+                size = if (breakpoint <= Breakpoint.SM) IconSize.LG else IconSize.XL
             )
             ToogleColorThemeButton(breakpoint)
-            A(
-                href = "/",
-                attrs = Modifier
-                    .transition(
-                        CSSTransition(
-                            property = "margin",
-                            duration = 2.s,
-                            delay = 500.ms
-                        )
-                    )
-                    .toAttrs()
-            ) {
+            A(href = "/") {
                 Image(
                     modifier = Modifier
                         .margin(top = 15.px)
-                        .fillMaxSize(),
+                        .fillMaxSize(if (breakpoint <= Breakpoint.SM) 99.percent else 100.percent),
                     src = Res.Image.professionalLogo
                 )
             }
         }
-        Column(
-            modifier = Modifier.margin(left = 5.px)
-        ) {
+        Column(modifier = Modifier.margin(left = 7.px)) {
             Section.entries.forEach { section ->
                 Link(
-                    modifier = NavigationItemStyle.toModifier()
-                        .padding(topBottom = 5.px, leftRight = 5.px)
+                    modifier = NavigationHeaderStyle.toModifier()
+                        .padding(bottom = 5.px, leftRight = 5.px)
                         .fontFamily("Sans-Serif")
                         .textAlign(TextAlign.Center)
                         .fontSize(18.px)
