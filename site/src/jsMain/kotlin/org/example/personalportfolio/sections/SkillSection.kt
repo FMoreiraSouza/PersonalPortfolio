@@ -44,7 +44,7 @@ fun SkillContent() {
     var animatedOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
         sectionId = Section.Skills.id,
-        distanceFromTop = if (breakpoint > Breakpoint.LG || breakpoint < Breakpoint.MD) 600.0 else 1200.0,
+        distanceFromTop = if (breakpoint > Breakpoint.LG || breakpoint < Breakpoint.MD) 500.0 else if (breakpoint > Breakpoint.MD || breakpoint == Breakpoint.LG) 2000.0 else 1200.0,
         onViewportEntered = {
             scope.launch {
                 animatedMargin = 0.px
