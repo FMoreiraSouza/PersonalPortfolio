@@ -29,10 +29,7 @@ import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.styles.CircleButtonVariant
 import org.example.personalportfolio.styles.NavigationHeaderStyle
 import org.example.personalportfolio.util.Res
-import org.jetbrains.compose.web.css.Position
-import org.jetbrains.compose.web.css.cssRem
-import org.jetbrains.compose.web.css.em
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.A
 
 @Composable
@@ -67,17 +64,17 @@ fun LeftSide(
         if (breakpoint < Breakpoint.MD) {
             FaBars(
                 modifier = Modifier
-                    .margin(bottom = if (breakpoint < Breakpoint.SM) 6.px else 8.px)
+                    .margin(bottom = 8.px)
                     .cursor(Cursor.Pointer)
                     .onClick {
                         onMenuClicked()
                     },
-                size = IconSize.XL,
+                size = if (breakpoint >= Breakpoint.SM) IconSize.XL else IconSize.LG
             )
         }
         A(href = "/") {
             Image(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize(if (breakpoint >= Breakpoint.SM && breakpoint < Breakpoint.MD) 80.percent else 100.percent),
                 src = Res.Image.professionalLogo
             )
         }
@@ -97,7 +94,7 @@ fun RightSide(
             Link(
                 modifier = NavigationHeaderStyle.toModifier()
                     .padding(topBottom = 10.px, leftRight = 5.px)
-                    .margin(right = 5.px, bottom = 4.px)
+                    .margin(bottom = 4.px)
                     .fontFamily("Sans-Serif")
                     .textAlign(TextAlign.Center)
                     .fontSize(if (breakpoint > Breakpoint.MD) 18.px else 14.px)
@@ -121,9 +118,9 @@ fun ToogleColorThemeButton(breakpoint: Breakpoint) {
             .setVariable(ButtonVars.FontSize, 1.em)
             .margin(
                 top = if (breakpoint < Breakpoint.MD) 10.px else 1.px,
-                left = if (breakpoint < Breakpoint.MD) 7.px else 0.px
+                left = if (breakpoint < Breakpoint.SM) 5.px else if (breakpoint < Breakpoint.MD) 7.px else 5.px
             ),
-        variant = CircleButtonVariant,
+        variant = CircleButtonVariant
     ) {
         if (colorMode.isLight) MoonIcon() else SunIcon()
     }

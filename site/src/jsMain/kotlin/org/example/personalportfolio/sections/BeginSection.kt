@@ -32,8 +32,7 @@ import org.jetbrains.compose.web.dom.Text
 fun BeginSection(onMenuClicked: () -> Unit) {
     val breakpoint = rememberBreakpoint()
     Box(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
         Header(breakpoint, onMenuClicked)
@@ -45,16 +44,16 @@ fun BeginSection(onMenuClicked: () -> Unit) {
 fun BeginContent(breakpoint: Breakpoint) {
     val colorMode by ColorMode.currentState
     Column(
-        modifier = Modifier.fillMaxWidth()
-            .margin(
-                top = 100.px,
-            ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .margin(top = if (breakpoint >= Breakpoint.MD) 150.px else if (breakpoint >= Breakpoint.SM && breakpoint < Breakpoint.MD) 175.px else 125.px),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (breakpoint >= Breakpoint.SM) {
             Image(
                 modifier = Modifier
+                    .margin(bottom = if (breakpoint >= Breakpoint.SM) 8.px else 5.px)
                     .animation(
                         AppearMoveKeyFrames
                             .toAnimation(
@@ -88,7 +87,7 @@ fun BeginContent(breakpoint: Breakpoint) {
                             timingFunction = AnimationTimingFunction.EaseInOut
                         )
                 )
-                .margin(bottom = 18.px)
+                .margin(bottom = if (breakpoint >= Breakpoint.SM) 20.px else 10.px)
                 .fontSize(if (breakpoint >= Breakpoint.SM) 40.px else 30.px)
                 .textAlign(TextAlign.Center)
                 .fontFamily("Roboto")

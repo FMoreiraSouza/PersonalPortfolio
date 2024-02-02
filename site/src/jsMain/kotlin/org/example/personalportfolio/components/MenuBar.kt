@@ -57,16 +57,12 @@ fun MenuBar(onMenuClosed: () -> Unit) {
         verticalArrangement = Arrangement.Top
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             FaXmark(
                 modifier = Modifier
-                    .margin(
-                        top = 10.px,
-                        left = 14.px
-                    )
+                    .margin(top = 8.px, left = 14.px)
                     .cursor(Cursor.Pointer)
                     .onClick {
                         scope.launch {
@@ -76,14 +72,14 @@ fun MenuBar(onMenuClosed: () -> Unit) {
                             onMenuClosed()
                         }
                     },
-                size = if (breakpoint <= Breakpoint.SM) IconSize.LG else IconSize.XL
+                size = if (breakpoint >= Breakpoint.SM) IconSize.XL else IconSize.LG
             )
             ToogleColorThemeButton(breakpoint)
             A(href = "/") {
                 Image(
                     modifier = Modifier
                         .margin(top = 15.px)
-                        .fillMaxSize(if (breakpoint <= Breakpoint.SM) 99.percent else 100.percent),
+                        .fillMaxSize(if (breakpoint >= Breakpoint.SM && breakpoint < Breakpoint.MD) 80.percent else if (breakpoint < Breakpoint.SM) 95.percent else 100.percent),
                     src = Res.Image.professionalLogo
                 )
             }
