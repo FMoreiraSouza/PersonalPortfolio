@@ -39,10 +39,10 @@ fun Header(onMenuClicked: () -> Unit) {
     val colorMode by ColorMode.currentState
     Row(
         modifier = Modifier
-            .position(Position.Fixed)
-            .zIndex(2)
-            .padding(1.cssRem)
             .fillMaxWidth()
+            .zIndex(2)
+            .position(Position.Fixed)
+            .padding(1.cssRem)
             .backgroundColor(if (colorMode.isLight) Color.Companion.rgb(255, 255, 255) else Color.Companion.rgb(35, 35, 35)),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
