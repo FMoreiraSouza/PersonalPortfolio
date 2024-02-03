@@ -30,10 +30,7 @@ import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.styles.CircleButtonVariant
 import org.example.personalportfolio.styles.NavigationHeaderStyle
 import org.example.personalportfolio.util.Res
-import org.jetbrains.compose.web.css.Position
-import org.jetbrains.compose.web.css.em
-import org.jetbrains.compose.web.css.percent
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.A
 
 @Composable
@@ -44,7 +41,7 @@ fun Header(onMenuClicked: () -> Unit) {
         modifier = Modifier
             .position(Position.Fixed)
             .zIndex(2)
-//            .padding(1.cssRem)
+            .padding(1.cssRem)
             .fillMaxWidth()
             .backgroundColor(if (colorMode.isLight) Color.Companion.rgb(255, 255, 255) else Color.Companion.rgb(35, 35, 35)),
         horizontalArrangement = Arrangement.SpaceBetween,
