@@ -64,7 +64,7 @@ fun ButtonToTop() {
                     else Visibility.Hidden
                 )
                 .margin(
-                    right = if(breakpoint >= Breakpoint.MD) 20.px else 10.px,
+                    right = if (breakpoint >= Breakpoint.MD) 20.px else 10.px,
                     bottom = 40.px
                 )
                 .size(40.px)
@@ -79,8 +79,7 @@ fun ButtonToTop() {
                                 timingFunction = AnimationTimingFunction.EaseInOut
                             )
                         )
-                    }
-                    else {
+                    } else {
                         Modifier
                     }
                 )
