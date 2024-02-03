@@ -12,7 +12,7 @@ enum class Project(
     PersonalPortfolio(
         link = personalPortfolio,
         title = "PersonalPortfolio",
-        image = Res.Image.profilePhoto,
+        image = Res.Image.profile,
         platform = "Front-end"
     )
 }

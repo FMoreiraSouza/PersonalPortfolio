@@ -60,7 +60,7 @@ fun BeginContent() {
                                 timingFunction = AnimationTimingFunction.EaseInOut
                             )
                     ),
-                src = Res.Image.computer,
+                src = Res.Image.computerCode,
             )
         }
         else {
@@ -74,7 +74,7 @@ fun BeginContent() {
                             )
                     )
                     .width(235.px),
-                src = Res.Image.computer
+                src = Res.Image.computerCode
             )
         }
         P(

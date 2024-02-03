@@ -74,7 +74,7 @@ fun LeftSide(
         A(href = "/") {
             Image(
                 modifier = Modifier.fillMaxSize(if (breakpoint >= Breakpoint.SM && breakpoint < Breakpoint.MD) 80.percent else 100.percent),
-                src = Res.Image.professionalLogo
+                src = Res.Image.professional
             )
         }
     }

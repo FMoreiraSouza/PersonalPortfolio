@@ -169,7 +169,7 @@ fun MyProfessionalPhoto(
         Image(
             modifier = Modifier
                 .size(if (breakpoint >= Breakpoint.MD) 300.px else 250.px),
-            src = Res.Image.profilePhoto
+            src = Res.Image.profile
         )
     }
 }

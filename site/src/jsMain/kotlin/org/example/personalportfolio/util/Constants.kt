@@ -3,16 +3,16 @@ package org.example.personalportfolio.util
 object Constants {
     const val LINKEDIN = "https://www.linkedin.com/in/felipe-moreira-b16147200/"
     const val GITHUB = "https://github.com/FMoreiraSouza"
-    const val personalPortfolio = "https://github.com/FMoreiraSouza/PersonalPortfolio.git"
-    const val About = "Formado em Ciência da Computação pela Universidade Federal do Ceará (UFC). Tenho experiência na construção de aplicações Back-end e Mobile. Aliado a minha experiência, foco no momento em construir aplicações utilizando tecnologias de desenvolvimento nativo."
     const val MAIL_TO = "mailto:fmoreirasouza701@gmail.com"
+    const val About = "Formado em Ciência da Computação pela Universidade Federal do Ceará (UFC). Tenho experiência na construção de aplicações Back-end e Mobile. Aliado a minha experiência, foco no momento em construir aplicações utilizando tecnologias de desenvolvimento nativo."
+    const val personalPortfolio = "https://github.com/FMoreiraSouza/PersonalPortfolio.git"
 }
 
 object Res {
     object Image {
-        const val profilePhoto = "ProfilePhoto.png"
-        const val professionalLogo = "ProfessionalLogo.png"
-        const val computer = "ComputerCodePhoto.png"
+        const val computerCode = "ComputerCodePhoto.png"
+        const val professional = "ProfessionalLogo.png"
+        const val profile = "ProfilePhoto.png"
     }
 
     object Icon {

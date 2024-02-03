@@ -80,7 +80,7 @@ fun MenuBar(onMenuClosed: () -> Unit) {
                     modifier = Modifier
                         .margin(left = 4.px, top = 15.px)
                         .fillMaxSize(if (breakpoint >= Breakpoint.SM && breakpoint < Breakpoint.MD) 80.percent else if (breakpoint < Breakpoint.SM) 95.percent else 100.percent),
-                    src = Res.Image.professionalLogo
+                    src = Res.Image.professional
                 )
             }
         }
