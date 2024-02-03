@@ -15,7 +15,6 @@ import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import org.example.personalportfolio.models.Skill
 import org.example.personalportfolio.styles.AppearMoveKeyFrames
 import org.example.personalportfolio.styles.SkillStyle
@@ -25,10 +24,10 @@ import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun SkillCard(
+    breakpoint: Breakpoint,
     animatedMargin: CSSSizeValue<CSSUnit.px>,
     animatedOpacity: CSSSizeValue<CSSUnit.percent>
 ) {
-    val breakpoint = rememberBreakpoint()
     SimpleGrid(
         modifier = Modifier
             .opacity(if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedOpacity else 100.percent)

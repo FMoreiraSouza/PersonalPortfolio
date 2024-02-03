@@ -30,8 +30,8 @@ import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun ProjectCard(
-    project: Project,
     breakpoint: Breakpoint,
+    project: Project,
     animatedMargin: CSSSizeValue<CSSUnit.px>
 ) {
     val colorMode by ColorMode.currentState

@@ -28,8 +28,8 @@ import org.jetbrains.compose.web.dom.A
 
 @Composable
 fun MenuBar(onMenuClosed: () -> Unit) {
-    val scope = rememberCoroutineScope()
     val breakpoint = rememberBreakpoint()
+    val scope = rememberCoroutineScope()
     val colorMode by ColorMode.currentState
     var translateX by remember { mutableStateOf((-100).percent) }
     var opacity by remember { mutableStateOf(0.percent) }
@@ -62,7 +62,7 @@ fun MenuBar(onMenuClosed: () -> Unit) {
         ) {
             FaXmark(
                 modifier = Modifier
-                    .margin(top = 8.px, left = 14.px)
+                    .margin(left = 14.px, top = 8.px)
                     .cursor(Cursor.Pointer)
                     .onClick {
                         scope.launch {
@@ -88,7 +88,7 @@ fun MenuBar(onMenuClosed: () -> Unit) {
             Section.entries.forEach { section ->
                 Link(
                     modifier = NavigationHeaderStyle.toModifier()
-                        .padding(bottom = 5.px, leftRight = 5.px)
+                        .padding(leftRight = 5.px, topBottom = 5.px)
                         .fontFamily("Sans-Serif")
                         .textAlign(TextAlign.Center)
                         .fontSize(18.px)

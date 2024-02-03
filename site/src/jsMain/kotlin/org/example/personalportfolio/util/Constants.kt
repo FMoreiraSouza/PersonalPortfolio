@@ -12,7 +12,7 @@ object Res {
     object Image {
         const val profilePhoto = "ProfilePhoto.png"
         const val professionalLogo = "ProfessionalLogo.png"
-        const val computer = "ComputerCode.png"
+        const val computer = "ComputerCodePhoto.png"
     }
 
     object Icon {

@@ -10,7 +10,6 @@ import com.varabyte.kobweb.compose.ui.graphics.Colors
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.coroutines.launch
 import org.example.personalportfolio.models.Section
@@ -22,10 +21,10 @@ import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun SectionTitle(
+    breakpoint:Breakpoint,
     modifier: Modifier,
-    section: Section
+    section: Section,
 ) {
-    val breakpoint = rememberBreakpoint()
     val colorMode by ColorMode.currentState
     val scope = rememberCoroutineScope()
     var titleOpacity by remember { mutableStateOf(0.percent) }

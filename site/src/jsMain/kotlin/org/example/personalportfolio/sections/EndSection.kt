@@ -7,7 +7,6 @@ import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Color
@@ -17,7 +16,7 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.example.personalportfolio.components.SocialLinks
+import org.example.personalportfolio.components.SocialBar
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.P
 import org.jetbrains.compose.web.dom.Text
@@ -34,13 +33,12 @@ fun EndSection() {
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
-        EndContent()
+        EndContent(breakpoint)
     }
 }
 
 @Composable
-fun EndContent() {
-    val breakpoint = rememberBreakpoint()
+fun EndContent(breakpoint: Breakpoint) {
     val colorMode by ColorMode.currentState
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -60,8 +58,6 @@ fun EndContent() {
         {
             Text("Desenvolvedor")
         }
-        Row {
-            SocialLinks(breakpoint)
-        }
+        SocialBar(breakpoint)
     }
 }

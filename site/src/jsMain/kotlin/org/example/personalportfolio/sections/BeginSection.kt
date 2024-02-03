@@ -98,6 +98,6 @@ fun BeginContent(breakpoint: Breakpoint) {
         {
             Text("Desenvolvedor")
         }
-        SocialBar()
+        SocialBar(breakpoint)
     }
 }

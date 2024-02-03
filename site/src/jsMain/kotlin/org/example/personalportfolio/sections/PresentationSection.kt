@@ -54,6 +54,7 @@ fun PresentationContent() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SectionTitle(
+            breakpoint = breakpoint,
             modifier = Modifier
                 .opacity(
                     if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL) animatedOpacity
@@ -81,6 +82,6 @@ fun PresentationContent() {
                 ),
             section = Section.About
         )
-        PresentationCard(animatedMargin, animatedOpacity)
+        PresentationCard(breakpoint, animatedMargin, animatedOpacity)
     }
 }

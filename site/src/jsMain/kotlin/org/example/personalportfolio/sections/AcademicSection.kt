@@ -31,13 +31,12 @@ fun AcademicSection() {
             .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        AcademicContent()
+        AcademicContent(breakpoint)
     }
 }
 
 @Composable
-fun AcademicContent() {
-    val breakpoint = rememberBreakpoint()
+fun AcademicContent(breakpoint: Breakpoint) {
     val scope = rememberCoroutineScope()
     var animatedMargin by remember { mutableStateOf((-2500).px) }
     var animatedOpacity by remember { mutableStateOf(0.percent) }
@@ -57,6 +56,7 @@ fun AcademicContent() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SectionTitle(
+            breakpoint = breakpoint,
             modifier = Modifier
                 .opacity(animatedOpacity)
                 .transition(
@@ -68,7 +68,7 @@ fun AcademicContent() {
             section = Section.Academics
         )
         Academic.entries.forEach { academic ->
-            AcademicCard(academic, animatedMargin)
+            AcademicCard(breakpoint, academic, animatedMargin)
         }
     }
 }

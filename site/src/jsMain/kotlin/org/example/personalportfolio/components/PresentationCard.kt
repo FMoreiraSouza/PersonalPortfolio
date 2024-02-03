@@ -18,7 +18,6 @@ import com.varabyte.kobweb.silk.components.layout.SimpleGrid
 import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.styles.AppearMoveKeyFrames
 import org.example.personalportfolio.styles.PresentationStyle
@@ -30,10 +29,10 @@ import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun PresentationCard(
+    breakpoint: Breakpoint,
     animatedMargin: CSSSizeValue<CSSUnit.px>,
     animatedOpacity: CSSSizeValue<CSSUnit.percent>
 ) {
-    val breakpoint = rememberBreakpoint()
     if (breakpoint >= Breakpoint.MD) {
         SimpleGrid(
             modifier = Modifier.fillMaxWidth(90.percent),

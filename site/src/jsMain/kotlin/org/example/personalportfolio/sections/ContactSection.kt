@@ -29,13 +29,12 @@ fun ContactSection() {
             .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        ContactContent()
+        ContactContent(breakpoint)
     }
 }
 
 @Composable
-fun ContactContent() {
-    val breakpoint = rememberBreakpoint()
+fun ContactContent(breakpoint: Breakpoint) {
     val scope = rememberCoroutineScope()
     var animatedOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
@@ -52,6 +51,7 @@ fun ContactContent() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SectionTitle(
+            breakpoint = breakpoint,
             modifier = Modifier
                 .opacity(animatedOpacity)
                 .transition(
@@ -62,6 +62,6 @@ fun ContactContent() {
                 ),
             section = Section.Contact
         )
-        ContactForm(animatedOpacity)
+        ContactForm(breakpoint, animatedOpacity)
     }
 }

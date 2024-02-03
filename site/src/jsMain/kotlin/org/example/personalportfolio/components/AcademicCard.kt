@@ -15,7 +15,6 @@ import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Academic
 import org.example.personalportfolio.styles.AcademicStyle
@@ -25,11 +24,11 @@ import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun AcademicCard(
+    breakpoint: Breakpoint,
     academic: Academic,
     animatedMargin: CSSSizeValue<CSSUnit.px>
 ) {
     val colorMode by ColorMode.currentState
-    val breakpoint = rememberBreakpoint()
     Column(
         modifier = AcademicStyle
             .toModifier()
@@ -88,7 +87,7 @@ fun AcademicCard(
             }
             P(
                 attrs = Modifier
-                    .margin(top = 2.px)
+                    .margin(top = if(breakpoint >= Breakpoint.MD) 2.px else 4.px)
                     .color(if (colorMode.isLight) Colors.Black else Colors.White)
                     .fontFamily("Sans-Serif")
                     .textAlign(if (breakpoint > Breakpoint.SM) TextAlign.Start else TextAlign.Center)

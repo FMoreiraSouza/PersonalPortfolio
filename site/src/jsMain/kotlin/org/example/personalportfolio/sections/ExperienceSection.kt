@@ -30,13 +30,12 @@ fun ExperienceSection() {
             .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        ExperienceContent()
+        ExperienceContent(breakpoint)
     }
 }
 
 @Composable
-fun ExperienceContent() {
-    val breakpoint = rememberBreakpoint()
+fun ExperienceContent(breakpoint: Breakpoint) {
     val scope = rememberCoroutineScope()
     var animatedOpacity by remember { mutableStateOf(0.percent) }
     ObserveViewportEntered(
@@ -54,6 +53,7 @@ fun ExperienceContent() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SectionTitle(
+            breakpoint = breakpoint,
             modifier = Modifier
                 .opacity(animatedOpacity)
                 .transition(
@@ -65,7 +65,7 @@ fun ExperienceContent() {
             section = Section.Experiences
         )
         Experience.entries.forEach { experience ->
-            ExperienceCard(experience, animatedOpacity)
+            ExperienceCard(breakpoint, experience, animatedOpacity)
         }
     }
 }

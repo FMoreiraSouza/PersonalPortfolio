@@ -32,13 +32,12 @@ fun ProjectSection() {
             .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        ProjectContent()
+        ProjectContent(breakpoint)
     }
 }
 
 @Composable
-fun ProjectContent() {
-    val breakpoint = rememberBreakpoint()
+fun ProjectContent(breakpoint: Breakpoint) {
     val scope = rememberCoroutineScope()
     var animatedMargin by remember { mutableStateOf((-1000).px) }
     var animatedOpacity by remember { mutableStateOf(0.percent) }
@@ -58,6 +57,7 @@ fun ProjectContent() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SectionTitle(
+            breakpoint = breakpoint,
             modifier = Modifier
                 .opacity(animatedOpacity)
                 .transition(
@@ -70,23 +70,21 @@ fun ProjectContent() {
         )
         if (breakpoint > Breakpoint.MD) {
             SimpleGrid(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 numColumns = numColumns(base = 1, md = 3)
             ) {
                 Project.entries.forEach { project ->
-                    ProjectCard(project, breakpoint, animatedMargin)
+                    ProjectCard(breakpoint, project, animatedMargin)
                 }
             }
         }
         else {
             SimpleGrid(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 numColumns = numColumns(base = 1, sm = 2)
             ) {
                 Project.entries.forEach { project ->
-                    ProjectCard(project, breakpoint, animatedMargin)
+                    ProjectCard(breakpoint, project, animatedMargin)
                 }
             }
         }

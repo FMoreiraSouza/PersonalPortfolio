@@ -16,7 +16,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
-import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.styles.ButtonStyle
 import org.example.personalportfolio.styles.FormStyle
@@ -25,9 +24,11 @@ import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
 
 @Composable
-fun ContactForm(animatedOpacity: CSSSizeValue<CSSUnit.percent>) {
+fun ContactForm(
+    breakpoint: Breakpoint,
+    animatedOpacity: CSSSizeValue<CSSUnit.percent>)
+{
     val colorMode by ColorMode.currentState
-    val breakpoint = rememberBreakpoint()
     Form(
         action = "https://formcarry.com/s/oA7nFSSWOMI",
         attrs = Modifier

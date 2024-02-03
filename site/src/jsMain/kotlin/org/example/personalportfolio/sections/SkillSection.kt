@@ -32,13 +32,12 @@ fun SkillSection() {
             .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
-        SkillContent()
+        SkillContent(breakpoint)
     }
 }
 
 @Composable
-fun SkillContent() {
-    val breakpoint = rememberBreakpoint()
+fun SkillContent(breakpoint: Breakpoint) {
     val scope = rememberCoroutineScope()
     var animatedMargin by remember { mutableStateOf((-50).px) }
     var animatedOpacity by remember { mutableStateOf(0.percent) }
@@ -58,6 +57,7 @@ fun SkillContent() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SectionTitle(
+            breakpoint = breakpoint,
             modifier = Modifier
                 .opacity(if (breakpoint > Breakpoint.LG && breakpoint <= Breakpoint.XL || breakpoint < Breakpoint.MD) animatedOpacity else 100.percent)
                 .transition(
@@ -82,6 +82,6 @@ fun SkillContent() {
                 ),
             section = Section.Skills
         )
-        SkillCard(animatedMargin, animatedOpacity)
+        SkillCard(breakpoint, animatedMargin, animatedOpacity)
     }
 }
