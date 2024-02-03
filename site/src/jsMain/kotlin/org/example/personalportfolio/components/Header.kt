@@ -92,7 +92,8 @@ fun RightSide(
         Section.entries.forEach { section ->
             Link(
                 modifier = NavigationHeaderStyle.toModifier()
-                    .padding(leftRight = 5.px, topBottom = 10.px)
+                    .padding(topBottom = 10.px, leftRight = 5.px)
+                    .margin(bottom = 4.px)
                     .fontFamily("Sans-Serif")
                     .textAlign(TextAlign.Center)
                     .fontSize(if (breakpoint > Breakpoint.MD) 18.px else 14.px)
