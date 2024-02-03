@@ -78,13 +78,13 @@ fun MenuBar(onMenuClosed: () -> Unit) {
             A(href = "/") {
                 Image(
                     modifier = Modifier
-                        .margin(top = 15.px)
+                        .margin(left = 4.px, top = 15.px)
                         .fillMaxSize(if (breakpoint >= Breakpoint.SM && breakpoint < Breakpoint.MD) 80.percent else if (breakpoint < Breakpoint.SM) 95.percent else 100.percent),
                     src = Res.Image.professionalLogo
                 )
             }
         }
-        Column(modifier = Modifier.margin(left = 7.px)) {
+        Column(modifier = Modifier.margin(left = 7.px, top = 4.px)) {
             Section.entries.forEach { section ->
                 Link(
                     modifier = NavigationHeaderStyle.toModifier()

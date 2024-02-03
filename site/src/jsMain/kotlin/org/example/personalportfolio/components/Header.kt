@@ -64,7 +64,7 @@ fun LeftSide(
         if (breakpoint < Breakpoint.MD) {
             FaBars(
                 modifier = Modifier
-                    .margin(bottom = 8.px)
+                    .margin(right = 4.px, bottom = 8.px)
                     .cursor(Cursor.Pointer)
                     .onClick {
                         onMenuClicked()
@@ -118,7 +118,7 @@ fun ToogleColorThemeButton(breakpoint: Breakpoint) {
             .setVariable(ButtonVars.FontSize, 1.em)
             .margin(
                 top = if (breakpoint < Breakpoint.MD) 10.px else 1.px,
-                left = if (breakpoint < Breakpoint.SM) 5.px else if (breakpoint < Breakpoint.MD) 7.px else 5.px
+                left = if (breakpoint < Breakpoint.SM) 8.px else if (breakpoint < Breakpoint.MD) 10.px else 5.px
             ),
         variant = CircleButtonVariant
     ) {
