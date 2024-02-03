@@ -13,7 +13,6 @@ version = "1.0-SNAPSHOT"
 kobweb {
     app {
         index {
-            faviconPath = "Favicon.ico"
             description.set("Powered by Kobweb")
         }
     }
