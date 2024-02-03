@@ -24,6 +24,7 @@ import com.varabyte.kobweb.silk.components.icons.fa.IconSize
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.components.style.toModifier
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.example.personalportfolio.models.Section
 import org.example.personalportfolio.styles.CircleButtonVariant
@@ -33,10 +34,8 @@ import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.A
 
 @Composable
-fun Header(
-    breakpoint: Breakpoint,
-    onMenuClicked: () -> Unit
-) {
+fun Header(onMenuClicked: () -> Unit) {
+    val breakpoint = rememberBreakpoint()
     val colorMode by ColorMode.currentState
     Row(
         modifier = Modifier

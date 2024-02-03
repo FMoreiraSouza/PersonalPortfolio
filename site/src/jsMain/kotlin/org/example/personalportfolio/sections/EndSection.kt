@@ -47,7 +47,7 @@ fun EndContent(breakpoint: Breakpoint) {
     ) {
         P(
             attrs = Modifier
-                .margin(bottom = 20.px)
+                .margin(top = 5.px, bottom = 20.px)
                 .fontSize(if (breakpoint >= Breakpoint.SM) 40.px else 30.px)
                 .textAlign(TextAlign.Center)
                 .fontFamily("Roboto")

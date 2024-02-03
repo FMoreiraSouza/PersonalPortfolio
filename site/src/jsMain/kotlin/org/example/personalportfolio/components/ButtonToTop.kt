@@ -60,7 +60,7 @@ fun ButtonToTop() {
                     if (show) Visibility.Visible
                     else Visibility.Hidden
                 )
-                .margin(right = 10.px, bottom = 40.px)
+                .margin(right = 15.px, bottom = 40.px)
                 .size(40.px)
                 .borderRadius(100.percent)
                 .cursor(Cursor.Pointer)
