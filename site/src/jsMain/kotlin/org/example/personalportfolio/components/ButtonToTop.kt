@@ -15,6 +15,8 @@ import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.icons.fa.FaArrowUp
 import com.varabyte.kobweb.silk.components.icons.fa.IconSize
+import com.varabyte.kobweb.silk.components.style.breakpoint.Breakpoint
+import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import kotlinx.browser.document
 import kotlinx.browser.window
@@ -28,6 +30,7 @@ import org.w3c.dom.ScrollToOptions
 
 @Composable
 fun ButtonToTop() {
+    val breakpoint = rememberBreakpoint()
     val scope = rememberCoroutineScope()
     var scroll: Double? by remember { mutableStateOf(null) }
     LaunchedEffect(Unit) {
@@ -60,7 +63,10 @@ fun ButtonToTop() {
                     if (show) Visibility.Visible
                     else Visibility.Hidden
                 )
-                .margin(right = 15.px, bottom = 40.px)
+                .margin(
+                    right = if(breakpoint >= Breakpoint.MD) 20.px else 10.px,
+                    bottom = 40.px
+                )
                 .size(40.px)
                 .borderRadius(100.percent)
                 .cursor(Cursor.Pointer)
