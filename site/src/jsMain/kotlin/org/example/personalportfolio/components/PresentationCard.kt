@@ -119,7 +119,7 @@ fun MyDescription(
                 .color(if (colorMode.isLight) Colors.Black else Colors.White)
                 .toAttrs()
         ) {
-            Text(Constants.About)
+            Text(Constants.about)
         }
     }
 }
