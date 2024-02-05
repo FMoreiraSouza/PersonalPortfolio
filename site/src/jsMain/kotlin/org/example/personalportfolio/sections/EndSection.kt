@@ -48,8 +48,8 @@ fun EndContent(breakpoint: Breakpoint) {
         P(
             attrs = Modifier
                 .margin(
-                    top = if (breakpoint >= Breakpoint.SM) 7.px else 12.px,
-                    bottom = 20.px
+                    top = if (breakpoint >= Breakpoint.SM) 10.px else 12.px,
+                    bottom = if (breakpoint >= Breakpoint.SM) 20.px else 15.px
                 )
                 .fontSize(if (breakpoint >= Breakpoint.SM) 40.px else 30.px)
                 .textAlign(TextAlign.Center)

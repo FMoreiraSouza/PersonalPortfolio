@@ -107,7 +107,7 @@ fun SpeakOnEmail(breakpoint: Breakpoint) {
     Link(
         modifier = ButtonStyle.toModifier()
             .margin(
-                bottom = if (breakpoint >= Breakpoint.SM) 20.px else 35.px,
+                bottom = if (breakpoint >= Breakpoint.SM) 20.px else 30.px,
                 left = if (breakpoint >= Breakpoint.SM) 20.px else 0.px
             )
             .height(50.px)
