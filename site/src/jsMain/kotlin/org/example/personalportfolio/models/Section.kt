@@ -7,7 +7,7 @@ enum class Section(
 ) {
     About(
         id = "about",
-        title = "Quem sou",
+        title = "Quem Sou",
         path = "#about"
     ),
     Skills(

@@ -42,7 +42,7 @@ fun Header(onMenuClicked: () -> Unit) {
             .fillMaxWidth()
             .zIndex(2)
             .position(Position.Fixed)
-            .padding(1.cssRem)
+            .padding(leftRight = 1.cssRem)
             .backgroundColor(if (colorMode.isLight) Color.Companion.rgb(255, 255, 255) else Color.Companion.rgb(35, 35, 35)),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -59,7 +59,11 @@ fun LeftSide(
     breakpoint: Breakpoint,
     onMenuClicked: () -> Unit
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        modifier = Modifier.minHeight(80.px),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ) {
         if (breakpoint < Breakpoint.MD) {
             FaBars(
                 modifier = Modifier
@@ -87,7 +91,8 @@ fun RightSide(
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.End,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.End
     ) {
         Section.entries.forEach { section ->
             Link(

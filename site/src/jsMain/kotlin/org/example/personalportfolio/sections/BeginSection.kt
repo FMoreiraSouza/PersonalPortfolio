@@ -86,7 +86,10 @@ fun BeginContent() {
                             timingFunction = AnimationTimingFunction.EaseInOut
                         )
                 )
-                .margin(top = 5.px, bottom = 20.px)
+                .margin(
+                    top = if (breakpoint >= Breakpoint.SM) 5.px else 7.px,
+                    bottom = 20.px
+                )
                 .fontSize(if (breakpoint >= Breakpoint.SM) 40.px else 30.px)
                 .textAlign(TextAlign.Center)
                 .fontFamily("Roboto")

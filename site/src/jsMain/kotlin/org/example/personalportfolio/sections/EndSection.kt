@@ -29,7 +29,7 @@ fun EndSection() {
         modifier = Modifier
             .backgroundColor(if (colorMode.isLight) Color.argb(0.7f, 211, 211, 212) else Color.argb(0.2f, 211, 211, 212))
             .margin(top = 50.px)
-            .height(if(breakpoint >= Breakpoint.SM) 140.px else 180.px)
+            .height(if(breakpoint >= Breakpoint.SM) 150.px else 180.px)
             .fillMaxWidth(),
         contentAlignment = Alignment.TopCenter
     ) {
@@ -47,7 +47,10 @@ fun EndContent(breakpoint: Breakpoint) {
     ) {
         P(
             attrs = Modifier
-                .margin(top = 5.px, bottom = 20.px)
+                .margin(
+                    top = if (breakpoint >= Breakpoint.SM) 7.px else 12.px,
+                    bottom = 20.px
+                )
                 .fontSize(if (breakpoint >= Breakpoint.SM) 40.px else 30.px)
                 .textAlign(TextAlign.Center)
                 .fontFamily("Roboto")

@@ -51,7 +51,7 @@ fun SocialBar(breakpoint: Breakpoint) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                SocialLinks()
+                SocialLinks(breakpoint)
                 SpeakOnEmail(breakpoint)
             }
         }
@@ -65,7 +65,7 @@ fun SocialBar(breakpoint: Breakpoint) {
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ){
-                    SocialLinks()
+                    SocialLinks(breakpoint)
                 }
             }
         }
@@ -73,23 +73,29 @@ fun SocialBar(breakpoint: Breakpoint) {
 }
 
 @Composable
-fun SocialLinks() {
+fun SocialLinks(breakpoint: Breakpoint) {
     Link(
-        modifier = Modifier.margin(bottom = 20.px, right = 10.px),
-        path = LINKEDIN,
+        modifier = Modifier.margin(
+            right = if (breakpoint >= Breakpoint.SM) 8.px else 10.px,
+            bottom = if (breakpoint >= Breakpoint.SM) 20.px else 0.px
+        ),
+        path = GITHUB,
         openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
     ) {
-        FaLinkedin(
+        FaGithub(
             modifier = SocialLinkStyle.toModifier(),
             size = IconSize.XXL
         )
     }
     Link(
-        modifier = Modifier.margin(bottom = 20.px, left = 10.px),
-        path = GITHUB,
+        modifier = Modifier.margin(
+            left = if (breakpoint >= Breakpoint.SM) 10.px else 15.px,
+            bottom = if (breakpoint >= Breakpoint.SM) 20.px else 0.px
+        ),
+        path = LINKEDIN,
         openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
     ) {
-        FaGithub(
+        FaLinkedin(
             modifier = SocialLinkStyle.toModifier(),
             size = IconSize.XXL
         )
