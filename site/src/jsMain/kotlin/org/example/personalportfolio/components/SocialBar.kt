@@ -77,7 +77,7 @@ fun SocialLinks(breakpoint: Breakpoint) {
     Link(
         modifier = Modifier.margin(
             right = if (breakpoint >= Breakpoint.SM) 8.px else 10.px,
-            bottom = if (breakpoint >= Breakpoint.SM) 20.px else 0.px
+            bottom = if (breakpoint >= Breakpoint.SM) 20.px else 5.px
         ),
         path = GITHUB,
         openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
@@ -90,7 +90,7 @@ fun SocialLinks(breakpoint: Breakpoint) {
     Link(
         modifier = Modifier.margin(
             left = if (breakpoint >= Breakpoint.SM) 10.px else 15.px,
-            bottom = if (breakpoint >= Breakpoint.SM) 20.px else 0.px
+            bottom = if (breakpoint >= Breakpoint.SM) 20.px else 5.px
         ),
         path = LINKEDIN,
         openExternalLinksStrategy = OpenLinkStrategy.IN_NEW_TAB
