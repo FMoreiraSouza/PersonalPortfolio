@@ -87,7 +87,7 @@ fun BeginContent() {
                         )
                 )
                 .margin(
-                    top = if (breakpoint >= Breakpoint.SM) 5.px else 7.px,
+                    top = 5.px,
                     bottom = if (breakpoint >= Breakpoint.SM) 20.px else 15.px
                 )
                 .fontSize(if (breakpoint >= Breakpoint.SM) 40.px else 30.px)
