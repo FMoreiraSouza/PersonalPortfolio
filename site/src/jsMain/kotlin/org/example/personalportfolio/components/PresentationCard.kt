@@ -113,7 +113,7 @@ fun MyDescription(
             attrs = Modifier
                 .margin(bottom = if (breakpoint >= Breakpoint.MD) 0.px else 35.px)
                 .fontSize(if (breakpoint >= Breakpoint.MD) 18.px else 14.px)
-                .textAlign(if (breakpoint >= Breakpoint.MD) TextAlign.Left else TextAlign.Center)
+                .textAlign(if (breakpoint >= Breakpoint.MD) TextAlign.Justify else TextAlign.Center)
                 .fontFamily("Sans-Serif")
                 .fontWeight(FontWeight.Normal)
                 .color(if (colorMode.isLight) Colors.Black else Colors.White)

@@ -1,7 +1,7 @@
 package org.example.personalportfolio.util
 
 object Constants {
-    const val about = "Formado em Ciência da Computação pela Universidade Federal do Ceará (UFC). Tenho experiência na construção de aplicações Back-end e Mobile. Aliado a minha experiência, foco no momento em construir aplicações utilizando tecnologias de desenvolvimento nativo."
+    const val about = "Formado em Ciência da Computação (UFC) e atualmente Pós-Graduando em Desenvolvimento de Aplicativos Móveis (PUCPR). Tenho experiência na construção de aplicações Back-end e Mobile. Aliado a minha experiência, foco no momento em construir aplicações utilizando tecnologias de desenvolvimento nativo."
     const val personalPortfolio = "https://github.com/FMoreiraSouza/PersonalPortfolio.git"
     const val GITHUB = "https://github.com/FMoreiraSouza"
     const val LINKEDIN = "https://www.linkedin.com/in/felipe-moreira-b16147200/"
@@ -26,8 +26,10 @@ object Res {
         const val postgreSQL = "PostgreSQLIcon.svg"
         const val fitbank450 = "Fitbank450.png"
         const val nemo = "Nemo.png"
+        const val novacode = "Novacode.png"
         const val ufc = "UFC.png"
         const val ufcCoatOfArms = "UFCCoatOfArms.png"
+        const val pucprCoatOfArms = "PUCPRCoatOfArms.png"
         const val redirect = "RedirectIcon.png"
     }
 }
