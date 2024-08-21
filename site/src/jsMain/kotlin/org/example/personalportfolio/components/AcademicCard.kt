@@ -47,12 +47,7 @@ fun AcademicCard(
             Box(
                 modifier = Modifier
                     .size(150.px)
-                    .boxShadow(
-                        blurRadius = 5.px,
-                        spreadRadius = 3.px,
-                        color = if (colorMode.isLight) Colors.LightGray else Colors.Gray
-                    )
-                    .backgroundColor(Colors.White)
+                    .backgroundColor(if (colorMode.isLight) Colors.Transparent else Colors.LightGray)
                     .borderRadius(50.percent),
                 contentAlignment = Alignment.Center
             ) {
@@ -100,7 +95,7 @@ fun AcademicCard(
         }
         Box(
             modifier = Modifier
-                .margin(top = 5.px)
+                .margin(top = 5.px, bottom = 10.px)
                 .height(2.px)
                 .width(100.percent)
                 .borderRadius(50.px),

@@ -96,7 +96,7 @@ fun ExperienceDescription(
                 .margin(topBottom = 0.px)
                 .fontFamily("Sans-Serif")
                 .fontSize(if (breakpoint >= Breakpoint.SM) 18.px else 14.px)
-                .textAlign(if (breakpoint >= Breakpoint.MD) TextAlign.Left else TextAlign.Center)
+                .textAlign(if (breakpoint >= Breakpoint.MD) TextAlign.Justify else TextAlign.Center)
                 .lineHeight(1.7)
                 .fontWeight(FontWeight.Normal)
                 .color(if (colorMode.isLight) Colors.Black else Colors.White)
@@ -172,15 +172,12 @@ fun ExperienceIcon(
         Box(
             modifier = Modifier
                 .size(70.px)
-                .boxShadow(
-                    blurRadius = 5.px,
-                    spreadRadius = 3.px,
-                    color = if (colorMode.isLight) Colors.LightGray else Colors.Gray
-                )
-                .backgroundColor(Colors.White)
+                .then(if (colorMode.isLight) Modifier.border(color = Colors.LightGray, width = 1.px, style = LineStyle.Ridge) else Modifier)
+                .backgroundColor(if (colorMode.isLight) Colors.White else Colors.LightGray)
                 .borderRadius(50.percent),
             contentAlignment = Alignment.Center
-        ) {
+        )
+        {
             Image(
                 modifier = Modifier.size(50.px),
                 src = experience.icon
